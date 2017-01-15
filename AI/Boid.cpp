@@ -2,23 +2,23 @@
 #include "Boid.h"
 
 
-VECTOR4D CBoid::Seek()
+VECTOR3D CBoid::Seek()
 {
-	VECTOR4D vDirection = Normalize(m_targetPosition - m_position);
+	VECTOR3D vDirection = Normalize(m_vTargetPosition - m_vPosition);
 	return vDirection * m_fMaxAcceleration;
 }
 
-VECTOR4D CBoid::Flee()
+VECTOR3D CBoid::Flee()
 {
-	VECTOR4D vDirection = Normalize(m_position - m_targetPosition);
+	VECTOR3D vDirection = Normalize(m_vPosition - m_vTargetPosition);
 	return vDirection * m_fMaxAcceleration;
 }
 
-VECTOR4D CBoid::Arrive()
+VECTOR3D CBoid::Arrive()
 {
 	float radius = 5.f;
-	VECTOR4D vDistance = m_targetPosition - m_position;
-	VECTOR4D vDirection = Normalize(vDistance);
+	VECTOR3D vDistance = m_vTargetPosition - m_vPosition;
+	VECTOR3D vDirection = Normalize(vDistance);
 	if (Magnity(vDistance) > radius)
 		return vDirection * m_fMaxAcceleration;
 	return (vDirection * m_fMaxAcceleration) * (Magnity(vDistance)/radius);
@@ -36,14 +36,14 @@ void CBoid::Destroy()
 
 void CBoid::Update(float delta)
 {
-	VECTOR4D linearAcceleration = Arrive();
-	m_velocity = m_velocity + linearAcceleration * delta;
-	if (Magnity(m_velocity) > m_fMaxSpeed) 
+	VECTOR3D linearAcceleration = Arrive();
+	m_vVelocity = m_vVelocity + linearAcceleration * delta;
+	if (Magnity(m_vVelocity) > m_fMaxSpeed) 
 	{
-		m_velocity =  Normalize(m_velocity);
-		m_velocity = m_velocity * m_fMaxSpeed;
+		m_vVelocity =  Normalize(m_vVelocity);
+		m_vVelocity = m_vVelocity * m_fMaxSpeed;
 	}
-	m_position = m_position + m_velocity * delta;
+	m_vPosition = m_vPosition + m_vVelocity * delta;
 
 }
 
@@ -51,9 +51,9 @@ void CBoid::Render()
 {
 }
 
-void CBoid::SetTargetPosition(const VECTOR4D& targetPosition)
+void CBoid::SetTargetPosition(const VECTOR3D& targetPosition)
 {
-	m_targetPosition = targetPosition;
+	m_vTargetPosition = targetPosition;
 }
 
 void CBoid::SetMaxSpeed(float fMaxSpeed)

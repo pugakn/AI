@@ -1,24 +1,24 @@
 #pragma once
-#include "VECTOR4D.h"
+#include "VECTOR3D.h"
 class CBoid
 {
 private:
-	VECTOR4D m_velocity;
-	VECTOR4D m_position;
-	VECTOR4D m_targetPosition;
+	VECTOR3D m_vVelocity;
+	VECTOR3D m_vPosition;
+	VECTOR3D m_vTargetPosition;
 	float m_fMaxSpeed;
 	float m_fMaxAcceleration;
 
 public:
-	VECTOR4D Seek();
-	VECTOR4D Flee();
-	VECTOR4D Arrive();
+	VECTOR3D Seek();
+	VECTOR3D Flee();
+	VECTOR3D Arrive();
 	void Init();
 	void Destroy();
 	void Update(float delta);
 	void Render();
 
-	void SetTargetPosition(const VECTOR4D& targetPosition);
+	void SetTargetPosition(const VECTOR3D& targetPosition);
 	void SetMaxSpeed(float fMaxSpeed);
 	float GetMaxSpeed();
 	void SetMaxAcceleration(float fMaxAcceleration);
