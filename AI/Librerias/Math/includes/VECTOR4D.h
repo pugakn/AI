@@ -16,10 +16,6 @@ public:
 		{
 			float r, g, b, a;
 		};
-		struct 
-		{
-			long lx, ly, lz, lw;
-		};
 		float v[4];
 
 	};
