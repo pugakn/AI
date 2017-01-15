@@ -10,18 +10,22 @@ VECTOR3D CBoid::Seek()
 
 VECTOR3D CBoid::Flee()
 {
-	VECTOR3D vDirection = Normalize(m_vPosition - m_vTargetPosition);
+	float fRadius = 50.f; 
+	VECTOR3D vDistance = m_vPosition - m_vTargetPosition;
+	VECTOR3D vDirection = Normalize(vDistance);
+	if (Magnity(vDistance) > fRadius)
+		return VECTOR3D(0,0,0);
 	return vDirection * m_fMaxAcceleration;
 }
 
 VECTOR3D CBoid::Arrive()
 {
-	float radius = 5.f;
+	float fRadius = 5.f;
 	VECTOR3D vDistance = m_vTargetPosition - m_vPosition;
 	VECTOR3D vDirection = Normalize(vDistance);
-	if (Magnity(vDistance) > radius)
+	if (Magnity(vDistance) > fRadius)
 		return vDirection * m_fMaxAcceleration;
-	return (vDirection * m_fMaxAcceleration) * (Magnity(vDistance)/radius);
+	return (vDirection * m_fMaxAcceleration) * (Magnity(vDistance)/fRadius);
 }
 
 void CBoid::Init()
