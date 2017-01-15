@@ -21,8 +21,6 @@ public:
 			long lx, ly, lz, lw;
 		};
 		float v[4];
-		unsigned long ul[4];
-		long l[4];
 
 	};
 	VECTOR4D();
