@@ -2,36 +2,66 @@
 #include "Boid.h"
 
 
-VECTOR3D CBoid::Seek()
+Vector3D CBoid::Seek(const Vector3D& vTargetPosition)
 {
-	VECTOR3D vDirection = Normalize(m_vTargetPosition - m_vPosition);
-	return vDirection * m_fMaxAcceleration;
+	Vector3D vDirection = Normalize(vTargetPosition - m_vPosition);
+	return vDirection * SEEK_FORCE;
 }
 
-VECTOR3D CBoid::Flee()
+Vector3D CBoid::Flee(const Vector3D& vTargetPosition, float fRadius)
 {
-	float fRadius = 50.f; 
-	VECTOR3D vDistance = m_vPosition - m_vTargetPosition;
-	VECTOR3D vDirection = Normalize(vDistance);
+	Vector3D vDistance = m_vPosition - vTargetPosition;
+	Vector3D vDirection = Normalize(vDistance);
 	if (Magnity(vDistance) > fRadius)
-		return VECTOR3D(0,0,0);
-	return vDirection * m_fMaxAcceleration;
+		return Vector3D(0,0,0);
+	return vDirection * FLEE_FORCE;
 }
 
-VECTOR3D CBoid::Arrive()
+Vector3D CBoid::Arrive(const Vector3D& vTargetPosition, float fRadius)
 {
-	float fRadius = 5.f;
-	VECTOR3D vDistance = m_vTargetPosition - m_vPosition;
-	VECTOR3D vDirection = Normalize(vDistance);
+	Vector3D vDistance = vTargetPosition - m_vPosition;
+	Vector3D vDirection = Normalize(vDistance);
 	if (Magnity(vDistance) > fRadius)
-		return vDirection * m_fMaxAcceleration;
-	return (vDirection * m_fMaxAcceleration) * (Magnity(vDistance)/fRadius);
+		return vDirection * ARRIVE_FORCE;
+	return (vDirection * ARRIVE_FORCE) * (Magnity(vDistance)/fRadius);
+}
+
+Vector3D CBoid::Pursue(const Vector3D & vTargetPosition, const Vector3D & vTargetVelocity, float fMaxTimePrediction)
+{
+	Vector3D vDistance = vTargetPosition - m_vPosition;
+	Vector3D vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
+	float fPredictionRadius = Magnity(vPredictionPos - vTargetPosition);
+	if (Magnity(vDistance) < fPredictionRadius )
+	{
+		fMaxTimePrediction = Magnity(vDistance) / fPredictionRadius;
+		vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
+	}
+	return Normalize(vPredictionPos - m_vPosition) * PURSUE_FORCE;
+}
+
+Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTargetVelocity, float fMaxTimePrediction, float fRadius)
+{
+	Vector3D vDistance = vTargetPosition - m_vPosition;
+	Vector3D vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
+	float fPredictionRadius = Magnity(vPredictionPos - vTargetPosition);
+	if (Magnity(vDistance) < fPredictionRadius)
+	{
+		if (Magnity(vDistance) > fRadius)
+			return Vector3D(0,0,0);
+		fMaxTimePrediction = Magnity(vDistance) / fPredictionRadius;
+		vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
+	}
+	else 
+	{
+		vDistance = vPredictionPos - m_vPosition;
+		if (Magnity(vDistance) > fRadius)
+			return Vector3D(0, 0, 0);
+	}
+	return Normalize(vPredictionPos - m_vPosition) * EVADE_FORCE;
 }
 
 void CBoid::Init()
 {
-	m_fMaxAcceleration = 5.f;
-	m_fMaxSpeed = 50.f;
 }
 
 void CBoid::Destroy()
@@ -40,14 +70,14 @@ void CBoid::Destroy()
 
 void CBoid::Update(float delta)
 {
-	VECTOR3D linearAcceleration = Arrive();
-	m_vVelocity = m_vVelocity + linearAcceleration * delta;
-	if (Magnity(m_vVelocity) > m_fMaxSpeed) 
-	{
-		m_vVelocity =  Normalize(m_vVelocity);
-		m_vVelocity = m_vVelocity * m_fMaxSpeed;
-	}
-	m_vPosition = m_vPosition + m_vVelocity * delta;
+	Vector3D linearAcceleration =  Arrive(Vector3D(1,1,1), 5.0f);
+	linearAcceleration += Flee(Vector3D(10, 1, 1), 5.0f);
+	linearAcceleration +=  Seek(Vector3D(5, 1, 1));
+	linearAcceleration += Pursue(Vector3D(5, 1, 1),Vector3D(1,1,0),MAX_TIME_PREDICTION);
+	linearAcceleration += Evade(Vector3D(5, 1, 1), Vector3D(5, 0, 0), MAX_TIME_PREDICTION,5.0f);
+	m_vVelocity += linearAcceleration * delta;
+	m_vVelocity = Truncate(m_vVelocity, MAX_SPEED);
+	m_vPosition +=  m_vVelocity * delta;
 
 }
 
@@ -55,30 +85,7 @@ void CBoid::Render()
 {
 }
 
-void CBoid::SetTargetPosition(const VECTOR3D& targetPosition)
-{
-	m_vTargetPosition = targetPosition;
-}
 
-void CBoid::SetMaxSpeed(float fMaxSpeed)
-{
-	m_fMaxSpeed = fMaxSpeed;
-}
-
-float CBoid::GetMaxSpeed()
-{
-	return m_fMaxSpeed;
-}
-
-void CBoid::SetMaxAcceleration(float fMaxAcceleration)
-{
-	m_fMaxAcceleration = fMaxAcceleration;
-}
-
-float CBoid::GetMaxAcceleration()
-{
-	return m_fMaxAcceleration;
-}
 
 CBoid::CBoid()
 {

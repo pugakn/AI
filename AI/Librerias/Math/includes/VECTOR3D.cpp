@@ -1,65 +1,77 @@
-#include "VECTOR3D.h"
+#include "Vector3D.h"
 
 
-VECTOR3D::VECTOR3D()
+Vector3D::Vector3D()
 {
 }
-VECTOR3D::VECTOR3D(const VECTOR3D &V)
+Vector3D::Vector3D(const Vector3D &V)
 {
 	x = V.x;
 	y = V.y;
 	z = V.z;
 }
-VECTOR3D::VECTOR3D(float fx, float fy, float fz)
+Vector3D::Vector3D(float fx, float fy, float fz)
 {
 	x = fx;
 	y = fy;
 	z = fz;
 }
-VECTOR3D::~VECTOR3D()
+Vector3D::~Vector3D()
 {
 }
 
 
-ostream& operator << (ostream& out, const VECTOR3D& V) {
+ostream& operator << (ostream& out, const Vector3D& V) {
 	out << "[" << V.x << "," << V.y << "," << V.z << "]";
 	return out;
 }
-istream& operator >> (istream& in, VECTOR3D& V) {
+istream& operator >> (istream& in, Vector3D& V) {
 	in >> V.x >> V.y >> V.z;
 	return in;
 }
-VECTOR3D operator* (const VECTOR3D &A, const VECTOR3D &B) {
-	return VECTOR3D(A.x*B.x, A.y*B.y, A.z*B.z);
+Vector3D operator* (const Vector3D &A, const Vector3D &B) {
+	return Vector3D(A.x*B.x, A.y*B.y, A.z*B.z);
 }
-VECTOR3D operator* (float s, const VECTOR3D&A) {
-	return VECTOR3D(A.x*s, A.y*s, A.z*s);
+Vector3D operator* (float s, const Vector3D&A) {
+	return Vector3D(A.x*s, A.y*s, A.z*s);
 }
-VECTOR3D operator* (const VECTOR3D &A, float s) {
+Vector3D operator* (const Vector3D &A, float s) {
 	return s*A;
 }
-VECTOR3D operator/ (const VECTOR3D &A, float s) {
+Vector3D operator/ (const Vector3D &A, float s) {
 	return A*(1 / s);
 }
-VECTOR3D operator+ (const VECTOR3D &A, const VECTOR3D &B) {
-	return VECTOR3D(A.x + B.x, A.y + B.y, A.z + B.z);
+Vector3D operator+ (const Vector3D &A, const Vector3D &B) {
+	return Vector3D(A.x + B.x, A.y + B.y, A.z + B.z);
 }
-VECTOR3D operator- (const VECTOR3D &A, const VECTOR3D &B) {
-	return VECTOR3D(A.x - B.x, A.y - B.y, A.z - B.z);
+Vector3D operator+= (Vector3D &A, const Vector3D &B) {
+	A = Vector3D(A.x + B.x, A.y + B.y, A.z + B.z);
+	return A;
 }
-float Dot(const VECTOR3D &A, const VECTOR3D &B) {
+Vector3D operator- (const Vector3D &A, const Vector3D &B) {
+	return Vector3D(A.x - B.x, A.y - B.y, A.z - B.z);
+}
+float Dot(const Vector3D &A, const Vector3D &B) {
 	return A.x*B.x + A.y*B.y + A.z*B.z;
 }
-VECTOR3D Cross3(const VECTOR3D &A, const VECTOR3D &B) {
-	return VECTOR3D(A.y*B.z - A.z*B.y,
+Vector3D Cross3(const Vector3D &A, const Vector3D &B) {
+	return Vector3D(A.y*B.z - A.z*B.y,
 		A.z*B.x - A.x*B.z,
 		A.x*B.y - A.y*B.x);
 }
 
-float Magnity(const VECTOR3D &A) {
+float Magnity(const Vector3D &A) {
 	return sqrt(Dot(A, A));
 }
-VECTOR3D Normalize(const VECTOR3D &A) {
+Vector3D Truncate(Vector3D A, float max)
+{
+	if (Magnity(A) > max) {
+		A =  Normalize(A);
+		A = A*max;
+	}
+	return A;
+}
+Vector3D Normalize(const Vector3D &A) {
 	return A / Magnity(A);
 }
 

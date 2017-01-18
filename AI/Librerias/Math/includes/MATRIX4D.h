@@ -1,9 +1,23 @@
 #pragma once
-#include "VECTOR4D.h"
+#include "Vector4D.h"
 #include <iostream>
 
+#define RIGHT_HANDED
+#ifdef RIGHT_HANDED
+	#define Translation( dx,  dy,  dz) TranslationRH(dx, dy, dz);
+	#define RotationX(theta) RotationXRH(theta);
+	#define RotationY(theta) RotationYRH(theta);
+	#define RotationZ(theta) RotationZRH(theta);
+#else
+	#define Translation( dx,  dy,  dz) TranslationLH(dx, dy, dz);
+	#define RotationX(theta) RotationXLH(theta);
+	#define RotationY(theta) RotationYLH(theta);
+	#define RotationZ(theta) RotationZLH(theta);
+#endif // RIGHT_HANDED
+
+
 using namespace std;
-struct MATRIX4D
+struct Matrix4D
 {
 public:
 	union {
@@ -14,44 +28,44 @@ public:
 			float m30, m31, m32, m33;
 		};
 		struct {
-			VECTOR4D Row0, Row1, Row2, Row3;
+			Vector4D Row0, Row1, Row2, Row3;
 		};
 		struct 
 		{
-			VECTOR4D Row[4];
+			Vector4D Row[4];
 		};
 		float m[4][4];
 		float v[16];
 	};
 public:
-	MATRIX4D();
-	MATRIX4D(float a00, float a01, float a02, float a03,
+	Matrix4D();
+	Matrix4D(float a00, float a01, float a02, float a03,
 			 float a10, float a11, float a12, float a13,
 			 float a20, float a21, float a22, float a23,
 			 float a30, float a31, float a32, float a33);
-	MATRIX4D(const MATRIX4D& M);
-	MATRIX4D(const VECTOR4D &row0,
-			 const VECTOR4D &row1,
-			 const VECTOR4D &row2,
-			 const VECTOR4D &row3);
-	~MATRIX4D();
+	Matrix4D(const Matrix4D& M);
+	Matrix4D(const Vector4D &row0,
+			 const Vector4D &row1,
+			 const Vector4D &row2,
+			 const Vector4D &row3);
+	~Matrix4D();
 };
-ostream& operator << (ostream& out, const MATRIX4D& A);
-istream& operator >> (istream& in, MATRIX4D& A);
-MATRIX4D operator* (const MATRIX4D& A, const MATRIX4D& B);
-VECTOR4D operator* (const VECTOR4D& V, const MATRIX4D& M);
-VECTOR4D operator* (const MATRIX4D& M, const VECTOR4D& V);
-MATRIX4D Zero();
-MATRIX4D Identity();
-MATRIX4D TranslationRH(float dx, float dy, float dz);
-MATRIX4D RotationXRH(float theta);
-MATRIX4D RotationYRH(float theta);
-MATRIX4D RotationZRH(float theta);
-MATRIX4D TranslationLH(float dx, float dy, float dz);
-MATRIX4D RotationXLH(float theta);
-MATRIX4D RotationYLH(float theta);
-MATRIX4D RotationZLH(float theta);
-MATRIX4D Scaling(float sx, float sy, float sz);
+ostream& operator << (ostream& out, const Matrix4D& A);
+istream& operator >> (istream& in, Matrix4D& A);
+Matrix4D operator* (const Matrix4D& A, const Matrix4D& B);
+Vector4D operator* (const Vector4D& V, const Matrix4D& M);
+Vector4D operator* (const Matrix4D& M, const Vector4D& V);
+Matrix4D Zero();
+Matrix4D Identity();
+Matrix4D TranslationRH(float dx, float dy, float dz);
+Matrix4D RotationXRH(float theta);
+Matrix4D RotationYRH(float theta);
+Matrix4D RotationZRH(float theta);
+Matrix4D TranslationLH(float dx, float dy, float dz);
+Matrix4D RotationXLH(float theta);
+Matrix4D RotationYLH(float theta);
+Matrix4D RotationZLH(float theta);
+Matrix4D Scaling(float sx, float sy, float sz);
 //float Det(const MATRIX4D& M);
 //MATRIX4D Transpose(const MATRIX4D& M);
 //MATRIX4D Cofactors(const MATRIX4D& M);
