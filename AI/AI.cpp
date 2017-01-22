@@ -17,7 +17,7 @@ int main()
 	M.Row1 = Vector4D(1, 2, 5, 3);
 	M.Row2 = Vector4D(1, 1, 5, 3);
 	M.Row3 = Vector4D(1, 2, 14, 3);
-	std::cout << A*M  << endl;
+	std::cout << A*M  << endl;  //Falta std para endl, o quitar std de cout, una o la otra
 
     return 0;
 }

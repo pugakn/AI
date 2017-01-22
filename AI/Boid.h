@@ -1,14 +1,17 @@
 #pragma once
-#include "Vector3D.h"
+
+#include "Vector3D.h" //Y donde esta el archivo?
+
 class CBoid
 {
 private:
 	Vector3D m_vVelocity;
 	Vector3D m_vPosition;
+
 	float m_fMaxSpeed;
 	float m_fMaxAcceleration;
 
-	const float MAX_SPEED = 10.f;
+	const float MAX_SPEED = 10.f; //Si esto ya es una constante, para que quiero la variable m_fMaxSpeed?
 	const float SEEK_FORCE = 5.f;
 	const float FLEE_FORCE = 5.f;
 	const float ARRIVE_FORCE = 5.f;

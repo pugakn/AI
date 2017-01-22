@@ -12,7 +12,7 @@ Vector3D CBoid::Flee(const Vector3D& vTargetPosition, float fRadius)
 {
 	Vector3D vDistance = m_vPosition - vTargetPosition;
 	Vector3D vDirection = Normalize(vDistance);
-	if (Magnity(vDistance) > fRadius)
+	if (Magnity(vDistance) > fRadius) //La palabra es Magnitude
 		return Vector3D(0,0,0);
 	return vDirection * FLEE_FORCE;
 }
@@ -70,6 +70,8 @@ void CBoid::Destroy()
 
 void CBoid::Update(float delta)
 {
+  //Por que tenemos constantes hardcodeadas aqui...
+  //Agregue variables segun se requiera, no hardcodee nada
 	Vector3D linearAcceleration =  Arrive(Vector3D(1,1,1), 5.0f);
 	linearAcceleration += Flee(Vector3D(10, 1, 1), 5.0f);
 	linearAcceleration +=  Seek(Vector3D(5, 1, 1));
