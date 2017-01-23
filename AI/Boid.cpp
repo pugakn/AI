@@ -65,7 +65,7 @@ Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTim
 {
 	static Vector3D vSeekPoint;
 	static bool bArrived = true;
-	Vector3D vDirection;
+	static Vector3D vDirection;
 	if (bArrived) {
 		vSeekPoint = Vector3D(rand() % (static_cast<int>(vWorldSize.x) + 1), rand() % (static_cast<int>(vWorldSize.y) + 1), 0);
 		vDirection = vSeekPoint - m_vPosition;
