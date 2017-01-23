@@ -13,7 +13,7 @@ Vector3D CBoid::Flee(const Vector3D& vTargetPosition, float fRadius)
 {
 	Vector3D vDistance = m_vPosition - vTargetPosition;
 	Vector3D vDirection = Normalize(vDistance);
-	if (Magnity(vDistance) > fRadius)
+	if (Magnitude(vDistance) > fRadius)
 		return Vector3D(0,0,0);
 	return vDirection * FLEE_FORCE;
 }
@@ -22,19 +22,19 @@ Vector3D CBoid::Arrive(const Vector3D& vTargetPosition, float fRadius)
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
 	Vector3D vDirection = Normalize(vDistance);
-	if (Magnity(vDistance) > fRadius)
+	if (Magnitude(vDistance) > fRadius)
 		return vDirection * ARRIVE_FORCE;
-	return (vDirection * ARRIVE_FORCE) * (Magnity(vDistance)/fRadius);
+	return (vDirection * ARRIVE_FORCE) * (Magnitude(vDistance)/fRadius);
 }
 
 Vector3D CBoid::Pursue(const Vector3D & vTargetPosition, const Vector3D & vTargetVelocity, float fMaxTimePrediction)
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
 	Vector3D vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
-	float fPredictionRadius = Magnity(vPredictionPos - vTargetPosition);
-	if (Magnity(vDistance) < fPredictionRadius )
+	float fPredictionRadius = Magnitude(vPredictionPos - vTargetPosition);
+	if (Magnitude(vDistance) < fPredictionRadius )
 	{
-		fMaxTimePrediction = Magnity(vDistance) / fPredictionRadius;
+		fMaxTimePrediction = Magnitude(vDistance) / fPredictionRadius;
 		vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
 	}
 	return Normalize(vPredictionPos - m_vPosition) * PURSUE_FORCE;
@@ -44,18 +44,18 @@ Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTarget
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
 	Vector3D vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
-	float fPredictionRadius = Magnity(vPredictionPos - vTargetPosition);
-	if (Magnity(vDistance) < fPredictionRadius)
+	float fPredictionRadius = Magnitude(vPredictionPos - vTargetPosition);
+	if (Magnitude(vDistance) < fPredictionRadius)
 	{
-		if (Magnity(vDistance) > fRadius)
+		if (Magnitude(vDistance) > fRadius)
 			return Vector3D(0,0,0);
-		fMaxTimePrediction = Magnity(vDistance) / fPredictionRadius;
+		fMaxTimePrediction = Magnitude(vDistance) / fPredictionRadius;
 		vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
 	}
 	else 
 	{
 		vDistance = vPredictionPos - m_vPosition;
-		if (Magnity(vDistance) > fRadius)
+		if (Magnitude(vDistance) > fRadius)
 			return Vector3D(0, 0, 0);
 	}
 	return Normalize(m_vPosition - vPredictionPos) * EVADE_FORCE;
@@ -69,11 +69,11 @@ Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTim
 	if (bArrived) {
 		vSeekPoint = Vector3D(rand() % (static_cast<int>(vWorldSize.x) + 1), rand() % (static_cast<int>(vWorldSize.y) + 1), 0);
 		vDirection = vSeekPoint - m_vPosition;
-		if (Magnity(vDirection) / Magnity(m_vVelocity)  > fMaxTime) {
-			vSeekPoint = Normalize(vDirection) * fMaxTime * Magnity(m_vVelocity);
+		if (Magnitude(vDirection) / Magnitude(m_vVelocity)  > fMaxTime) {
+			vSeekPoint = Normalize(vDirection) * fMaxTime * Magnitude(m_vVelocity);
 		}
 	}
-	if (Magnity(vSeekPoint - m_vPosition) < fRadius) {
+	if (Magnitude(vSeekPoint - m_vPosition) < fRadius) {
 		bArrived = true;
 		return Vector3D(0, 0, 0);
 	}
@@ -93,7 +93,7 @@ Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
 		vPoint = vProyectedPoint + Vector3D(cos(fBoidAngle + fRandAngle), sin(fBoidAngle + fRandAngle), 0);
 		vForce = Normalize(vPoint - m_vPosition) * WANDER_FORCE;
 	}
-	if (Magnity(vPoint - m_vPosition) < fRadius) {
+	if (Magnitude(vPoint - m_vPosition) < fRadius) {
 		bArrived = true;
 		return Vector3D(0, 0, 0);
 	}

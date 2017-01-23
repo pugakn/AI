@@ -59,9 +59,9 @@ Vector4D Cross3(const Vector4D &A, const Vector4D &B) {
 					0);
 }
 
-float Magnity(const Vector4D &A) {
+float Magnitude(const Vector4D &A) {
 	return sqrt(Dot(A,A));
 }
 Vector4D Normalize(const Vector4D &A) {
-	return A / Magnity(A);
+	return A / Magnitude(A);
 }

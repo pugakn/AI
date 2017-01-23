@@ -35,7 +35,7 @@ Vector4D operator+ (const Vector4D &A, const Vector4D &B);
 Vector4D operator- (const Vector4D &A, const Vector4D &B);
 float Dot(const Vector4D &A, const Vector4D &B);
 Vector4D Cross3(const Vector4D &A, const Vector4D &B);
-float Magnity(const Vector4D &A);
+float Magnitude(const Vector4D &A);
 Vector4D Normalize(const Vector4D &A);
 
 

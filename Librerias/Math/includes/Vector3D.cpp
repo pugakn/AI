@@ -60,18 +60,18 @@ Vector3D Cross3(const Vector3D &A, const Vector3D &B) {
 		A.x*B.y - A.y*B.x);
 }
 
-float Magnity(const Vector3D &A) {
+float Magnitude(const Vector3D &A) {
 	return sqrt(Dot(A, A));
 }
 Vector3D Truncate(Vector3D A, float max)
 {
-	if (Magnity(A) > max) {
+	if (Magnitude(A) > max) {
 		A =  Normalize(A);
 		A = A*max;
 	}
 	return A;
 }
 Vector3D Normalize(const Vector3D &A) {
-	return A / Magnity(A);
+	return A / Magnitude(A);
 }
 
