@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Boid.h"
+#include <math.h>
 
 
 Vector3D CBoid::Seek(const Vector3D& vTargetPosition)
@@ -57,24 +58,65 @@ Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTarget
 		if (Magnity(vDistance) > fRadius)
 			return Vector3D(0, 0, 0);
 	}
-	return Normalize(vPredictionPos - m_vPosition) * EVADE_FORCE;
+	return Normalize(m_vPosition - vPredictionPos) * EVADE_FORCE;
+}
+
+Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTime)
+{
+	static Vector3D vSeekPoint;
+	static bool bArrived = true;
+	Vector3D vDirection;
+	if (bArrived) {
+		vSeekPoint = Vector3D(rand() % (static_cast<int>(vWorldSize.x) + 1), rand() % (static_cast<int>(vWorldSize.y) + 1), 0);
+		vDirection = vSeekPoint - m_vPosition;
+		if (Magnity(vDirection) / Magnity(m_vVelocity)  > fMaxTime) {
+			vSeekPoint = Normalize(vDirection) * fMaxTime * Magnity(m_vVelocity);
+		}
+	}
+	if (Magnity(vSeekPoint - m_vPosition) < fRadius) {
+		bArrived = true;
+		return Vector3D(0, 0, 0);
+	}
+	return Normalize(vDirection) * WANDER_FORCE;
+}
+
+Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
+{
+	static Vector3D vForce;
+	static Vector3D vPoint;
+	static bool bArrived = true;
+
+	if (bArrived) {
+		Vector3D vProyectedPoint = m_vPosition + (Normalize(m_vVelocity) * fOffset);
+		float fBoidAngle = atan2(m_vVelocity.y, m_vVelocity.x);
+		float fRandAngle = (static_cast<float>(rand()) / static_cast<float>(RAND_MAX / (fVisionRange))) - fVisionRange / 2;
+		vPoint = vProyectedPoint + Vector3D(cos(fBoidAngle + fRandAngle), sin(fBoidAngle + fRandAngle), 0);
+		vForce = Normalize(vPoint - m_vPosition) * WANDER_FORCE;
+	}
+	if (Magnity(vPoint - m_vPosition) < fRadius) {
+		bArrived = true;
+		return Vector3D(0, 0, 0);
+	}
+
+	return vForce;
 }
 
 void CBoid::Init()
 {
+	m_vVelocity = Vector3D(0, 0, 0);
+	m_vPosition = Vector3D(0, 0, 0);
 }
-
 void CBoid::Destroy()
 {
 }
 
 void CBoid::Update(float delta)
 {
-	Vector3D linearAcceleration =  Arrive(Vector3D(1,1,1), 5.0f);
-	linearAcceleration += Flee(Vector3D(10, 1, 1), 5.0f);
-	linearAcceleration +=  Seek(Vector3D(5, 1, 1));
-	linearAcceleration += Pursue(Vector3D(5, 1, 1),Vector3D(1,1,0),MAX_TIME_PREDICTION);
-	linearAcceleration += Evade(Vector3D(5, 1, 1), Vector3D(5, 0, 0), MAX_TIME_PREDICTION,5.0f);
+	Vector3D linearAcceleration =  Arrive(m_vTargetPos,ACTIVE_RADIUS);
+	linearAcceleration += Flee(m_vTargetPos, ACTIVE_RADIUS);
+	linearAcceleration +=  Seek(m_vTargetPos);
+	linearAcceleration += Pursue(m_vTargetPos, m_vTargetVel,MAX_TIME_PREDICTION);
+	linearAcceleration += Evade(m_vTargetPos, m_vTargetVel, MAX_TIME_PREDICTION,ACTIVE_RADIUS);
 	m_vVelocity += linearAcceleration * delta;
 	m_vVelocity = Truncate(m_vVelocity, MAX_SPEED);
 	m_vPosition +=  m_vVelocity * delta;
@@ -94,4 +136,23 @@ CBoid::CBoid()
 
 CBoid::~CBoid()
 {
+}
+
+void CBoid::setTargetPos(Vector3D pos)
+{
+	m_vTargetPos = pos;
+}
+
+Vector3D CBoid::getTargetPos()
+{
+	return m_vTargetPos;
+}
+void CBoid::setTargetVel(Vector3D vel)
+{
+	m_vTargetPos = vel;
+}
+
+Vector3D CBoid::getTargetVel()
+{
+	return m_vTargetPos;
 }
