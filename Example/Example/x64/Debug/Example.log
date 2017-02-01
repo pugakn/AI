@@ -1,0 +1,4 @@
+﻿  Win32Framework.cpp
+c:\users\ulises\documents\github\graficas\classproject\example\example\win32framework.cpp(3): fatal error C1083: No se puede abrir el archivo incluir: 'SDL/SDL.h': No such file or directory
+  Core.cpp
+  Generando código...

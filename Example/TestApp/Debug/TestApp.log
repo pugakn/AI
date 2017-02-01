@@ -1,0 +1,7 @@
+﻿  Boid.cpp
+c:\users\ulises\documents\github\aigraf\example\testapp\boid.h(47): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  World.cpp
+  TestApp.vcxproj -> C:\Users\Ulises\Documents\GitHub\AIGRAF\Example\bin\TestApp.exe
+  TestApp.vcxproj -> C:\Users\Ulises\Documents\GitHub\AIGRAF\Example\bin\TestApp.pdb (Full PDB)
