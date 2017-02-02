@@ -1,9 +1,1 @@
-﻿  Win32Framework.cpp
-  UtilsGL.cpp
-  TriangleGL.cpp
-  Timer.cpp
-  InputManager.cpp
-  GLDriver.cpp
-  Core.cpp
-  Generando código...
-  Example.vcxproj -> C:\Users\Ulises\Documents\GitHub\AIGRAF\Example\Debug\Framework.lib
+﻿  Example.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\Framework.lib

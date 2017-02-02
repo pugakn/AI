@@ -1,68 +1,84 @@
 #include "World.h"
 #include "Boid.h"
+#include <time.h>
 #include <memory>
 
 void CWorld::Init()
 {
+	srand(time(NULL));
 	std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> obstaclePointer(&m_pObstacleList);
+	///////////////////////////////////////////////////////
+	//BOIDS//////////////////////////////////////////
+	//Inicializar aqui los BOIDS
+	///////////////////////////////////////////////////////
+	/*CreateBoid(Vector3D(-0.9,-0.5,0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander2);
+	CreateBoid(Vector3D(0.9, 0.5, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddDynamicTarget(m_ObjectList[0], SteeringBehavior::E::kPursue);
 
-	CreateBoid(Vector3D(-0.9,-0.5,0), 0.1f);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->SetObstacleList(obstaclePointer);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kWander2);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddDynamicTarget(m_ObjectList[1], SteeringBehavior::E::kEvade);
 
-	//CreateBoid(Vector3D(-0.9, -0.5, 0), 0.1f);
-	//dynamic_cast<CBoid*>(m_ObjectList.back().get())->SetObstacleList(obstaclePointer);
-	//dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	//dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kWander);
+	CreateBoid(Vector3D(0.9, -0.5, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander);
+	CreateBoid(Vector3D(-0.9, 0.5, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander2);
 
-	CreateBoid(Vector3D(0.9, 0.5, 0), 0.1f);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->SetObstacleList(obstaclePointer);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddDynamicTarget(m_ObjectList[0], SteeringBehabior::E::kPursue);
+	CreateBoid(Vector3D(-0.9, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance2);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddStaticTarget(Vector3D(0.9,0,0),SteeringBehavior::E::kArrive);
 
-	dynamic_cast<CBoid*>(m_ObjectList[0].get())->AddDynamicTarget(m_ObjectList[1], SteeringBehabior::E::kEvade);
+	CreateBoid(Vector3D(-0.9, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander);
 
-	CreateBoid(Vector3D(0.9, -0.5, 0), 0.1f);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->SetObstacleList(obstaclePointer);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kWander);
-	CreateBoid(Vector3D(-0.9, 0.5, 0), 0.1f);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->SetObstacleList(obstaclePointer);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kWander2);
+	CreateBoid(Vector3D(-0.9, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddDynamicTarget(m_ObjectList[5], SteeringBehavior::E::kPursue);*/
 
-	//dynamic_cast<CBoid*>(m_ObjectList.back().get())->AddSteeringState(SteeringStates::E::kWander);
 
-	//CreateBoid(Vector3D(-0.9, 0.5, 0), 0.1f);
+	CreateBoid(Vector3D(0.5, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kCircleMovement);
 
-	//(dynamic_cast<CBoid*>(m_ObjectList.back().get()))->AddDynamicTarget(m_ObjectList[0], SteeringBehabior::E::kPursue);
-	//(dynamic_cast<CBoid*>(m_ObjectList.back().get()))->AddSteeringState(SteeringStates::E::kWander2);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//OBSTACULOS///////////////////////////////////////////
+	//Inicializar aqui los obstaculos 
+	///////////////////////////////////////////////////////
+	//m_pObstacleList.push_back(std::make_shared<CObstacle>());
+	//m_pObstacleList.back()->SetPosition(Vector3D(0, 0.01, 0));
+	//m_pObstacleList.back()->SetRadius(0.08f);
 
-	//(dynamic_cast<CBoid*>(m_ObjectList[0].get()))->AddDynamicTarget(m_ObjectList[1], SteeringBehabior::E::kPursue);
-	//(dynamic_cast<CBoid*>(m_ObjectList[0].get()))->AddDynamicTarget(m_ObjectList[1], SteeringBehabior::E::kEvade);
-
-	/*OBSTACULOS*///////////////////////////////////////////
-	//Inicializar aqui los obstaculos
+	float angulo = rand() / static_cast<float>(RAND_MAX) *6.18;
 	m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	m_pObstacleList.back()->SetPosition(Vector3D(0, 0.01, 0));
-	m_pObstacleList.back()->SetRadius(0.05f);
+	m_pObstacleList.back()->SetPosition(Vector3D(sin(angulo) * CIRCLE_RADIUS, cos(angulo)*CIRCLE_RADIUS, 0));
+	m_pObstacleList.back()->SetRadius(0.08f);
 
+	angulo = rand() / static_cast<float>(RAND_MAX) *6.18;
 	m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	m_pObstacleList.back()->SetPosition(Vector3D(0, 0.5, 0));
-	m_pObstacleList.back()->SetRadius(0.05f);
+	m_pObstacleList.back()->SetPosition(Vector3D(sin(angulo) * CIRCLE_RADIUS, cos(angulo)*CIRCLE_RADIUS, 0));	
+	m_pObstacleList.back()->SetRadius(0.08f);
 
+	angulo = rand() / static_cast<float>(RAND_MAX) *6.18;
 	m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	m_pObstacleList.back()->SetPosition(Vector3D(0, 0.-0.5, 0));
-	m_pObstacleList.back()->SetRadius(0.05f);
+	m_pObstacleList.back()->SetPosition(Vector3D(sin(angulo) * CIRCLE_RADIUS, cos(angulo)*CIRCLE_RADIUS, 0));	
+	m_pObstacleList.back()->SetRadius(0.08f);
 
+	angulo = rand() / static_cast<float>(RAND_MAX) *6.18;
 	m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	m_pObstacleList.back()->SetPosition(Vector3D(-0.5, 0.01, 0));
-	m_pObstacleList.back()->SetRadius(0.05f);
-
-	m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	m_pObstacleList.back()->SetPosition(Vector3D(0.5, 0.01, 0));
-	m_pObstacleList.back()->SetRadius(0.05f);
+	m_pObstacleList.back()->SetPosition(Vector3D(sin(angulo) * CIRCLE_RADIUS, cos(angulo)*CIRCLE_RADIUS, 0));
+	m_pObstacleList.back()->SetRadius(0.08f);
 	///////////////////////////////////////////////////////////
 
 	for (auto &item : m_ObjectList) 

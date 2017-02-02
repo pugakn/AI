@@ -4,9 +4,8 @@
 #include "TriangleGL.h"
 #include <memory>
 #include <vector>
-#include <map>
 
-namespace SteeringBehabior 
+namespace SteeringBehavior 
 {
 	enum E
 	{
@@ -26,6 +25,7 @@ namespace SteeringStates
 		kWander2,
 		kObstacleAvoidance,
 		kObstacleAvoidance2,
+		kCircleMovement,
 		kNumObjects
 	};
 }
@@ -44,15 +44,20 @@ const float PROYECTION_DISTANCE = 0.2f;
 const float WANDER2_OFFSET = 0.6f;
 const float WANDER2_RADIUS = 0.7f;
 const float WANDER2_VISIONRANGE = 1.12f;
+const float CIRCLE_FORCE = 0.5f;
 const float PI = 3.1415927;
+
+const float CIRCLE_RADIUS = 0.5f;
+const float CIRCLE_PARAM_VEL = 1.0f;
 class CBoid : public CGameObject
 {
 private:
 	TrangleGL triangle;
 	Vector3D m_vDirection;
 	float m_fRadius;
+	float m_fVelocity;
 	std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> m_pObstacleList;
-	std::vector <std::pair<std::shared_ptr<CGameObject>, SteeringBehabior::E>> m_Targets;
+	std::vector <std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E>> m_Targets;
 	std::vector <SteeringStates::E> m_States;
 
 public:
@@ -65,6 +70,7 @@ public:
 	Vector3D Wander2(const float fOffset, float fRadius, float fVisionRange);
 	Vector3D ObstacleAvoidance(float fProyDist);
 	Vector3D ObstacleAvoidance2();
+	Vector3D CircleMovement(float fRadius, float delta);
 	void Init() override;
 	void Destroy() override;
 	void Update(float delta) override;
@@ -74,11 +80,12 @@ public:
 	
 	void SetRadius(float radius);
 	float GetRadius();
-	Vector3D GetVelocity();
+	float GetVelocity();
+	Vector3D GetDirection();
 	void SetObstacleList(std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> pObstacleList);
 
-	void AddStaticTarget( Vector3D targetPos, SteeringBehabior::E key);
-	void AddDynamicTarget(std::shared_ptr<CGameObject> target, SteeringBehabior::E key);
+	void AddStaticTarget( Vector3D targetPos, SteeringBehavior::E key);
+	void AddDynamicTarget(std::shared_ptr<CGameObject> target, SteeringBehavior::E key);
 	void AddSteeringState(SteeringStates::E state);
 };
 
