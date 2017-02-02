@@ -60,7 +60,7 @@ void CWorld::Init()
 	//m_pObstacleList.back()->SetPosition(Vector3D(0, 0.01, 0));
 	//m_pObstacleList.back()->SetRadius(0.08f);
 
-	float angulo = rand() / static_cast<float>(RAND_MAX) *6.18;
+	float angulo = rand() / static_cast<float>(RAND_MAX) *6.18; //Angulo random 
 	m_pObstacleList.push_back(std::make_shared<CObstacle>());
 	m_pObstacleList.back()->SetPosition(Vector3D(sin(angulo) * CIRCLE_RADIUS, cos(angulo)*CIRCLE_RADIUS, 0));
 	m_pObstacleList.back()->SetRadius(0.08f);

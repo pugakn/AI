@@ -1,15 +1,1 @@
-﻿  Boid.cpp
-c:\users\ulises\documents\github\ai\example\testapp\boid.h(48): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-c:\users\ulises\documents\github\ai\example\testapp\boid.cpp(239): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-  Generando código...
-  Compilando...
-  World.cpp
-c:\users\ulises\documents\github\ai\example\testapp\boid.h(48): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-c:\users\ulises\documents\github\ai\example\testapp\world.cpp(8): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\testapp\world.cpp(63): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\testapp\world.cpp(68): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\testapp\world.cpp(73): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\testapp\world.cpp(78): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  TestApp.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\TestApp.exe
-  TestApp.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\TestApp.pdb (Full PDB)
+﻿

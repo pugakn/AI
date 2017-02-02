@@ -5,12 +5,15 @@
 //////////////////////////////
 // STEERING BEHAVIORS ///////
 /////////////////////////////
+
+//Sugue un punto fijo
 Vector3D CBoid::Seek(const Vector3D& vTargetPosition)
 {
 	Vector3D vDirection = Normalize(vTargetPosition - m_vPosition);
 	return vDirection * SEEK_FORCE;
 }
 
+//Corre de un punto fijo
 Vector3D CBoid::Flee(const Vector3D& vTargetPosition, float fRadius)
 {
 	Vector3D vDistance = m_vPosition - vTargetPosition;
@@ -22,6 +25,7 @@ Vector3D CBoid::Flee(const Vector3D& vTargetPosition, float fRadius)
 	return vDirection * FLEE_FORCE;
 }
 
+//Llega a un punto y se detiene
 Vector3D CBoid::Arrive(const Vector3D& vTargetPosition, float fRadius)
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
@@ -34,6 +38,7 @@ Vector3D CBoid::Arrive(const Vector3D& vTargetPosition, float fRadius)
 	return (vDirection * ARRIVE_FORCE) * (Magnitude(vDistance)/fRadius) ;
 }
 
+//Persigue a un objetivo en movimiento
 Vector3D CBoid::Pursue(const Vector3D & vTargetPosition, const Vector3D & vTargetVelocity, float fMaxTimePrediction)
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
@@ -48,7 +53,7 @@ Vector3D CBoid::Pursue(const Vector3D & vTargetPosition, const Vector3D & vTarge
 	}
 	return Normalize(vPredictionPos - m_vPosition) * PURSUE_FORCE;
 }
-
+//Corre de un objetivo en movimiento
 Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTargetVelocity, float fMaxTimePrediction, float fRadius)
 {
 	Vector3D vDistance = vTargetPosition - m_vPosition;
@@ -70,7 +75,7 @@ Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTarget
 	}
 	return Normalize(m_vPosition - vPredictionPos) * EVADE_FORCE;
 }
-
+//vaga por el mundo
 Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTime,float fDelta)
 {
 	static Vector3D vSeekPoint;
@@ -79,8 +84,6 @@ Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTim
 	static float fTime = 0;
 	fTime += fDelta;
 	if (bArrived) {
-		//vSeekPoint = Vector3D(-vWorldSize.x *.5f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (vWorldSize.x*0.5f - (-vWorldSize.x*0.5f)))),
-		//	-vWorldSize.y *.5f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (vWorldSize.y*0.5f - (-vWorldSize.y*0.5f)))), 0);
 		vSeekPoint = Vector3D(vWorldSize.x * static_cast <float> (rand()) / (static_cast <float> (RAND_MAX ) - vWorldSize.x/2.f),
 			vWorldSize.y * static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) - vWorldSize.y/2.f), 0);
 		vDirection = vSeekPoint - m_vPosition;
@@ -96,7 +99,7 @@ Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTim
 	}
 	return Normalize(vDirection) * WANDER_FORCE;
 }
-
+//Vaga por el mundo, es más estable que wander 1
 Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
 {
 	Vector3D vForce;
@@ -116,7 +119,7 @@ Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
 
 	return vForce;
 }
-
+//Evade un obstaculo
 Vector3D CBoid::ObstacleAvoidance(float fProyDist)
 {
 	Vector3D vMedProyection = m_vPosition + fProyDist *0.5f * Normalize(m_vDirection);
@@ -156,11 +159,11 @@ Vector3D CBoid::ObstacleAvoidance(float fProyDist)
 		return shortestCollisionDir * BIG_FORCE;
 	return Vector3D(0, 0, 0);
 }
+//Evade un obstaculo sin dejar huecos
 Vector3D CBoid::ObstacleAvoidance2()
 {
 	const float POFFSET0 = 0.05f;
 	const float POFFSET1 = 0.05f;
-	//m_vDirection = Normalize(m_vDirection);
 	Vector3D PerpendicularDir(-m_vDirection.y,m_vDirection.x,m_vDirection.z);
 	Vector3D topLeftPoint = m_vPosition + POFFSET0 * PerpendicularDir;
 	Vector3D topRightPoint = topLeftPoint + m_vDirection * POFFSET1;
