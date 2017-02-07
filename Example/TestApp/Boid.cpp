@@ -78,26 +78,22 @@ Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTarget
 //vaga por el mundo
 Vector3D CBoid::Wander(const Vector3D & vWorldSize, float fRadius, float fMaxTime,float fDelta)
 {
-	static Vector3D vSeekPoint;
-	static bool bArrived = true;
-	static Vector3D vDirection(1,0,0);
-	static float fTime = 0;
-	fTime += fDelta;
-	if (bArrived) {
-		vSeekPoint = Vector3D(vWorldSize.x * static_cast <float> (rand()) / (static_cast <float> (RAND_MAX ) - vWorldSize.x/2.f),
+
+	m_fWanderTime += fDelta;
+	if (m_bWanderArrived) {
+		m_vWanderSeekPoint = Vector3D(vWorldSize.x * static_cast <float> (rand()) / (static_cast <float> (RAND_MAX ) - vWorldSize.x/2.f),
 			vWorldSize.y * static_cast <float> (rand()) / (static_cast <float> (RAND_MAX) - vWorldSize.y/2.f), 0);
-		vDirection = vSeekPoint - m_vPosition;
-		bArrived = false;
+		m_bWanderArrived = false;
 	}
-	if (Magnitude(vSeekPoint - m_vPosition) < fRadius) {
-		bArrived = true;
+	if (Magnitude(m_vWanderSeekPoint - m_vPosition) < fRadius) {
+		m_bWanderArrived = true;
 		return Vector3D(0, 0, 0);
 	}
-	if (fTime > fMaxTime) {
-		bArrived = true;
-		fTime = 0;
+	if (m_fWanderTime > fMaxTime) {
+		m_bWanderArrived = true;
+		m_fWanderTime = 0;
 	}
-	return Normalize(vDirection) * WANDER_FORCE;
+	return Normalize(m_vWanderSeekPoint - m_vPosition) * WANDER_FORCE;
 }
 //Vaga por el mundo, es más estable que wander 1
 Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
@@ -239,9 +235,8 @@ Vector3D CBoid::ObstacleAvoidance2()
 /////////////////
 Vector3D CBoid::CircleMovement(float fRadius, float delta)
 {
-	static float param = 0.1;
-	param += CIRCLE_PARAM_VEL * delta;
-	Vector3D seekPoint =  Vector3D(cosf(param), sinf(param), 0) * fRadius; //Genera un punto de seek a partir del seno y coseno de un parametro que incrementa con el tiempo
+	m_fCircleParam += CIRCLE_PARAM_VEL * delta;
+	Vector3D seekPoint =  Vector3D(cosf(m_fCircleParam), sinf(m_fCircleParam), 0) * fRadius; //Genera un punto de seek a partir del seno y coseno de un parametro que incrementa con el tiempo
 	return Seek(seekPoint); //Regresa seek a ese punto
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -250,6 +245,7 @@ Vector3D CBoid::CircleMovement(float fRadius, float delta)
 
 void CBoid::Init()
 {
+	m_fCircleParam = 0.1f;
 	m_vDirection = Vector3D(0, 0, 0);
 	triangle.Create();
 }

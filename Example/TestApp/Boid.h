@@ -56,6 +56,12 @@ private:
 	Vector3D m_vDirection;
 	float m_fRadius;
 	float m_fVelocity;
+	float m_fCircleParam;
+
+	Vector3D m_vWanderSeekPoint;
+	bool m_bWanderArrived = true;
+	float m_fWanderTime = 0;
+
 	std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> m_pObstacleList;
 	std::vector <std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E>> m_Targets;
 	std::vector <SteeringStates::E> m_States;

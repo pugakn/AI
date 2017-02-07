@@ -1,12 +1,3 @@
-c:\users\ulises\documents\github\aigraf\example\example\debug\framework.pdb
-c:\users\ulises\documents\github\aigraf\example\example\debug\framework.idb
-c:\users\ulises\documents\github\aigraf\example\example\debug\core.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\gldriver.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\inputmanager.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\timer.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\trianglegl.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\utilsgl.obj
-c:\users\ulises\documents\github\aigraf\example\example\debug\win32framework.obj
 c:\users\ulises\documents\github\ai\example\example\debug\framework.pdb
 c:\users\ulises\documents\github\ai\example\example\debug\framework.idb
 c:\users\ulises\documents\github\ai\example\example\debug\core.obj
@@ -14,10 +5,9 @@ c:\users\ulises\documents\github\ai\example\example\debug\gldriver.obj
 c:\users\ulises\documents\github\ai\example\example\debug\inputmanager.obj
 c:\users\ulises\documents\github\ai\example\example\debug\timer.obj
 c:\users\ulises\documents\github\ai\example\example\debug\trianglegl.obj
-c:\users\ulises\documents\github\aigraf\example\debug\framework.lib
-c:\users\ulises\documents\github\ai\example\debug\framework.lib
 c:\users\ulises\documents\github\ai\example\example\debug\utilsgl.obj
 c:\users\ulises\documents\github\ai\example\example\debug\win32framework.obj
+c:\users\ulises\documents\github\ai\example\debug\framework.lib
 c:\users\ulises\documents\github\ai\example\debug\framework.pdb
 c:\users\ulises\documents\github\ai\example\example\debug\framework.tlog\cl.command.1.tlog
 c:\users\ulises\documents\github\ai\example\example\debug\framework.tlog\cl.read.1.tlog
