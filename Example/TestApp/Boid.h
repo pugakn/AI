@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Obstacle.h"
 #include "TriangleGL.h"
+#include "LineGL.h"
 #include <memory>
 #include <vector>
 
@@ -35,12 +36,12 @@ const float FLEE_FORCE = 5.f;
 const float ARRIVE_FORCE = 0.2f;
 const float PURSUE_FORCE = 0.4f;
 const float EVADE_FORCE = 0.4f;
-const float WANDER_FORCE = 0.3f;
+const float WANDER_FORCE = 0.4f;
 const float BIG_FORCE = 20000.f;
 const float MAX_TIME_PREDICTION = 1.5f;
 const float ACTIVE_RADIUS = 0.5f;
-const float MAX_FORCE = 0.8f;
-const float PROYECTION_DISTANCE = 0.2f;
+const float MAX_FORCE = 0.05f;
+const float PROYECTION_DISTANCE = 0.05f;
 const float WANDER2_OFFSET = 0.6f;
 const float WANDER2_RADIUS = 0.7f;
 const float WANDER2_VISIONRANGE = 1.12f;
@@ -53,6 +54,7 @@ class CBoid : public CGameObject
 {
 private:
 	TrangleGL triangle;
+	LineGL m_line;
 	Vector3D m_vDirection;
 	float m_fRadius;
 	float m_fVelocity;

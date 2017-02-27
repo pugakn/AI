@@ -22,9 +22,9 @@ void TrangleGL::Create() {
 	
 	matUniformLoc = glGetUniformLocation(shaderID, "MyMatrix");
 
-	vertices[0] = {  0.0f,  0.05f, 0.0f , 0.0f, 0.0f, 1.0f };
+	vertices[0] = { -0.05f,  0.05f, 0.0f , 0.0f, 0.0f, 1.0f };
 	vertices[1] = { -0.05f, -0.05f, 0.0f , 0.0f, 1.0f, 0.0f };
-	vertices[2] = {  0.05f, -0.05f, 0.0f , 1.0f, 0.0f, 1.0f };
+	vertices[2] = {  0.05f, 0.0f, 0.0f , 1.0f, 0.0f, 1.0f };
 
 	glGenBuffers(1, &VB);
 	glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -37,7 +37,7 @@ void TrangleGL::Create() {
 
 	glGenBuffers(1, &IB);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6*sizeof(unsigned short), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3*sizeof(unsigned short), indices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	D3DXMatrixIdentity(&transform);
@@ -61,7 +61,7 @@ void TrangleGL::Draw() {
 	glVertexAttribPointer(vertexAttribLoc, 3, GL_FLOAT, GL_FALSE, sizeof(triVertex), (void*)0);
 	glVertexAttribPointer(colorAttribLoc, 3, GL_FLOAT, GL_FALSE, sizeof(triVertex), (void*)12);
 
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

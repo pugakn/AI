@@ -9,6 +9,18 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="FSM">
+      <UniqueIdentifier>{3b7b2638-f4b2-4b92-9ed3-c5e37dec21e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FSM">
+      <UniqueIdentifier>{3dd3cef6-2fda-44d2-97d8-fd589f00c41f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FSM\States">
+      <UniqueIdentifier>{97c6543c-f67d-4a6e-868a-ea049b3f5c14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FSM\States">
+      <UniqueIdentifier>{45902786-fd72-4d66-a099-44f9e74afac7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestApp.cpp">
@@ -38,6 +50,54 @@
     <ClCompile Include="Vector4D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Faction.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainType.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponType.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Type.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Build.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Dead.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Guarrison.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Idle.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveTo.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Recollect.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Roting.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\FSM\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -63,6 +123,54 @@
     </ClInclude>
     <ClInclude Include="Vector4D.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponType.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Type.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainType.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Faction.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Build.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Dead.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Idle.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveTo.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Recollect.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Roting.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>FSM\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Guarrison.h">
+      <Filter>FSM\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

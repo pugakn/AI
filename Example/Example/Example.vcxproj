@@ -23,6 +23,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="GLDriver.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LineGL.h" />
     <ClInclude Include="PrimitiveBase.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TriangleGL.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="GLDriver.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LineGL.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TriangleGL.cpp" />
     <ClCompile Include="UtilsGL.cpp" />

@@ -10,10 +10,6 @@
 
 
 
-struct triVertex {
-	float x, y, z;
-	float r, g, b;
-};
 
 
 class TrangleGL : public PrimitiveBase {

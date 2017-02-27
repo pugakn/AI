@@ -119,9 +119,9 @@ Vector3D CBoid::Wander2(const float fOffset, float fRadius, float fVisionRange)
 Vector3D CBoid::ObstacleAvoidance(float fProyDist)
 {
 	Vector3D vMedProyection = m_vPosition + fProyDist *0.5f * Normalize(m_vDirection);
-	vMedProyection = vMedProyection* Magnitude(m_vDirection);
+	vMedProyection = vMedProyection* m_fVelocity;
 	Vector3D vFinProyection = vMedProyection * 2.f;
-	vFinProyection = vFinProyection* Magnitude(m_vDirection);
+	m_line.vertices[1].x = Magnitude(vFinProyection - m_vPosition) +0.05f;
 	Vector3D shortestCollisionDir;
 	const float NULL_DISTANCE = 30000;
 	float shortestCollisionDis = NULL_DISTANCE;
@@ -171,6 +171,7 @@ Vector3D CBoid::ObstacleAvoidance2()
 	Vector3D botVector = botLeftPoint - botRightPint;
 	Vector3D leftVector = botLeftPoint - topLeftPoint;
 
+	m_line.vertices[1].x = Magnitude(topRightPoint - m_vPosition) + 0.05f;//
 	for (auto &it : *m_pObstacleList)
 	{
 		Vector3D distancePoint = (Dot((it->GetPosition()  - topLeftPoint),(topVector)) / Magnitude(topVector)) * m_vDirection;
@@ -228,10 +229,8 @@ Vector3D CBoid::ObstacleAvoidance2()
 	return Vector3D(0,0,0);
 }
 
-///////////////////
 //////////////////
-//EXAMEN
-/////////////////
+//EXAMEN/////////
 /////////////////
 Vector3D CBoid::CircleMovement(float fRadius, float delta)
 {
@@ -242,13 +241,15 @@ Vector3D CBoid::CircleMovement(float fRadius, float delta)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+//Inicializar parametros
 void CBoid::Init()
 {
 	m_fCircleParam = 0.1f;
 	m_vDirection = Vector3D(0, 0, 0);
 	triangle.Create();
+	m_line.Create();
 }
+
 void CBoid::Destroy()
 {
 	triangle.Destroy();
@@ -296,6 +297,7 @@ void CBoid::Update(float delta)
 			break;
 		case SteeringStates::E::kObstacleAvoidance2:
 			forces += ObstacleAvoidance2();
+			break;
 		case SteeringStates::E::kCircleMovement:
 			forces += CircleMovement(CIRCLE_RADIUS, delta);
 			break;
@@ -303,7 +305,7 @@ void CBoid::Update(float delta)
 	}
 	Vector3D forces2(0,0,0);
 	if (!(forces.x == 0 && forces.y == 0 && forces.z == 0)) {
-		forces2 = Normalize(forces);
+		forces2 = Truncate(forces, MAX_FORCE);
 		m_vDirection += forces2;
 		m_vDirection = Normalize(m_vDirection);
 	}
@@ -324,14 +326,16 @@ void CBoid::Update(float delta)
 		m_vPosition.y = 1;
 	}
 
-	Matrix4D traslation;
-	traslation = Translation(m_vPosition.x, m_vPosition.y,0);
-	triangle.Transform(traslation.v);
+	Matrix4D transform = RotationZRH(atan2(-m_vDirection.y, m_vDirection.x));
+	transform = transform * Translation(m_vPosition.x, m_vPosition.y, 0);
+	triangle.Transform(transform.v);
+	m_line.Transform(transform.v);
 }
 
 void CBoid::Render()
 {
 	triangle.Draw();
+	m_line.Draw();
 }
 
 //Añadir objetivos que no se mueven
