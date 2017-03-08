@@ -7,13 +7,11 @@
 #include "Type.h"
 class CFaction;
 class CState;
+class CWorld;
 class CUnit : CGameObject
 {
 private:
-	std::vector<std::shared_ptr<CType>> m_typeList;
-	std::vector<std::shared_ptr<CFaction>> m_factionList;
-
-	unsigned int m_uId;
+	CWorld* m_pWorld;
 	unsigned int m_uIdType;
 	unsigned int m_uIdFaction;
 	Vector3D m_vDirection;
@@ -25,6 +23,7 @@ private:
 	float m_fRotingTimer;
 
 public:
+	unsigned int m_uId;
 	bool CanRecolect();
 	bool CanBuild();
 	bool IsBelic();
@@ -44,6 +43,7 @@ public:
 	void Die();
 
 	void SetState(std::shared_ptr<CState> state);
+	void SetWorlPtr(CWorld* ptr);
 
 	void Init() override;
 	void Destroy() override;

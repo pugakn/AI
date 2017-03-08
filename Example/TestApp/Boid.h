@@ -27,48 +27,78 @@ namespace SteeringStates
 		kObstacleAvoidance,
 		kObstacleAvoidance2,
 		kCircleMovement,
+		kFollowPath,
+		kFollowPathLoop,
+		kFollowPathArrive,
+		kFlocking,
+		kFollowTheLider,
 		kNumObjects
 	};
 }
-const float MAX_SPEED = 0.5f;
-const float SEEK_FORCE = 0.5f;
-const float FLEE_FORCE = 5.f;
-const float ARRIVE_FORCE = 0.2f;
-const float PURSUE_FORCE = 0.4f;
-const float EVADE_FORCE = 0.4f;
-const float WANDER_FORCE = 0.4f;
-const float BIG_FORCE = 20000.f;
-const float MAX_TIME_PREDICTION = 1.5f;
-const float ACTIVE_RADIUS = 0.5f;
-const float MAX_FORCE = 0.05f;
-const float PROYECTION_DISTANCE = 0.05f;
-const float WANDER2_OFFSET = 0.6f;
-const float WANDER2_RADIUS = 0.7f;
-const float WANDER2_VISIONRANGE = 1.12f;
-const float CIRCLE_FORCE = 0.5f;
-const float PI = 3.1415927;
-
-const float CIRCLE_RADIUS = 0.5f;
-const float CIRCLE_PARAM_VEL = 1.0f;
 class CBoid : public CGameObject
 {
 private:
+	//========== Constantes Para modificar el comportamiento de las fuerzas ============
+	const float MAX_SPEED = 0.6f;
+	const float SEEK_FORCE = 0.4f;
+	const float FLEE_FORCE = 5.f;
+	const float ARRIVE_FORCE = 0.5f;
+	const float PURSUE_FORCE = 0.4f;
+	const float EVADE_FORCE = 0.4f;
+	const float WANDER_FORCE = 0.4f;
+	const float BIG_FORCE = 20000.f;
+	const float MAX_TIME_PREDICTION = 1.5f;
+	const float ACTIVE_RADIUS = 0.05f;
+	const float MAX_ROTATION = 0.05f;
+	const float PROYECTION_DISTANCE = 0.05f;
+	const float WANDER2_OFFSET = 0.6f;
+	const float WANDER2_RADIUS = 0.7f;
+	const float WANDER2_VISIONRANGE = 1.12f;
+	const float CIRCLE_FORCE = 0.5f;
+	const float PI = 3.1415927;
+	const float CIRCLE_RADIUS = 0.5f;
+	const float CIRCLE_PARAM_VEL = 1.0f;
+	const float FOLLOW_PATH_LINE_FORCE = 0.1f;
+	const float FOLLOW_POINT_RADIUS = 0.02f;
+	const float FLOCKING_RADIUS = 0.5f;
+	const float FTL_RADIUS = 1.5f;
+	const float LIDER_SEPARATION = 0.1f;
+
+	//========= Elementos visuales ==========
 	TrangleGL triangle;
-	LineGL m_line;
+	//LineGL m_line;
+
+	//======== Variables ========
 	Vector3D m_vDirection;
+
+	//======== Variables para CircelMovement =========
 	float m_fRadius;
 	float m_fVelocity;
 	float m_fCircleParam;
 
+	//========= Variables para Wander =========
 	Vector3D m_vWanderSeekPoint;
 	bool m_bWanderArrived = true;
 	float m_fWanderTime = 0;
 
-	std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> m_pObstacleList;
+	//========= Variables para FollowPath =========
+	int m_iActualPoint;
+	bool m_bFirstFollow;
+	std::vector<Vector3D> m_followPathVector;
+
+	//========= Variables para FollowTheLider =========
+	bool m_isLider;
+
+	//============== Targets y estados ==============
+	std::vector<std::shared_ptr<CObstacle>>* m_pObstacleList;
 	std::vector <std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E>> m_Targets;
 	std::vector <SteeringStates::E> m_States;
 
+	//======= Boids en el mundo ======
+	std::vector<std::shared_ptr<CGameObject>>* m_pWorldBoids;
+
 public:
+	//============== Steering Behaviors ==================
 	Vector3D Seek(const Vector3D& vTargetPosition);
 	Vector3D Flee(const Vector3D& vTargetPosition, float fRadius);
 	Vector3D Arrive(const Vector3D& vTargetPosition, float fRadius);
@@ -79,6 +109,16 @@ public:
 	Vector3D ObstacleAvoidance(float fProyDist);
 	Vector3D ObstacleAvoidance2();
 	Vector3D CircleMovement(float fRadius, float delta);
+	Vector3D FollowPath();
+	Vector3D FollowPathLoop(); //Patrol
+	Vector3D FollowPathArrive();
+	void SetLider(bool islider);
+
+	Vector3D Flocking();
+	Vector3D FollowTheLider();
+
+
+
 	void Init() override;
 	void Destroy() override;
 	void Update(float delta) override;
@@ -86,11 +126,17 @@ public:
 	CBoid();
 	~CBoid();
 	
+	bool IsLider();
+
+	//============= Gets, Sets ===============
 	void SetRadius(float radius);
 	float GetRadius();
 	float GetVelocity();
 	Vector3D GetDirection();
-	void SetObstacleList(std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> pObstacleList);
+	void SetObstacleList	(std::vector<std::shared_ptr<CObstacle>>* pObstacleList);
+	void SetWorldBoidsVector(std::vector<std::shared_ptr<CGameObject>>* worldBoids);
+	void SetFollowPathVector(std::vector<Vector3D> vector);
+
 
 	void AddStaticTarget( Vector3D targetPos, SteeringBehavior::E key);
 	void AddDynamicTarget(std::shared_ptr<CGameObject> target, SteeringBehavior::E key);

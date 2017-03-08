@@ -121,7 +121,7 @@ Vector3D CBoid::ObstacleAvoidance(float fProyDist)
 	Vector3D vMedProyection = m_vPosition + fProyDist *0.5f * Normalize(m_vDirection);
 	vMedProyection = vMedProyection* m_fVelocity;
 	Vector3D vFinProyection = vMedProyection * 2.f;
-	m_line.vertices[1].x = Magnitude(vFinProyection - m_vPosition) +0.05f;
+	//m_line.vertices[1].x = Magnitude(vFinProyection - m_vPosition) +0.05f;
 	Vector3D shortestCollisionDir;
 	const float NULL_DISTANCE = 30000;
 	float shortestCollisionDis = NULL_DISTANCE;
@@ -171,7 +171,7 @@ Vector3D CBoid::ObstacleAvoidance2()
 	Vector3D botVector = botLeftPoint - botRightPint;
 	Vector3D leftVector = botLeftPoint - topLeftPoint;
 
-	m_line.vertices[1].x = Magnitude(topRightPoint - m_vPosition) + 0.05f;//
+	//m_line.vertices[1].x = Magnitude(topRightPoint - m_vPosition) + 0.05f;//
 	for (auto &it : *m_pObstacleList)
 	{
 		Vector3D distancePoint = (Dot((it->GetPosition()  - topLeftPoint),(topVector)) / Magnitude(topVector)) * m_vDirection;
@@ -182,7 +182,6 @@ Vector3D CBoid::ObstacleAvoidance2()
 		if (Magnitude(it->GetPosition() - distancePoint) < it->GetRadius()) 
 		{
 			//Colisión
-
 			return Normalize(distancePoint - it->GetPosition()) * BIG_FORCE;
 		}
 
@@ -194,7 +193,6 @@ Vector3D CBoid::ObstacleAvoidance2()
 		if (Magnitude(it->GetPosition() - distancePoint) < it->GetRadius())
 		{
 			//Colisión
-
 			return Normalize(distancePoint - it->GetPosition()) * BIG_FORCE;
 		}
 
@@ -206,7 +204,6 @@ Vector3D CBoid::ObstacleAvoidance2()
 		if (Magnitude(it->GetPosition() - distancePoint) < it->GetRadius())
 		{
 			//Colisión
-
 			return Normalize(distancePoint - it->GetPosition()) * BIG_FORCE;
 		}
 
@@ -218,7 +215,6 @@ Vector3D CBoid::ObstacleAvoidance2()
 		if (Magnitude(it->GetPosition() - distancePoint) < it->GetRadius())
 		{
 			//Colisión
-
 			return Normalize(distancePoint - it->GetPosition()) * BIG_FORCE;
 		}
 	}
@@ -228,26 +224,168 @@ Vector3D CBoid::ObstacleAvoidance2()
 
 	return Vector3D(0,0,0);
 }
-
-//////////////////
-//EXAMEN/////////
-/////////////////
 Vector3D CBoid::CircleMovement(float fRadius, float delta)
 {
 	m_fCircleParam += CIRCLE_PARAM_VEL * delta;
 	Vector3D seekPoint =  Vector3D(cosf(m_fCircleParam), sinf(m_fCircleParam), 0) * fRadius; //Genera un punto de seek a partir del seno y coseno de un parametro que incrementa con el tiempo
 	return Seek(seekPoint); //Regresa seek a ese punto
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//=========== Sigue una serie de puntos establecidos en m_followPathVector =================
+Vector3D CBoid::FollowPath()
+{
+	if (m_bFirstFollow) {
+		m_iActualPoint = 0;
+		m_bFirstFollow = false;
+	}
+	Vector3D force(0, 0, 0);
 
-//Inicializar parametros
+	if (m_iActualPoint < m_followPathVector.size())
+	{
+		force = Seek(m_followPathVector[m_iActualPoint]);
+		Vector3D linePoint;
+		if (m_iActualPoint < m_followPathVector.size()-1)
+			linePoint = m_followPathVector[m_iActualPoint + 1] - m_followPathVector[m_iActualPoint];
+		else
+			linePoint = m_followPathVector[m_iActualPoint] - m_followPathVector[m_iActualPoint-1];
+		Vector3D distancePoint = (Dot((m_followPathVector[m_iActualPoint] - m_vPosition), linePoint) / Magnitude(linePoint)) * Normalize(linePoint) ;
+		force += (distancePoint - m_vPosition) * FOLLOW_PATH_LINE_FORCE;
+		if (Magnitude(m_followPathVector[m_iActualPoint] - m_vPosition) < FOLLOW_POINT_RADIUS) {
+			m_iActualPoint++;
+		}
+	}
+
+	return force;
+}
+
+Vector3D CBoid::FollowPathLoop()
+{
+	if (m_bFirstFollow) {
+		m_iActualPoint = 0;
+		m_bFirstFollow = false;
+	}
+	Vector3D force(0, 0, 0);
+
+	if (m_iActualPoint < m_followPathVector.size())
+	{
+		force = Seek(m_followPathVector[m_iActualPoint]);
+		Vector3D linePoint;
+		if (m_iActualPoint < m_followPathVector.size() - 1)
+			linePoint = m_followPathVector[m_iActualPoint + 1] - m_followPathVector[m_iActualPoint];
+		else
+			linePoint = m_followPathVector[m_iActualPoint] - m_followPathVector[m_iActualPoint - 1];
+		Vector3D distancePoint = (Dot((m_followPathVector[m_iActualPoint] - m_vPosition), linePoint) / Magnitude(linePoint)) * Normalize(linePoint);
+		force += (distancePoint - m_vPosition) * FOLLOW_PATH_LINE_FORCE;
+		if (Magnitude(m_followPathVector[m_iActualPoint] - m_vPosition) < FOLLOW_POINT_RADIUS) {
+			m_iActualPoint++;
+		}
+	}
+	else
+		m_bFirstFollow = true;
+
+	return force;
+}
+
+Vector3D CBoid::FollowPathArrive()
+{
+	if (m_bFirstFollow) {
+		m_iActualPoint = 0;
+		m_bFirstFollow = false;
+	}
+	Vector3D force(0, 0, 0);
+
+	if (m_iActualPoint < m_followPathVector.size())
+	{
+		force = Arrive(m_followPathVector[m_iActualPoint],ACTIVE_RADIUS);
+		if (Magnitude(m_followPathVector[m_iActualPoint] - m_vPosition) < FOLLOW_POINT_RADIUS) {
+			m_iActualPoint++;
+		}
+	}
+
+	return force;
+}
+
+void CBoid::SetLider(bool islider)
+{
+	m_isLider = islider;
+}
+
+Vector3D CBoid::Flocking()
+{
+	Vector3D directions = m_vDirection;
+	Vector3D forces(0,0,0);
+	Vector3D center = m_vPosition;
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS)
+		{
+			center += (1 / 3.f)*(it->GetPosition() - m_vPosition);
+		}
+	}
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS && dist != 0)
+		{
+			directions += dynamic_cast<CBoid*>(it.get())->GetDirection();
+			forces +=Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
+			forces +=  center - m_vPosition;
+		}
+	}
+	forces += directions * SEEK_FORCE;
+	return forces;
+}
+
+Vector3D CBoid::FollowTheLider()
+{
+	Vector3D forces(0, 0, 0);
+	Vector3D center = m_vPosition;
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS && dist != 0)
+		{
+			center += (1 / 3.f)*(it->GetPosition() - m_vPosition);
+		}
+	}
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS && dist != 0)
+		{
+			forces += Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
+			forces += center - m_vPosition;
+
+		}
+		if (dist < FTL_RADIUS && dist != 0) {
+			if (dynamic_cast<CBoid*>(it.get())->IsLider())
+			{
+				forces += Seek(it->GetPosition() - (dynamic_cast<CBoid*>(it.get())->GetDirection() * LIDER_SEPARATION));
+			}
+		}
+
+	}
+	return forces;
+}
+
+//============== Inicializar parametros ==============
 void CBoid::Init()
 {
 	m_fCircleParam = 0.1f;
 	m_vDirection = Vector3D(0, 0, 0);
 	triangle.Create();
-	m_line.Create();
+	//m_line.Create();
+	m_isLider = false;
+	m_bFirstFollow = true;
+	m_iActualPoint = 0;
+
+	m_followPathVector.push_back(Vector3D(0, 0, 0));
+	m_followPathVector.push_back(Vector3D(0.5, 0.5, 0));
+	m_followPathVector.push_back(Vector3D(-0.5, -0.5, 0));
 }
 
 void CBoid::Destroy()
@@ -301,11 +439,26 @@ void CBoid::Update(float delta)
 		case SteeringStates::E::kCircleMovement:
 			forces += CircleMovement(CIRCLE_RADIUS, delta);
 			break;
+		case SteeringStates::E::kFollowPath:
+			forces += FollowPath();
+			break;
+		case SteeringStates::E::kFollowPathLoop:
+			forces += FollowPathLoop();
+			break;
+		case SteeringStates::E::kFollowPathArrive:
+			forces += FollowPathArrive();
+			break;
+		case SteeringStates::E::kFlocking:
+			forces += Flocking();
+			break;
+		case SteeringStates::E::kFollowTheLider:
+			forces += FollowTheLider();
+			break;
 		}
 	}
 	Vector3D forces2(0,0,0);
 	if (!(forces.x == 0 && forces.y == 0 && forces.z == 0)) {
-		forces2 = Truncate(forces, MAX_FORCE);
+		forces2 = Truncate(forces, MAX_ROTATION);
 		m_vDirection += forces2;
 		m_vDirection = Normalize(m_vDirection);
 	}
@@ -329,13 +482,13 @@ void CBoid::Update(float delta)
 	Matrix4D transform = RotationZRH(atan2(-m_vDirection.y, m_vDirection.x));
 	transform = transform * Translation(m_vPosition.x, m_vPosition.y, 0);
 	triangle.Transform(transform.v);
-	m_line.Transform(transform.v);
+	//m_line.Transform(transform.v);
 }
 
 void CBoid::Render()
 {
 	triangle.Draw();
-	m_line.Draw();
+	//m_line.Draw();
 }
 
 //Añadir objetivos que no se mueven
@@ -350,28 +503,38 @@ void CBoid::AddStaticTarget(Vector3D targetPos, SteeringBehavior::E behabior)
 //Añadir objetivos que se mueven
 void CBoid::AddDynamicTarget(std::shared_ptr <CGameObject> target, SteeringBehavior::E behavior)
 {
-	std::shared_ptr<CBoid> targetBoid = std::make_shared<CBoid>();
-	target->Init();
 	std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E> dataPair = { target, behavior };
 	m_Targets.push_back(dataPair);
 }
 //Añadir estados de comportamiento
 void CBoid::AddSteeringState(SteeringStates::E state)
 {
+	if (state == SteeringStates::E::kFollowPath)
+		m_bFirstFollow = true;
 	m_States.push_back(state);
 }
 
-/////////////////////////////
-// GETS y SETS//////////////
-////////////////////////////
+
+//=========== GETS y SETS ===========
+
 Vector3D CBoid::GetDirection()
 {
 	return m_vDirection;
 }
 
-void CBoid::SetObstacleList(std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> pObstacleList)
+void CBoid::SetObstacleList(std::vector<std::shared_ptr<CObstacle>>* pObstacleList)
 {
 	m_pObstacleList = pObstacleList;
+}
+
+void CBoid::SetFollowPathVector(std::vector<Vector3D> vector)
+{
+	m_followPathVector = vector;
+}
+
+void CBoid::SetWorldBoidsVector(std::vector<std::shared_ptr<CGameObject>>* worldBoids)
+{
+	m_pWorldBoids = worldBoids;
 }
 
 void CBoid::SetRadius(float radius)
@@ -387,7 +550,6 @@ float CBoid::GetVelocity()
 {
 	return m_fVelocity;
 }
-//////////////////////////////
 
 
 CBoid::CBoid()
@@ -397,4 +559,9 @@ CBoid::CBoid()
 
 CBoid::~CBoid()
 {
+}
+
+bool CBoid::IsLider()
+{
+	return m_isLider;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector3D.h"
-class CGameObject
+#include <memory>
+class CGameObject: public std::enable_shared_from_this<CGameObject>
 {
 protected:
 	Vector3D m_vPosition;

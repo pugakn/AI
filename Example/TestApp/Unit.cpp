@@ -13,7 +13,7 @@ void CUnit::Destroy()
 
 void CUnit::Update(float delta)
 {
-	m_state->Update(delta, this);
+	m_state->Update(shared_from_this());
 }
 
 void CUnit::Render()
@@ -31,17 +31,17 @@ CUnit::~CUnit()
 
 bool CUnit::CanRecolect()
 {
-	return m_typeList[m_uIdType]->m_bCanRecolect;
+	return true;
 }
 
 bool CUnit::CanBuild()
 {
-	return m_typeList[m_uIdType]->m_bCanBuild;
+	return true;
 }
 
 bool CUnit::IsBelic()
 {
-	return m_typeList[m_uIdType]->m_bisBelic;
+	return true;
 }
 
 bool CUnit::IsDead()
@@ -64,6 +64,11 @@ void CUnit::SetState(std::shared_ptr<CState> state)
 	m_state->OnExit();
 	m_state = state;
 	m_state->OnEnter();
+}
+
+void CUnit::SetWorlPtr(CWorld * ptr)
+{
+	m_pWorld = ptr;
 }
 
 void CUnit::MoveTo(Vector3D poisition)

@@ -1,9 +1,8 @@
 #pragma once
 class CTerrainType
 {
-private:
-	unsigned int m_uId;
 public:
+	unsigned int m_uId;
 	CTerrainType();
 	~CTerrainType();
 };

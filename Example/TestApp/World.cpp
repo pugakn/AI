@@ -6,7 +6,7 @@
 void CWorld::Init()
 {
 	srand(time(NULL));
-	std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> obstaclePointer(&m_pObstacleList);
+	//std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> obstaclePointer(&m_pObstacleList);
 	///////////////////////////////////////////////////////
 	//BOIDS//////////////////////////////////////////
 	//Inicializar aqui los BOIDS
@@ -14,9 +14,33 @@ void CWorld::Init()
 
 
 	CreateBoid(Vector3D(0.5, 0, 0), 0.08f);
-	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(obstaclePointer);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(&m_pObstacleList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetWorldBoidsVector(&m_ObjectList);
 	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
-	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kCircleMovement);
+	//std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowPathArrive);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowTheLider);
+
+	CreateBoid(Vector3D(0, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(&m_pObstacleList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetWorldBoidsVector(&m_ObjectList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	//std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander2);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowTheLider);
+
+	CreateBoid(Vector3D(0.3, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(&m_pObstacleList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetWorldBoidsVector(&m_ObjectList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowTheLider);
+
+	CreateBoid(Vector3D(0.4, 0, 0), 0.08f);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetObstacleList(&m_pObstacleList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetWorldBoidsVector(&m_ObjectList);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->SetLider(true);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kObstacleAvoidance);
+	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander2);
+	//std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowTheLider);
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//OBSTACULOS///////////////////////////////////////////
@@ -27,11 +51,6 @@ void CWorld::Init()
 	//m_pObstacleList.back()->SetRadius(0.08f);
 
 	///////////////////////////////////////////////////////////
-
-	for (auto &item : m_ObjectList) 
-		item->Init();
-	for (auto &item : m_pObstacleList)
-		item->Init();
 }
 
 void CWorld::Destroy()
@@ -75,6 +94,41 @@ void CWorld::CreateObstacle(Vector3D position, float fRadius)
 
 }
 
+CFaction CWorld::GetFactionByID(unsigned short id)
+{
+	for (auto &it : m_factions)
+		if (it.m_uId == id)
+			return it;
+}
+
+CArmor CWorld::GetArmorByID(unsigned short id)
+{
+	for (auto &it : m_armors)
+		if (it.m_uId == id)
+			return it;
+}
+
+CTerrainType CWorld::GetTerrainTypenByID(unsigned short id)
+{
+	for (auto &it : m_terrainType)
+		if (it.m_uId == id)
+			return it;
+}
+
+CType CWorld::GetTypeByID(unsigned short id)
+{
+	for (auto &it : m_types)
+		if (it.m_uId == id)
+			return it;
+}
+
+CWeaponType CWorld::GetWeaponTypeByID(unsigned short id)
+{
+	for (auto &it : m_weaponTypes)
+		if (it.m_uId == id)
+			return it;
+}
+
 CWorld::CWorld()
 {
 }
@@ -83,3 +137,4 @@ CWorld::CWorld()
 CWorld::~CWorld()
 {
 }
+

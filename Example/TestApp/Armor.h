@@ -2,8 +2,8 @@
 class CArmor
 {
 private:
-	unsigned int m_uId;
 public:
+	unsigned int m_uId;
 	CArmor();
 	~CArmor();
 };

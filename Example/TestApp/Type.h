@@ -7,7 +7,6 @@ class CType
 private:
 	friend class CUnit;
 
-	unsigned int m_uId;
 	float m_fVisionRange;
 	bool m_bCanRecolect;
 	bool m_bCanBuild;
@@ -27,6 +26,7 @@ private:
 	float m_fRotingTime;
 
 public:
+	unsigned int m_uId;
 	CType();
 	~CType();
 };

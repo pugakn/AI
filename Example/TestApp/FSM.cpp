@@ -44,7 +44,7 @@ void CFSM::Init()
 	m_states.push_back(std::make_shared<CGuarrison>());
 }
 
-void CFSM::SetState(CUnit unit, std::shared_ptr<CState> state)
+void CFSM::SetState(CUnit* unit, std::shared_ptr<CState> state)
 {
-	unit.SetState(state);
+	unit->SetState(state);
 }

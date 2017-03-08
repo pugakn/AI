@@ -2,7 +2,7 @@
 
 
 
-void CBuild::Update(float delta, CUnit* callerUnit)
+void CBuild::Update(std::shared_ptr<CGameObject> callerUnit)
 {
 }
 
@@ -12,6 +12,11 @@ void CBuild::OnEnter()
 
 void CBuild::OnExit()
 {
+}
+
+void CBuild::SetFSM(CFSM * fsm)
+{
+	m_fsm = fsm;
 }
 
 CBuild::CBuild()

@@ -12,17 +12,31 @@
 #include <memory>
 #include <list>
 #include <vector>
+namespace States
+{
+	enum E
+	{
+		IDLE,
+		MOVE_TO,
+		ATTACK,
+		DEAD,
+		ROTING,
+		RECOLLECT,
+		BUILD,
+		GUARRISON
+	};
+}
 class CFSM
 {
 private:
-	std::vector<std::shared_ptr<CState>> m_states;
-public:
 	std::list<std::shared_ptr<CGameObject>> m_observers;
+public:
+	std::vector<std::shared_ptr<CState>> m_states;
 	void Attach(std::shared_ptr<CGameObject> observer);
 	void Detach(std::shared_ptr<CGameObject> observer);
 
 	void Init();
-	void SetState(CUnit unit, std::shared_ptr<CState> state);
+	void SetState(CUnit* unit, std::shared_ptr<CState> state);
 	void Update(float delta);
 	void Destroy();
 	CFSM();
