@@ -2,7 +2,7 @@
 
 
 
-void CBuild::Update(std::shared_ptr<CGameObject> callerUnit)
+void CBuild::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

@@ -3,7 +3,7 @@
 #include "Unit.h"
 
 
-void CIdle::Update(std::shared_ptr<CGameObject> callerUnit)
+void CIdle::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 	//if (callerUnit->SeesEnemies())
 	//{

@@ -13,7 +13,7 @@ void CUnit::Destroy()
 
 void CUnit::Update(float delta)
 {
-	m_state->Update(shared_from_this());
+	m_state.lock()->Update(shared_from_this());
 }
 
 void CUnit::Render()
@@ -59,17 +59,13 @@ void CUnit::Die()
 	
 }
 
-void CUnit::SetState(std::shared_ptr<CState> state)
+void CUnit::SetState(std::weak_ptr<CState> state)
 {
-	m_state->OnExit();
+	m_state.lock()->OnExit();
 	m_state = state;
-	m_state->OnEnter();
+	m_state.lock()->OnEnter();
 }
 
-void CUnit::SetWorlPtr(CWorld * ptr)
-{
-	m_pWorld = ptr;
-}
 
 void CUnit::MoveTo(Vector3D poisition)
 {

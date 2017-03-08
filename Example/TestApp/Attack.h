@@ -5,7 +5,7 @@ class CAttack :
 {
 public:
 
-	void Update(std::shared_ptr<CGameObject> callerUnit) override;
+	void Update(std::weak_ptr<CGameObject> callerUnit) override;
 	void OnEnter()override;
 	void OnExit()override;
 	void SetFSM(CFSM* fsm) override;

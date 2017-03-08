@@ -2,7 +2,7 @@
 
 
 
-void CGuarrison::Update(std::shared_ptr<CGameObject> callerUnit)
+void CGuarrison::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

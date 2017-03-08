@@ -169,6 +169,7 @@
     <ClCompile Include="Recollect.cpp" />
     <ClCompile Include="Roting.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TerrainType.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="Type.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Recollect.h" />
     <ClInclude Include="Roting.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="TerrainType.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Unit.h" />

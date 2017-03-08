@@ -2,7 +2,7 @@
 
 
 
-void CRecollect::Update(std::shared_ptr<CGameObject> callerUnit)
+void CRecollect::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

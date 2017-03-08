@@ -2,7 +2,7 @@
 
 
 
-void CDead::Update(std::shared_ptr<CGameObject> callerUnit)
+void CDead::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

@@ -12,6 +12,7 @@
 #include <memory>
 #include <list>
 #include <vector>
+#include "Subject.h"
 namespace States
 {
 	enum E
@@ -26,17 +27,14 @@ namespace States
 		GUARRISON
 	};
 }
-class CFSM
+class CFSM : public CSubject
 {
-private:
-	std::list<std::shared_ptr<CGameObject>> m_observers;
 public:
 	std::vector<std::shared_ptr<CState>> m_states;
-	void Attach(std::shared_ptr<CGameObject> observer);
-	void Detach(std::shared_ptr<CGameObject> observer);
+
 
 	void Init();
-	void SetState(CUnit* unit, std::shared_ptr<CState> state);
+	void SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state);
 	void Update(float delta);
 	void Destroy();
 	CFSM();

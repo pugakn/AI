@@ -51,7 +51,7 @@ private:
 	const float ACTIVE_RADIUS = 0.05f;
 	const float MAX_ROTATION = 0.05f;
 	const float PROYECTION_DISTANCE = 0.05f;
-	const float WANDER2_OFFSET = 0.6f;
+	const float WANDER2_OFFSET = 0.4f;
 	const float WANDER2_RADIUS = 0.7f;
 	const float WANDER2_VISIONRANGE = 1.12f;
 	const float CIRCLE_FORCE = 0.5f;
@@ -63,6 +63,10 @@ private:
 	const float FLOCKING_RADIUS = 0.5f;
 	const float FTL_RADIUS = 1.5f;
 	const float LIDER_SEPARATION = 0.1f;
+	const float FTL_SEEK_MOD = 2.0f;
+	const float FLOCKING_COHESION_FORCE = 2.0f;
+	const float FTL_COHESION_FORCE = 1.1f;
+
 
 	//========= Elementos visuales ==========
 	TrangleGL triangle;
@@ -139,7 +143,7 @@ public:
 
 
 	void AddStaticTarget( Vector3D targetPos, SteeringBehavior::E key);
-	void AddDynamicTarget(std::shared_ptr<CGameObject> target, SteeringBehavior::E key);
+	void AddDynamicTarget(std::weak_ptr<CGameObject> target, SteeringBehavior::E key);
 	void AddSteeringState(SteeringStates::E state);
 };
 

@@ -2,7 +2,7 @@
 
 
 
-void CRoting::Update(std::shared_ptr<CGameObject> callerUnit)
+void CRoting::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

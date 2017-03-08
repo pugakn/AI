@@ -65,7 +65,6 @@ Vector3D CBoid::Evade(const Vector3D & vTargetPosition, const Vector3D & vTarget
 	float fPredictionRadius = Magnitude(vPredictionPos - vTargetPosition);
 	if (Magnitude(vDistance) < fPredictionRadius)
 	{
-
 		fMaxTimePrediction = Magnitude(vDistance) / fPredictionRadius;
 		vPredictionPos = vTargetPosition + vTargetVelocity * fMaxTimePrediction;
 	}
@@ -314,27 +313,40 @@ Vector3D CBoid::Flocking()
 	Vector3D directions = m_vDirection;
 	Vector3D forces(0,0,0);
 	Vector3D center = m_vPosition;
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS)
-		{
-			center += (1 / 3.f)*(it->GetPosition() - m_vPosition);
-		}
-	}
+	//========= Obtener Centro de masa ==========
+	int numBoids = 0;
 	for (auto &it : *m_pWorldBoids)
 	{
 		Vector3D separation = it->GetPosition() - m_vPosition;
 		float dist = Magnitude(separation);
 		if (dist < FLOCKING_RADIUS && dist != 0)
 		{
-			directions += dynamic_cast<CBoid*>(it.get())->GetDirection();
+				numBoids++;
+		}
+	}
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS)
+		{
+			center += (1 / static_cast<float>(numBoids))*(it->GetPosition() - m_vPosition);
+		}
+	}
+	//========= Obtener Fuerzas ==========
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS && dist != 0)
+		{
+			directions += (1 / static_cast<float>(numBoids)) * dynamic_cast<CBoid*>(it.get())->GetDirection();
 			forces +=Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
-			forces +=  center - m_vPosition;
+			forces +=  (center - m_vPosition) * FLOCKING_COHESION_FORCE;
 		}
 	}
 	forces += directions * SEEK_FORCE;
+	forces.z = 0;
 	return forces;
 }
 
@@ -342,15 +354,31 @@ Vector3D CBoid::FollowTheLider()
 {
 	Vector3D forces(0, 0, 0);
 	Vector3D center = m_vPosition;
+
+	//========= Obtener Centro de masa ==========
+	int numBoids = 0;
 	for (auto &it : *m_pWorldBoids)
 	{
 		Vector3D separation = it->GetPosition() - m_vPosition;
 		float dist = Magnitude(separation);
 		if (dist < FLOCKING_RADIUS && dist != 0)
 		{
-			center += (1 / 3.f)*(it->GetPosition() - m_vPosition);
+			if (!dynamic_cast<CBoid*>(it.get())->IsLider())
+				numBoids++;
 		}
 	}
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < FLOCKING_RADIUS && dist != 0)
+		{
+			if (!dynamic_cast<CBoid*>(it.get())->IsLider())
+				center += (1 / static_cast<float>( numBoids))*(it->GetPosition() - m_vPosition);
+		}
+	}
+	//========= Obtener Fuerzas ==========
+
 	for (auto &it : *m_pWorldBoids)
 	{
 		Vector3D separation = it->GetPosition() - m_vPosition;
@@ -358,17 +386,18 @@ Vector3D CBoid::FollowTheLider()
 		if (dist < FLOCKING_RADIUS && dist != 0)
 		{
 			forces += Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
-			forces += center - m_vPosition;
+			forces += (center - m_vPosition)* FTL_COHESION_FORCE;
 
 		}
 		if (dist < FTL_RADIUS && dist != 0) {
 			if (dynamic_cast<CBoid*>(it.get())->IsLider())
 			{
-				forces += Seek(it->GetPosition() - (dynamic_cast<CBoid*>(it.get())->GetDirection() * LIDER_SEPARATION));
+				forces += Seek(it->GetPosition() - (dynamic_cast<CBoid*>(it.get())->GetDirection() * LIDER_SEPARATION)) * FTL_SEEK_MOD;
 			}
 		}
 
 	}
+	forces.z = 0;
 	return forces;
 }
 
@@ -385,7 +414,9 @@ void CBoid::Init()
 
 	m_followPathVector.push_back(Vector3D(0, 0, 0));
 	m_followPathVector.push_back(Vector3D(0.5, 0.5, 0));
+	m_followPathVector.push_back(Vector3D(0.5, -0.5, 0));
 	m_followPathVector.push_back(Vector3D(-0.5, -0.5, 0));
+	m_followPathVector.push_back(Vector3D(-0.5, 0.5, 0));
 }
 
 void CBoid::Destroy()
@@ -501,9 +532,9 @@ void CBoid::AddStaticTarget(Vector3D targetPos, SteeringBehavior::E behabior)
 	m_Targets.push_back(dataPair);
 }
 //Añadir objetivos que se mueven
-void CBoid::AddDynamicTarget(std::shared_ptr <CGameObject> target, SteeringBehavior::E behavior)
+void CBoid::AddDynamicTarget(std::weak_ptr <CGameObject> target, SteeringBehavior::E behavior)
 {
-	std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E> dataPair = { target, behavior };
+	std::pair<std::shared_ptr<CGameObject>, SteeringBehavior::E> dataPair = { target.lock(), behavior };
 	m_Targets.push_back(dataPair);
 }
 //Añadir estados de comportamiento

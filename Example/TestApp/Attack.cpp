@@ -2,7 +2,7 @@
 
 
 
-void CAttack::Update(std::shared_ptr<CGameObject> callerUnit)
+void CAttack::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

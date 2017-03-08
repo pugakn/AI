@@ -2,7 +2,7 @@
 
 
 
-void CMoveTo::Update(std::shared_ptr<CGameObject> callerUnit)
+void CMoveTo::Update(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

@@ -1,12 +1,10 @@
 #include "FSM.h"
 
-
-
 void CFSM::Update(float delta)
 {
-	for (auto &observer : m_observers)
-		observer->Update(delta);
 }
+
+
 
 void CFSM::Destroy()
 {
@@ -22,15 +20,7 @@ CFSM::~CFSM()
 {
 }
 
-void CFSM::Attach(std::shared_ptr<CGameObject> observer)
-{
-	m_observers.push_back(observer);
-}
 
-void CFSM::Detach(std::shared_ptr<CGameObject> observer)
-{
-	m_observers.remove(observer);
-}
 
 void CFSM::Init()
 {
@@ -44,7 +34,7 @@ void CFSM::Init()
 	m_states.push_back(std::make_shared<CGuarrison>());
 }
 
-void CFSM::SetState(CUnit* unit, std::shared_ptr<CState> state)
+void CFSM::SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state)
 {
-	unit->SetState(state);
+	unit.lock()->SetState(state.lock());
 }
