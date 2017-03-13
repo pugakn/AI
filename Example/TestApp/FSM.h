@@ -1,14 +1,6 @@
 #pragma once
 #include "Unit.h"
 #include "State.h"
-#include "Idle.h"
-#include "MoveTo.h"
-#include "Attack.h"
-#include "Dead.h"
-#include "Roting.h"
-#include "Recollect.h"
-#include "Build.h"
-#include "Guarrison.h"
 #include <memory>
 #include <list>
 #include <vector>

@@ -217,10 +217,6 @@ Vector3D CBoid::ObstacleAvoidance2()
 			return Normalize(distancePoint - it->GetPosition()) * BIG_FORCE;
 		}
 	}
-
-
-	
-
 	return Vector3D(0,0,0);
 }
 Vector3D CBoid::CircleMovement(float fRadius, float delta)
@@ -255,7 +251,7 @@ Vector3D CBoid::FollowPath()
 
 	return force;
 }
-
+//=========== Sigue una serie de puntos establecidos en m_followPathVector =================
 Vector3D CBoid::FollowPathLoop()
 {
 	if (m_bFirstFollow) {
@@ -283,7 +279,7 @@ Vector3D CBoid::FollowPathLoop()
 
 	return force;
 }
-
+//=========== Sigue una serie de puntos establecidos en m_followPathVector =================
 Vector3D CBoid::FollowPathArrive()
 {
 	if (m_bFirstFollow) {
@@ -302,100 +298,91 @@ Vector3D CBoid::FollowPathArrive()
 
 	return force;
 }
-
-void CBoid::SetLider(bool islider)
+//El boid mantendrá uns separación con los boids que lo rodean
+Vector3D CBoid::Separation(float radius)
 {
-	m_isLider = islider;
+	Vector3D forces(0, 0, 0);
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < radius && dist != 0)
+		{
+			forces += Normalize(separation) * (1 - radius / dist);
+		}
+	}
+	return forces;
 }
+//El boid tratará de acercarce a los boids que lo rodean
+Vector3D CBoid::Cohesion(float radius)
+{
+	int numBoids = 0;
+	Vector3D forces(0, 0, 0);
+	Vector3D center(0,0,0);
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < radius)
+		{
+			if (!dynamic_cast<CBoid*>(it.get())->IsLider()) {
+				numBoids++;
+				center += it->GetPosition();
+			}
 
+		}
+	}
+	center = center*(1 / static_cast<float>(numBoids));
+	forces += (center - m_vPosition);
+
+	return forces;
+}
+//Se promedian las direcciones de los boids que lo rodean
+Vector3D CBoid::Direction(float radius)
+{
+	int numBoids = 0;
+	Vector3D directions(0, 0, 0);
+	for (auto &it : *m_pWorldBoids)
+	{
+		Vector3D separation = it->GetPosition() - m_vPosition;
+		float dist = Magnitude(separation);
+		if (dist < radius)
+		{
+			numBoids++;
+			directions += dynamic_cast<CBoid*>(it.get())->GetDirection();
+		}
+	}
+	if (Magnitude(directions) != 0)
+		directions = Normalize(directions *(1 / static_cast<float>(numBoids)));
+	return 	 directions * SEEK_FORCE;
+}
+//Los boids se agrupan
 Vector3D CBoid::Flocking()
 {
-	Vector3D directions = m_vDirection;
 	Vector3D forces(0,0,0);
-	Vector3D center = m_vPosition;
-	//========= Obtener Centro de masa ==========
-	int numBoids = 0;
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS && dist != 0)
-		{
-				numBoids++;
-		}
-	}
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS)
-		{
-			center += (1 / static_cast<float>(numBoids))*(it->GetPosition() - m_vPosition);
-		}
-	}
-	//========= Obtener Fuerzas ==========
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS && dist != 0)
-		{
-			directions += (1 / static_cast<float>(numBoids)) * dynamic_cast<CBoid*>(it.get())->GetDirection();
-			forces +=Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
-			forces +=  (center - m_vPosition) * FLOCKING_COHESION_FORCE;
-		}
-	}
-	forces += directions * SEEK_FORCE;
+	forces += Separation(FLOCKING_SEPARATION_RADIUS);
+	forces += Cohesion(FLOCKING_RADIUS);
+	forces += Direction(FLOCKING_RADIUS);
 	forces.z = 0;
 	return forces;
 }
-
+//Seguir a un lider como grupo
 Vector3D CBoid::FollowTheLider()
 {
 	Vector3D forces(0, 0, 0);
-	Vector3D center = m_vPosition;
-
-	//========= Obtener Centro de masa ==========
-	int numBoids = 0;
+	forces += Separation(FTL_SEPARATION_RADIUS);
+	forces += Cohesion(FLOCKING_RADIUS);
 	for (auto &it : *m_pWorldBoids)
 	{
 		Vector3D separation = it->GetPosition() - m_vPosition;
 		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS && dist != 0)
-		{
-			if (!dynamic_cast<CBoid*>(it.get())->IsLider())
-				numBoids++;
-		}
-	}
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS && dist != 0)
-		{
-			if (!dynamic_cast<CBoid*>(it.get())->IsLider())
-				center += (1 / static_cast<float>( numBoids))*(it->GetPosition() - m_vPosition);
-		}
-	}
-	//========= Obtener Fuerzas ==========
-
-	for (auto &it : *m_pWorldBoids)
-	{
-		Vector3D separation = it->GetPosition() - m_vPosition;
-		float dist = Magnitude(separation);
-		if (dist < FLOCKING_RADIUS && dist != 0)
-		{
-			forces += Normalize(separation) * (1 - FLOCKING_RADIUS / dist);
-			forces += (center - m_vPosition)* FTL_COHESION_FORCE;
-
-		}
 		if (dist < FTL_RADIUS && dist != 0) {
 			if (dynamic_cast<CBoid*>(it.get())->IsLider())
 			{
-				forces += Seek(it->GetPosition() - (dynamic_cast<CBoid*>(it.get())->GetDirection() * LIDER_SEPARATION)) * FTL_SEEK_MOD;
+				forces += Arrive(it->GetPosition() - (dynamic_cast<CBoid*>(it.get())->GetDirection() * LIDER_SEPARATION), ACTIVE_RADIUS) * FTL_SEEK_MOD;
+				break;
 			}
 		}
-
 	}
 	forces.z = 0;
 	return forces;
@@ -411,7 +398,7 @@ void CBoid::Init()
 	m_isLider = false;
 	m_bFirstFollow = true;
 	m_iActualPoint = 0;
-
+	//============== Default follow path vector ===============
 	m_followPathVector.push_back(Vector3D(0, 0, 0));
 	m_followPathVector.push_back(Vector3D(0.5, 0.5, 0));
 	m_followPathVector.push_back(Vector3D(0.5, -0.5, 0));
@@ -426,6 +413,7 @@ void CBoid::Destroy()
 
 void CBoid::Update(float delta)
 {
+	//======================= Agregar furzas ============================
 	Vector3D forces(0,0,0);
 	for (auto &item : m_Targets) 
 	{
@@ -488,15 +476,18 @@ void CBoid::Update(float delta)
 		}
 	}
 	Vector3D forces2(0,0,0);
+	//===== Limitar rotacion del boid =====
 	if (!(forces.x == 0 && forces.y == 0 && forces.z == 0)) {
 		forces2 = Truncate(forces, MAX_ROTATION);
 		m_vDirection += forces2;
 		m_vDirection = Normalize(m_vDirection);
 	}
+	//==== Cambiar velocidad y posición del boid ====
 	forces = Truncate(forces, MAX_SPEED);
 	m_fVelocity = Magnitude(forces);
 	m_vPosition += m_vDirection * m_fVelocity * delta;
 
+	//==== Limitar movimiento del boid en la pantalla ====
 	if (m_vPosition.x > 1) {
 		m_vPosition.x = -1;
 	}
@@ -510,6 +501,7 @@ void CBoid::Update(float delta)
 		m_vPosition.y = 1;
 	}
 
+	//===== Transformar triangulo =====
 	Matrix4D transform = RotationZRH(atan2(-m_vDirection.y, m_vDirection.x));
 	transform = transform * Translation(m_vPosition.x, m_vPosition.y, 0);
 	triangle.Transform(transform.v);
@@ -547,7 +539,11 @@ void CBoid::AddSteeringState(SteeringStates::E state)
 
 
 //=========== GETS y SETS ===========
-
+// Set lider para Follow the lider
+void CBoid::SetLider(bool islider)
+{
+	m_isLider = islider;
+}
 Vector3D CBoid::GetDirection()
 {
 	return m_vDirection;

@@ -5,7 +5,7 @@
 #include "LineGL.h"
 #include <memory>
 #include <vector>
-
+const float PI = 3.1415927;
 namespace SteeringBehavior 
 {
 	enum E
@@ -40,32 +40,37 @@ class CBoid : public CGameObject
 private:
 	//========== Constantes Para modificar el comportamiento de las fuerzas ============
 	const float MAX_SPEED = 0.6f;
+	const float MAX_ROTATION = 0.05f;
+	const float BIG_FORCE = 20000.f;
+	const float MAX_TIME_PREDICTION = 1.5f;
+	const float ACTIVE_RADIUS = 0.05f;
+	const float PROYECTION_DISTANCE = 0.05f;
+
 	const float SEEK_FORCE = 0.4f;
 	const float FLEE_FORCE = 5.f;
 	const float ARRIVE_FORCE = 0.5f;
 	const float PURSUE_FORCE = 0.4f;
 	const float EVADE_FORCE = 0.4f;
+	//Wander
 	const float WANDER_FORCE = 0.4f;
-	const float BIG_FORCE = 20000.f;
-	const float MAX_TIME_PREDICTION = 1.5f;
-	const float ACTIVE_RADIUS = 0.05f;
-	const float MAX_ROTATION = 0.05f;
-	const float PROYECTION_DISTANCE = 0.05f;
 	const float WANDER2_OFFSET = 0.4f;
 	const float WANDER2_RADIUS = 0.7f;
 	const float WANDER2_VISIONRANGE = 1.12f;
+	//Circle Movement
 	const float CIRCLE_FORCE = 0.5f;
-	const float PI = 3.1415927;
 	const float CIRCLE_RADIUS = 0.5f;
 	const float CIRCLE_PARAM_VEL = 1.0f;
+	//Follow Path
 	const float FOLLOW_PATH_LINE_FORCE = 0.1f;
 	const float FOLLOW_POINT_RADIUS = 0.02f;
-	const float FLOCKING_RADIUS = 0.5f;
+	//Follow the lider
 	const float FTL_RADIUS = 1.5f;
-	const float LIDER_SEPARATION = 0.1f;
 	const float FTL_SEEK_MOD = 2.0f;
-	const float FLOCKING_COHESION_FORCE = 2.0f;
-	const float FTL_COHESION_FORCE = 1.1f;
+	const float FTL_SEPARATION_RADIUS = 0.25f;
+	const float LIDER_SEPARATION = 0.3f;
+	//Flocking
+	const float FLOCKING_RADIUS = 0.5f;
+	const float FLOCKING_SEPARATION_RADIUS = 0.25f;
 
 
 	//========= Elementos visuales ==========
@@ -118,6 +123,9 @@ public:
 	Vector3D FollowPathArrive();
 	void SetLider(bool islider);
 
+	Vector3D Separation(float radius);
+	Vector3D Cohesion(float radius);
+	Vector3D Direction(float radius);
 	Vector3D Flocking();
 	Vector3D FollowTheLider();
 
