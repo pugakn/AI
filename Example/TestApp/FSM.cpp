@@ -30,19 +30,35 @@ CFSM::~CFSM()
 
 
 
-void CFSM::Init()
+void CFSM::Init(CWorld * world)
 {
-	//Consruir estados
+	//Consruir estados y asignar punteros
 	m_states.push_back(std::make_shared<CGuarrison>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CBuild>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CRecollect>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CRoting>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CDead>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CAttack>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CMoveTo>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 	m_states.push_back(std::make_shared<CIdle>());
+	m_states.back()->SetFSM(this);
+	m_states.back()->SetWorlPtr(world);
 }
-
+//Aplicar estado a una unidad
 void CFSM::SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state)
 {
 	unit.lock()->SetState(state.lock());

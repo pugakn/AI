@@ -14,10 +14,7 @@ void CAttack::OnExit()
 {
 }
 
-void CAttack::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
+
 
 CAttack::CAttack()
 {

@@ -14,10 +14,6 @@ void CRoting::OnExit()
 {
 }
 
-void CRoting::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
 
 CRoting::CRoting()
 {

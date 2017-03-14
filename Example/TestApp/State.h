@@ -16,7 +16,7 @@ public:
 	virtual void Update( std::weak_ptr<CGameObject> callerUnit) = 0;
 	virtual void OnEnter() = 0;
 	virtual void OnExit() = 0;
-	virtual void SetFSM(CFSM* fsm) = 0;
+	void SetFSM(CFSM* fsm);
 	virtual ~CState();
 };
 

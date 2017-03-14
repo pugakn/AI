@@ -14,10 +14,7 @@ void CGuarrison::OnExit()
 {
 }
 
-void CGuarrison::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
+
 
 CGuarrison::CGuarrison()
 {

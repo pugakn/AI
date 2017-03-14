@@ -14,10 +14,7 @@ void CDead::OnExit()
 {
 }
 
-void CDead::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
+
 
 CDead::CDead()
 {

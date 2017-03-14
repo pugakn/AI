@@ -112,35 +112,35 @@ void CWorld::CreateObstacle(Vector3D position, float fRadius)
 	m_pObstacleList.back()->SetRadius(fRadius);
 
 }
-
+//Obtener las propiedades de una facción por id
 CFaction CWorld::GetFactionByID(unsigned short id)
 {
 	for (auto &it : m_factions)
 		if (it.m_uId == id)
 			return it;
 }
-
+//Obtener las propiedades de una armadura por id
 CArmor CWorld::GetArmorByID(unsigned short id)
 {
 	for (auto &it : m_armors)
 		if (it.m_uId == id)
 			return it;
 }
-
+//Obtener las propiedades de un terreno por id
 CTerrainType CWorld::GetTerrainTypenByID(unsigned short id)
 {
 	for (auto &it : m_terrainType)
 		if (it.m_uId == id)
 			return it;
 }
-
+//Obtener las propiedades de un tipo de unidad por id
 CType CWorld::GetTypeByID(unsigned short id)
 {
 	for (auto &it : m_types)
 		if (it.m_uId == id)
 			return it;
 }
-
+//Obtener las propiedades de un tipo de arma por id
 CWeaponType CWorld::GetWeaponTypeByID(unsigned short id)
 {
 	for (auto &it : m_weaponTypes)

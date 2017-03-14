@@ -21,10 +21,6 @@ void CIdle::OnExit()
 {
 }
 
-void CIdle::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
 
 CIdle::CIdle()
 {

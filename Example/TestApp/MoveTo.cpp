@@ -14,10 +14,6 @@ void CMoveTo::OnExit()
 {
 }
 
-void CMoveTo::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
 
 CMoveTo::CMoveTo()
 {

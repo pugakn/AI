@@ -553,22 +553,22 @@ void CBoid::SetObstacleList(std::vector<std::shared_ptr<CObstacle>>* pObstacleLi
 {
 	m_pObstacleList = pObstacleList;
 }
-
+//Asigna un vector nuevo para pollow path
 void CBoid::SetFollowPathVector(std::vector<Vector3D> vector)
 {
 	m_followPathVector = vector;
 }
-
+//Asigna un puntero a la lista de boids del mundo
 void CBoid::SetWorldBoidsVector(std::vector<std::shared_ptr<CGameObject>>* worldBoids)
 {
 	m_pWorldBoids = worldBoids;
 }
-
+//Asigna el radio al boid
 void CBoid::SetRadius(float radius)
 {
 	m_fRadius = radius;
 }
-
+//Obtiene el radio del boid
 float CBoid::GetRadius()
 {
 	return m_fRadius;
@@ -587,7 +587,7 @@ CBoid::CBoid()
 CBoid::~CBoid()
 {
 }
-
+//Rgresa true si el boid es un lider
 bool CBoid::IsLider()
 {
 	return m_isLider;

@@ -14,10 +14,6 @@ void CBuild::OnExit()
 {
 }
 
-void CBuild::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
 
 CBuild::CBuild()
 {

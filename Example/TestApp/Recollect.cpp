@@ -14,10 +14,6 @@ void CRecollect::OnExit()
 {
 }
 
-void CRecollect::SetFSM(CFSM * fsm)
-{
-	m_fsm = fsm;
-}
 
 CRecollect::CRecollect()
 {

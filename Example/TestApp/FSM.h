@@ -19,13 +19,12 @@ namespace States
 		GUARRISON
 	};
 }
-class CFSM : public CSubject
+class CFSM : public CSubject //Hereda de Subject para implementar el patron de diseño observador
 {
 public:
-	std::vector<std::shared_ptr<CState>> m_states;
+	std::vector<std::shared_ptr<CState>> m_states; //Lista a de todos los estados disponibles
 
-
-	void Init();
+	void Init(CWorld * world);
 	void SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state);
 	void Update(float delta);
 	void Destroy();
