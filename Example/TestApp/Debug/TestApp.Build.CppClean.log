@@ -4,6 +4,7 @@ c:\users\ulises\documents\github\ai\example\testapp\debug\faction.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\fsm.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\gameobject.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\guarrison.obj
+c:\users\ulises\documents\github\ai\example\testapp\debug\idle.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\matrix4d.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\moveto.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\obstacle.obj
@@ -25,7 +26,6 @@ c:\users\ulises\documents\github\ai\example\testapp\debug\attack.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\boid.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\build.obj
 c:\users\ulises\documents\github\ai\example\testapp\debug\dead.obj
-c:\users\ulises\documents\github\ai\example\testapp\debug\idle.obj
 c:\users\ulises\documents\github\ai\example\bin\testapp.ilk
 c:\users\ulises\documents\github\ai\example\bin\testapp.exe
 c:\users\ulises\documents\github\ai\example\bin\testapp.pdb
