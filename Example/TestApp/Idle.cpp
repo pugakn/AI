@@ -5,12 +5,22 @@
 
 void CIdle::Update(std::weak_ptr<CGameObject> callerUnit)
 {
-	//if (callerUnit->SeesEnemies())
-	//{
-	//	//m_fsm->SetState(callerUnit,m_fsm->m_states[States::ATTACK]);
-	//	return;
-	//}
-	//return;
+	CUnit * unit = nullptr;
+	if (callerUnit.lock())
+	{
+		unit = dynamic_cast<CUnit*>(callerUnit.lock().get());
+	}
+	else
+		return;
+
+	//Si la unidad es belica y ve a un enemigo, cambia al estado de ataque
+	if (unit->SeesEnemies() && unit->IsBelic())
+	{
+		unit->SetNearestTarget();
+		m_fsm->SetState(callerUnit,m_fsm->m_states[States::ATTACK]);
+		return;
+	}
+	return;
 }
 
 void CIdle::OnEnter()

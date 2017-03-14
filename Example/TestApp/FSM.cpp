@@ -59,7 +59,7 @@ void CFSM::Init(CWorld * world)
 	m_states.back()->SetWorlPtr(world);
 }
 //Aplicar estado a una unidad
-void CFSM::SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state)
+void CFSM::SetState(std::weak_ptr<CGameObject> unit, std::weak_ptr<CState> state)
 {
-	unit.lock()->SetState(state.lock());
+	dynamic_cast<CUnit*>(unit.lock().get())->SetState(state.lock());
 }

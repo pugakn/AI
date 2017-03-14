@@ -20,26 +20,49 @@ private:
 	std::vector<float> m_reloadTimes;
 	float m_fRotingTimer;
 
+	friend class CAttack;
+	friend class CMoveTo;
+	friend class CRecollect;
+	friend class CGuarrison;
+	friend class CBuild;
+	std::weak_ptr<CUnit> m_target;
+	Vector3D m_targetPos;
+
 public:
 	unsigned int m_uId;
+
+	//====== TODO: Implementar funciones ======
 	bool CanRecolect();
 	bool CanBuild();
 	bool IsBelic();
 	bool IsDead();
-	//bool IsEnemy();
-	//bool IsInAttackRange();
-	//bool IsVisible();
-	//bool CanAttack();
-	//bool SeesEnemies();
-
+	bool TargetIsDead();
+	bool TargetIsEnemy();
+	bool TargetIsInAttackRange();
+	bool IsInGuarrison();
+	bool CanAttack();
+	bool IsFull();
+	bool SeesEnemies();
+	bool HasBuildOrders();
+	void Build();
+	bool BuildCompleted();
+	void SearchBuildingUnit();
+	bool IsInBuildRange();
+	void SetNearestTarget();
+	bool ArrivedToTargetPos();
+	void Recolect();
+	void DepositResources();
+	void MoveToNearestResource();
+	void IncRotingTime();
+	bool Roted();
+	bool CanGuarrison();
 	void MoveTo(Vector3D poisition);
-	void Attack(CUnit unit);
+	void AttackTarget();
 	void Reload();
-	void BuildUnit(CUnit unit);
-	void Guarrison(CUnit unit);
+	void GuarrisonOnTarget();
 	void TakeDamage(float damage);
 	void Die();
-
+	//====================================
 	void SetState(std::weak_ptr<CState> state);
 
 	void Init() override;

@@ -25,7 +25,7 @@ public:
 	std::vector<std::shared_ptr<CState>> m_states; //Lista a de todos los estados disponibles
 
 	void Init(CWorld * world);
-	void SetState(std::weak_ptr<CUnit> unit, std::weak_ptr<CState> state);
+	void SetState(std::weak_ptr<CGameObject> unit, std::weak_ptr<CState> state);
 	void Update(float delta);
 	void Destroy();
 	CFSM();

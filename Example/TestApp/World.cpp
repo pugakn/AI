@@ -60,16 +60,6 @@ void CWorld::Init()
 	//std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kWander2);
 	std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowPathLoop);
 	//std::dynamic_pointer_cast<CBoid>(m_ObjectList.back())->AddSteeringState(SteeringStates::E::kFollowTheLider);
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//OBSTACULOS///////////////////////////////////////////
-	//Inicializar aqui los obstaculos 
-	///////////////////////////////////////////////////////
-	//m_pObstacleList.push_back(std::make_shared<CObstacle>());
-	//m_pObstacleList.back()->SetPosition(Vector3D(0, 0.01, 0));
-	//m_pObstacleList.back()->SetRadius(0.08f);
-
-	///////////////////////////////////////////////////////////
 }
 
 void CWorld::Destroy()
