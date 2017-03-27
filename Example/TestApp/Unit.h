@@ -7,6 +7,7 @@
 #include "Type.h"
 class CFaction;
 class CState;
+class CWorld;
 class CUnit : CGameObject
 {
 private:
@@ -32,7 +33,7 @@ public:
 	unsigned int m_uId;
 
 	//====== TODO: Implementar funciones ======
-	bool CanRecolect();
+	bool CanRecolect(CWorld * fsm);
 	bool CanBuild();
 	bool IsBelic();
 	bool IsDead();

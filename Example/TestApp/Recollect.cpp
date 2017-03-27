@@ -19,7 +19,7 @@ void CRecollect::Update(std::weak_ptr<CGameObject> callerUnit)
 		return;
 	}
 	//Si la unidad puede recolectar (esta en el rango), recolecta
-	if (unit->CanRecolect()) {
+	if (unit->CanRecolect(m_pWorld)) {
 		unit->Recolect();
 		return;
 	}

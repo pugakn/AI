@@ -1,6 +1,6 @@
 #include "Unit.h"
 #include "State.h"
-
+#include "World.h"
 
 
 void CUnit::Init()
@@ -29,9 +29,9 @@ CUnit::~CUnit()
 {
 }
 
-bool CUnit::CanRecolect()
+bool CUnit::CanRecolect(CWorld * world)
 {
-	return true;
+	return world->GetTypeByID(m_uIdType).m_bCanRecolect;
 }
 
 bool CUnit::CanBuild()
