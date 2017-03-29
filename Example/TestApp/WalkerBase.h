@@ -6,19 +6,24 @@
 struct GraphNode
 {
 	unsigned int id;
-	bool visited;
-	GraphNode* father;
 	std::list<GraphNode*> children;
 
 	int weight;
 	int conectionWeight;
 	Vector3D worldPosition;
+	CopyNode copy;
+};
+struct CopyNode
+{
+	bool visited {false};
+	GraphNode* father;
 };
 
 class CWalkerBase
 {
 protected:
 	std::list<GraphNode*> m_openList;
+	std::list<GraphNode*> m_closedList;
 public:
 	CWalkerBase();
 	std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd, int maxIterations);
@@ -27,7 +32,7 @@ public:
 	virtual void EnlistNodes(GraphNode* pActual) = 0;
 	std::function<int()> pHeuristicFoo; //Retorna el peso evaludao con la heuristica
 
-	GraphNode* m_graphBegin;
+	//GraphNode* m_graphRoot;
 	virtual ~CWalkerBase();
 };
 

@@ -13,8 +13,9 @@ void CBestFSWalker::EnlistNodes(GraphNode * pActual)
 {
 	for (auto &option : pActual->children)
 	{
-		if (!option->visited) {
+		if (!option->copy.visited) {
 			m_openList.push_back(option);
+			m_closedList.push_back(option);
 			m_openList.back()->weight = pHeuristicFoo();
 		}
 	}
