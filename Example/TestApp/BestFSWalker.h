@@ -1,10 +1,11 @@
 #pragma once
 #include "WalkerBase.h"
+#include <queue>
 class CBestFSWalker :
 	public CWalkerBase
 {
 private:
-	std::list<GraphNode*> m_openList;
+	std::priority_queue<GraphNode*, std::vector<GraphNode*>, PathNode> m_openList;
 	std::list<GraphNode*> m_closedList;
 	GraphNode* SelectNextNode(GraphNode* pActual);
 	void EnlistNodes(GraphNode* pActual, GraphNode* pFinalNode);

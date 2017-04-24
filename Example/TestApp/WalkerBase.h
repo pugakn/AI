@@ -14,7 +14,24 @@ namespace Heuristic
 	};
 }
 
-struct GraphNode;
+struct PathNode;
+
+struct GraphNode
+{
+	GraphNode()
+	{
+		weight = 1;
+		active = true;
+	}
+	//GraphNode(const GraphNode& node) { this->weight = node.weight; id = node.id; pathNode = node.pathNode; };
+	unsigned int id;
+	std::list<GraphNode*> children;
+	float weight;
+	Vector3D worldPosition;
+	bool active;
+	std::unique_ptr<PathNode> pathNode;
+};
+
 struct PathNode //PathNode
 {
 	bool enlisted;
@@ -27,21 +44,12 @@ struct PathNode //PathNode
 		gCost = 0;
 		weight = 0;
 	}
-};
-
-struct GraphNode
-{
-	GraphNode()
+	bool operator ()(const GraphNode* lhs, const GraphNode* rhs) const
 	{
-		weight = 1;
-		active = true;
+		if (lhs->pathNode == nullptr || rhs->pathNode == nullptr)
+			return false;
+		return lhs->pathNode->weight > rhs->pathNode->weight;
 	}
-	unsigned int id;
-	std::list<GraphNode*> children;
-	float weight;
-	Vector3D worldPosition;
-	bool active;
-	std::unique_ptr<PathNode> pathNode;
 };
 
 class CWalkerBase

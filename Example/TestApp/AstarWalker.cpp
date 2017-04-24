@@ -4,9 +4,9 @@
 
 GraphNode * CAstarWalker::SelectNextNode(GraphNode * pActual)
 {
-	m_openList.sort([](const GraphNode * a, const GraphNode * b) { return a->pathNode->weight > b->pathNode->weight; });
-	GraphNode* pActualNode = m_openList.back();
-	m_openList.pop_back();
+	//m_openList.sort([](const GraphNode * a, const GraphNode * b) { return a->pathNode->weight > b->pathNode->weight; });
+	GraphNode* pActualNode = m_openList.top();
+	m_openList.pop();
 	return pActualNode;
 }
 
@@ -18,13 +18,13 @@ void CAstarWalker::EnlistNodes(GraphNode * pActual, GraphNode* pFinalNode)
 			if (option->pathNode == nullptr)
 				option->pathNode = std::make_unique<PathNode>();
 			if (!option->pathNode->enlisted) {
-				m_openList.push_back(option);
-				m_closedList.push_back(option);
 				float hCost = pHeuristicFoo(pFinalNode, option);
 				option->pathNode->gCost = pActual->pathNode->gCost + option->weight;
 				option->pathNode->weight = hCost + option->pathNode->gCost;
 				option->pathNode->enlisted = true;
 				option->pathNode->father = pActual;
+				m_openList.push(option);
+				m_closedList.push_back(option);
 			}
 		}
 	}
@@ -97,7 +97,10 @@ void CAstarWalker::Reset()
 		it->pathNode.reset();
 	}
 	m_closedList.clear();
-	m_openList.clear();
+	while (!m_openList.empty())
+	{
+		m_openList.pop();
+	}
 }
 
 CAstarWalker::CAstarWalker()
