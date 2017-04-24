@@ -3,9 +3,37 @@
 #include <time.h>
 #include <memory>
 
+
+#include "DFSWalker.h"
+#include <iostream>
 void CWorld::Init()
 {
 	srand(time(NULL));
+
+	CWalkerBase * dfs = new CDFSWalker;
+	GraphNode root;
+	root.id = 0;
+	GraphNode rc;
+	rc.id = 1;
+	GraphNode rc2;
+	rc2.id = 2;
+	root.children.push_back(&rc2);
+
+	GraphNode rc3;
+	rc3.id = 3;
+	rc2.children.push_back(&rc3);
+
+	auto temp = dfs->Search(&root, &rc3,200);
+	for (auto &it : temp)
+	{
+		std::cout << it->id;
+	}
+
+
+
+
+
+
 	//std::shared_ptr<std::vector<std::shared_ptr<CObstacle>>> obstaclePointer(&m_pObstacleList);
 	///////////////////////////////////////////////////////
 	//BOIDS//////////////////////////////////////////
