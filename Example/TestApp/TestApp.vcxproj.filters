@@ -21,12 +21,6 @@
     <Filter Include="Source Files\FSM\States">
       <UniqueIdentifier>{45902786-fd72-4d66-a099-44f9e74afac7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\PathFinding">
-      <UniqueIdentifier>{202fbae7-6350-467b-9fc0-6df671cda28f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\PathFinding">
-      <UniqueIdentifier>{033c06de-00fd-49af-b396-ffc98450e569}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestApp.cpp">
@@ -107,24 +101,6 @@
     <ClCompile Include="Subject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AstarWalker.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="BestFSWalker.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="BFSWalker.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="DFSWalker.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="DijikstraWalker.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="WalkerBase.cpp">
-      <Filter>Source Files\PathFinding</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -201,24 +177,6 @@
     </ClInclude>
     <ClInclude Include="Subject.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BestFSWalker.h">
-      <Filter>Header Files\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="BFSWalker.h">
-      <Filter>Header Files\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="AstarWalker.h">
-      <Filter>Header Files\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="DFSWalker.h">
-      <Filter>Header Files\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="DijikstraWalker.h">
-      <Filter>Header Files\PathFinding</Filter>
-    </ClInclude>
-    <ClInclude Include="WalkerBase.h">
-      <Filter>Header Files\PathFinding</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
