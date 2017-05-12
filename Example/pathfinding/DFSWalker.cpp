@@ -1,65 +1,6 @@
 #include "DFSWalker.h"
 
 
-std::vector<GraphNode*> CDFSWalker::Search(GraphNode * pathBegin, GraphNode * pathEnd, int maxIterations)
-{
-	//Seleccionar primer nodo
-	std::vector<GraphNode*> backProp;
-	auto pActualNode = pathBegin;
-	m_closedList.push_back(pActualNode);
-	pActualNode->pathNode = std::make_unique<PathNode>();
-	pActualNode->pathNode->enlisted = true;
-	//Meter en la lista los hijos del nodo actual
-	EnlistNodes(pActualNode);
-	for (size_t i = 0; i < maxIterations; i++)
-	{
-		//Revisar si es el final
-		if (pActualNode == pathEnd)
-		{
-			backProp = GetPath(pActualNode);
-			break;
-		}
-		//Seleccionar siguiente nodo
-		pActualNode = SelectNextNode(pActualNode);
-		//Meter en la lista los hijos del nodo actual
-		EnlistNodes(pActualNode);
-	}
-	//Reset();
-	return backProp;
-}
-
-std::vector<GraphNode*> CDFSWalker::Search(GraphNode * pathBegin, GraphNode * pathEnd)
-{
-	//Seleccionar primer nodo
-	std::vector<GraphNode*> backProp;
-	auto pActualNode = pathBegin;
-	m_closedList.push_back(pActualNode);
-	pActualNode->pathNode = std::make_unique<PathNode>();
-	pActualNode->pathNode->enlisted = true;
-	//Meter en la lista los hijos del nodo actual
-	EnlistNodes(pActualNode);
-	do
-	{
-		//Revisar si es el final
-		if (pActualNode == pathEnd)
-		{
-			backProp = GetPath(pActualNode);
-			break;
-		}
-		//Seleccionar siguiente nodo
-		pActualNode = SelectNextNode(pActualNode);
-		//Meter en la lista los hijos del nodo actual
-		EnlistNodes(pActualNode);
-	} while (m_openList.size() > 0);
-	//Reset();
-	return backProp;
-}
-
-std::list<GraphNode*> CDFSWalker::GetClosedList()
-{
-	return m_closedList;
-}
-
 GraphNode* CDFSWalker::SelectNextNode(GraphNode* pActual)
 {
 	GraphNode* pActualNode = m_openList.back();
@@ -67,18 +8,25 @@ GraphNode* CDFSWalker::SelectNextNode(GraphNode* pActual)
 	return pActualNode;
 }
 
-void CDFSWalker::EnlistNodes(GraphNode * pActual)
+size_t CDFSWalker::GetOpenListSize()
+{
+	return m_openList.size();
+}
+
+void CDFSWalker::EnlistNodes(GraphNode * pActual, GraphNode* pFinal)
 {
 	for (auto &option : pActual->children)
 	{
 		if (option->active) {
-			if (option->pathNode == nullptr)
-				option->pathNode = std::make_unique<PathNode>();
-			if (!option->pathNode->enlisted) {
-				m_openList.push_back(option);
+			if (option->pathNode == nullptr){
+
+				PathNode *pathNode = new PathNode();
+				pathNode->father = pActual;
+				pathNode->enlisted = true;
+				m_pathNodePool.push_back(pathNode);
+				option->pathNode = m_pathNodePool.back();
 				m_closedList.push_back(option);
-				option->pathNode->enlisted = true;
-				option->pathNode->father = pActual;
+				m_openList.push_back(option);
 			}
 		}
 	}
@@ -88,10 +36,15 @@ void CDFSWalker::Reset()
 {
 	for (auto &it : m_closedList)
 	{
-		it->pathNode.reset();
+		it->pathNode = nullptr;
 	}
 	m_closedList.clear();
 	m_openList.clear();
+	for (auto &it : m_pathNodePool)
+	{
+		delete it;
+	}
+	m_pathNodePool.clear();
 
 }
 

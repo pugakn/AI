@@ -223,7 +223,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		djikstra = new CDijikstraWalker();
 		astar = new CAstarWalker();
 
-		walker = astar;
+		walker = djikstra;
 		actualEuristic = Heuristic::E::kEuclidean;
 		walker->SetHeuristic(actualEuristic);
 		//Inicializar Brochas

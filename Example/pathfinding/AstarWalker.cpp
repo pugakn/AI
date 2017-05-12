@@ -15,88 +15,45 @@ void CAstarWalker::EnlistNodes(GraphNode * pActual, GraphNode* pFinalNode)
 	for (auto &option : pActual->children)
 	{
 		if (option->active) {
-			if (option->pathNode == nullptr)
-				option->pathNode = std::make_unique<PathNode>();
-			if (!option->pathNode->enlisted) {
+			if (option->pathNode == nullptr){
+				PathNode *pathNode = new PathNode();
+				pathNode->father = pActual;
+				pathNode->enlisted = true;
 				float hCost = pHeuristicFoo(pFinalNode, option);
-				option->pathNode->gCost = pActual->pathNode->gCost + option->weight;
-				option->pathNode->weight = hCost + option->pathNode->gCost;
-				option->pathNode->enlisted = true;
-				option->pathNode->father = pActual;
-				m_openList.push(option);
+				pathNode->gCost = pActual->pathNode->gCost + option->weight;
+				pathNode->weight = hCost + pathNode->gCost;
+
+				m_pathNodePool.push_back(pathNode);
+				option->pathNode = m_pathNodePool.back();
 				m_closedList.push_back(option);
+				m_openList.push(option);
+
 			}
 		}
 	}
 }
 
-std::vector<GraphNode*> CAstarWalker::Search(GraphNode * pathBegin, GraphNode * pathEnd, int maxIterations)
+size_t CAstarWalker::GetOpenListSize()
 {
-	//Seleccionar primer nodo
-	std::vector<GraphNode*> backProp;
-	auto pActualNode = pathBegin;
-	m_closedList.push_back(pActualNode);
-	pActualNode->pathNode = std::make_unique<PathNode>();
-	pActualNode->pathNode->enlisted = true;
-	pActualNode->pathNode->weight = pActualNode->weight;
-	//Meter en la lista los hijos del nodo actual
-	EnlistNodes(pActualNode, pathEnd);
-	for (size_t i = 0; i < maxIterations; i++)
-	{
-		//Revisar si es el final
-		if (pActualNode == pathEnd)
-		{
-			backProp = GetPath(pActualNode);
-			break;
-		}
-		//Seleccionar siguiente nodo
-		pActualNode = SelectNextNode(pActualNode);
-		//Meter en la lista los hijos del nodo actual
-		EnlistNodes(pActualNode, pathEnd);
-	}
-	return backProp;
+	return m_openList.size();
 }
 
-std::vector<GraphNode*> CAstarWalker::Search(GraphNode * pathBegin, GraphNode * pathEnd)
-{
-	//Seleccionar primer nodo
-	std::vector<GraphNode*> backProp;
-	auto pActualNode = pathBegin;
-	m_closedList.push_back(pActualNode);
-	pActualNode->pathNode = std::make_unique<PathNode>();
-	pActualNode->pathNode->enlisted = true;
-	pActualNode->pathNode->weight = pActualNode->weight;
-	//Meter en la lista los hijos del nodo actual
-	EnlistNodes(pActualNode, pathEnd);
-	do
-	{
-		//Revisar si es el final
-		if (pActualNode == pathEnd)
-		{
-			backProp = GetPath(pActualNode);
-			break;
-		}
-		//Seleccionar siguiente nodo
-		pActualNode = SelectNextNode(pActualNode);
-		//Meter en la lista los hijos del nodo actual
-		EnlistNodes(pActualNode, pathEnd);
-	
-	} while (m_openList.size() > 0);
-	return backProp;
-}
 
-std::list<GraphNode*> CAstarWalker::GetClosedList()
-{
-	return m_closedList;
-}
+
+
 
 void CAstarWalker::Reset()
 {
 	for (auto &it : m_closedList)
 	{
-		it->pathNode.reset();
+		it->pathNode = nullptr;
 	}
 	m_closedList.clear();
+	for (auto &it : m_pathNodePool)
+	{
+		delete it;
+	}
+	m_pathNodePool.clear();
 	while (!m_openList.empty())
 	{
 		m_openList.pop();

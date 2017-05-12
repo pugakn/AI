@@ -6,15 +6,11 @@ class CAstarWalker :
 {
 private:
 	std::priority_queue<GraphNode*, std::vector<GraphNode*>, PathNode> m_openList;
-	std::list<GraphNode*> m_closedList;
 
-	GraphNode* SelectNextNode(GraphNode* pActual);
-	void EnlistNodes(GraphNode* pActual, GraphNode* pFinalNode);
+	GraphNode* SelectNextNode(GraphNode* pActual)override;
+	void EnlistNodes(GraphNode* pActual, GraphNode* pFinalNode)override;
+	size_t GetOpenListSize() override;
 public:
-	std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd, int maxIterations) override;
-	std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd) override;
-	std::list<GraphNode*> GetClosedList() override;
-
 
 	void Reset() override;
 	CAstarWalker();

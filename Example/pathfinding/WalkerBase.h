@@ -22,17 +22,17 @@ struct GraphNode
 	{
 		weight = 1;
 		active = true;
+		pathNode = nullptr;
 	}
-	//GraphNode(const GraphNode& node) { this->weight = node.weight; id = node.id; pathNode = node.pathNode; };
 	unsigned int id;
 	std::list<GraphNode*> children;
 	float weight;
 	Vector3D worldPosition;
 	bool active;
-	std::unique_ptr<PathNode> pathNode;
+	PathNode* pathNode;
 };
 
-struct PathNode //PathNode
+struct PathNode
 {
 	bool enlisted;
 	GraphNode* father;
@@ -58,12 +58,16 @@ class CWalkerBase
 	int m_nodePoolIndex;
 protected:
 	std::function<float(GraphNode* finalNode, GraphNode*actualNode)> pHeuristicFoo; //Retorna el peso evaludao con la heuristica
-	std::vector<PathNode> m_pathNodePool;
+	std::vector<PathNode> m_pathNodeStaticPool;
+	std::vector<PathNode*> m_pathNodePool;
+	std::list<GraphNode*> m_closedList;
 public:
 	CWalkerBase();
-	virtual std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd, int maxIterations) = 0;
-	virtual std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd) = 0;
-	virtual std::list<GraphNode*> GetClosedList() = 0;
+	std::vector<GraphNode*> Search(GraphNode* pathBegin, GraphNode* pathEnd, int maxIterations = 0);
+	std::list<GraphNode*> GetClosedList();
+	virtual void EnlistNodes(GraphNode* pActual, GraphNode* pFinalNode) = 0;
+	virtual size_t GetOpenListSize() = 0;
+	virtual GraphNode* SelectNextNode(GraphNode* pActual) = 0;
 	//Reset
 	virtual void Reset() = 0;
 	//BackProp
