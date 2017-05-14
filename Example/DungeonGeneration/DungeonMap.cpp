@@ -19,12 +19,21 @@ void DungeonMap::SeparateBlocks()
 			Vector3D forces(0, 0, 0);
 			for (auto &it : m_blocks)
 			{
-				Vector3D separation = it.position - block.position;
-				if (((abs(separation.x) < block.size.x / 2.f + m_data.m_fMinSeparation + it.size.x / 2.f)
-					&& (abs(separation.y) < block.size.y / 2.f + m_data.m_fMinSeparation + it.size.y / 2.f))
-					&& Magnitude(separation) != 0)
+
+				Vector3D separation = block.position- it.position;
+				float blockLeft = block.position.x - block.size.x / 2.f;
+				float blockRight = block.position.x + block.size.x / 2.f;
+				float blockTop = block.position.y + block.size.y / 2.f;
+				float blockBottom = block.position.y - block.size.y / 2.f;
+
+				float itLeft =   it.position.x -  it.size.x / 2.f;
+				float itRight =  it.position.x + it.size.x / 2.f;
+				float itTop =    it.position.y +   it.size.y / 2.f;
+				float itBottom = it.position.y -it.size.y / 2.f;
+				if (blockLeft < itRight && blockRight > itLeft &&
+					blockTop > itBottom && blockBottom < itTop && Magnitude(separation) != 0)
 				{
-					forces += Normalize(separation) * (block.size.x / Magnitude(separation) - 1);
+					forces +=  Normalize(separation);
 					finished = false;
 				}
 			}

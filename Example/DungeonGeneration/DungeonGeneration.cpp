@@ -7,23 +7,28 @@
 #include <vector>
 #include <thread>
 
-const int NUM_BLOCKS = 100;
+const int NUM_BLOCKS = 200;
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1024, 768), "Map");
+	const sf::Uint32 winWidth = 1080;
+	const sf::Uint32 winHeight = 680;
+	const float MOVE_AREA_X = 300;
+	const float MOVE_AREA_Y = 150;
+	const float CAM_VEL = 1;
+	sf::RenderWindow window(sf::VideoMode(winWidth, winHeight), "Map");
 	std::vector<sf::RectangleShape> shapes;
 
 
 	DungeonMapData tmpData;
 	tmpData.m_blockMinSize = Vector3D(5, 5, 5);
-	tmpData.m_blockMaxSize = Vector3D(100, 80, 80);
+	tmpData.m_blockMaxSize = Vector3D(150, 100, 80);
 	tmpData.m_fMinSpanningTreeProbability = 1;
-	tmpData.m_fSpawnRadius = 200;
+	tmpData.m_fSpawnRadius = 30;
 	tmpData.m_initialPos = Vector3D(512, 768 / 2.f, 0);
 	tmpData.m_iNumBlocks = NUM_BLOCKS;
-	tmpData.m_iSeed = 785;
-	tmpData.m_minValidSize = Vector3D(30, 20, 0);
-	tmpData.m_fMinSeparation = 2.f;
+	tmpData.m_iSeed = 6697;
+	tmpData.m_minValidSize = Vector3D(30, 40, 0);
+	tmpData.m_fMinSeparation = 0.f;
 	DungeonMap map;
 	std::thread mapThread([&map, tmpData]() {map.GenerateMap(tmpData); });
 #if !VISUAL_DEBUG_MODE
@@ -57,6 +62,42 @@ int main()
 #if VISUAL_DEBUG_MODE
 		map.m_mutex.unlock();
 #endif
+
+		auto pos = sf::Mouse::getPosition(window);
+
+		if ((winWidth - pos.x)< MOVE_AREA_X)
+		{
+			float factor = (MOVE_AREA_X - winWidth + pos.x) / MOVE_AREA_X;
+			float move = CAM_VEL * factor;
+			sf::View biew = window.getView();
+			biew.move(move, 0);
+			window.setView(biew);
+		}
+		if ((pos.x)< MOVE_AREA_X)
+		{
+			float factor = (MOVE_AREA_X - pos.x) / MOVE_AREA_X;
+			sf::View biew = window.getView();
+			float move = CAM_VEL * factor;
+			biew.move(-move, 0);
+			window.setView(biew);
+		}
+		if ((winHeight - pos.y)< MOVE_AREA_Y)
+		{
+			float factor = (MOVE_AREA_Y - winHeight + pos.y) / MOVE_AREA_Y;
+			sf::View biew = window.getView();
+			float move = CAM_VEL * factor;
+			biew.move(0, move);
+			window.setView(biew);
+		}
+		if ((pos.y)< MOVE_AREA_Y)
+		{
+			float factor = (MOVE_AREA_Y - pos.y) / MOVE_AREA_Y;
+			sf::View biew = window.getView();
+			float move = CAM_VEL * factor;
+			biew.move(0, -move);
+			window.setView(biew);
+		}
+
 		window.clear();
 		for (auto &shape : shapes)
 		{
