@@ -28,6 +28,7 @@ Vector3D operator* (const Vector3D &A, float s);
 Vector3D operator/ (const Vector3D &A, float s);
 Vector3D operator+ (const Vector3D &A, const Vector3D &B);
 Vector3D operator+= (Vector3D &A, const Vector3D &B);
+bool operator== (const Vector3D &A, const Vector3D &B);
 Vector3D operator- (const Vector3D &A, const Vector3D &B);
 float Dot(const Vector3D &A, const Vector3D &B);
 Vector3D Cross3(const Vector3D &A, const Vector3D &B);

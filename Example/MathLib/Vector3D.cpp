@@ -45,6 +45,10 @@ Vector3D operator+= (Vector3D &A, const Vector3D &B) {
 	A = Vector3D(A.x + B.x, A.y + B.y, A.z + B.z);
 	return A;
 }
+bool operator==(const Vector3D & A, const Vector3D & B)
+{
+	return (A.x == B.x && A.y == B.y && A.z == B.z);
+}
 Vector3D operator- (const Vector3D &A, const Vector3D &B) {
 	return Vector3D(A.x - B.x, A.y - B.y, A.z - B.z);
 }

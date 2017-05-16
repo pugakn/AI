@@ -7,28 +7,41 @@
 #include <vector>
 #include <thread>
 
-const int NUM_BLOCKS = 200;
+
 int main()
 {
 	const sf::Uint32 winWidth = 1080;
 	const sf::Uint32 winHeight = 680;
 	const float MOVE_AREA_X = 300;
 	const float MOVE_AREA_Y = 150;
-	const float CAM_VEL = 1;
+	const float CAM_VEL = 30;
+
 	sf::RenderWindow window(sf::VideoMode(winWidth, winHeight), "Map");
+	window.setFramerateLimit(60);
+
+	sf::Font font;
+	font.loadFromFile("font.ttf");
+	sf::Text text;
+	text.setFont(font);
+	text.setString("Edges: ");
+	text.setCharacterSize(24); 
+	text.setFillColor(sf::Color::Red);
+
 	std::vector<sf::RectangleShape> shapes;
+	std::vector<std::vector<sf::Vertex>> lines;
+	std::vector<std::vector<sf::Vertex>> corridors;
 
-
+	const int NUM_BLOCKS = 150;
 	DungeonMapData tmpData;
-	tmpData.m_blockMinSize = Vector3D(5, 5, 5);
-	tmpData.m_blockMaxSize = Vector3D(150, 100, 80);
-	tmpData.m_fMinSpanningTreeProbability = 1;
-	tmpData.m_fSpawnRadius = 30;
+	tmpData.m_blockMinSize = Vector3D(20, 20, 5);
+	tmpData.m_blockMaxSize = Vector3D(100, 100, 80);
+	tmpData.m_iMinSpanningTreeProbability = 95;
+	tmpData.m_fSpawnRadius = 50;
 	tmpData.m_initialPos = Vector3D(512, 768 / 2.f, 0);
 	tmpData.m_iNumBlocks = NUM_BLOCKS;
-	tmpData.m_iSeed = 6697;
-	tmpData.m_minValidSize = Vector3D(30, 40, 0);
-	tmpData.m_fMinSeparation = 0.f;
+	tmpData.m_iSeed = 993885;
+	tmpData.m_minValidSize = Vector3D(50, 50, 0);
+	tmpData.m_fMinSeparation = 10.f;
 	DungeonMap map;
 	std::thread mapThread([&map, tmpData]() {map.GenerateMap(tmpData); });
 #if !VISUAL_DEBUG_MODE
@@ -59,6 +72,52 @@ int main()
 			shapes[i].setOrigin(shapes[i].getSize() / 2.f);
 		}
 		shapes.resize(map.m_blocks.size());
+
+		//for (auto &edge : map.m_finalEdges)
+		//{
+		//	std::vector<sf::Vertex> tmp;
+		//	sf::Vertex v1(sf::Vector2f(edge.p1.p.x,edge.p1.p.y));
+		//	sf::Vertex v2(sf::Vector2f(edge.p2.p.x, edge.p2.p.y));
+		//	//sf::Vertex v3(sf::Vector2f(triangle.p3.x, triangle.p3.y));
+		//	tmp.push_back(v1);
+		//	tmp.push_back(v2);
+		//	lines.push_back(tmp);
+		//}
+		static bool first = true;
+		if (first) {
+			if (map.m_blocks[0].graphConnections.size() != 0){
+				for (auto &block : map.m_blocks)
+				{
+					std::vector<sf::Vertex> tmp;
+					for (auto &con : block.graphConnections)
+					{
+						sf::Vertex v1(sf::Vector2f(block.position.x, block.position.y));
+						sf::Vertex v2(sf::Vector2f(con->position.x, con->position.y));
+						tmp.push_back(v1);
+						tmp.push_back(v2);
+					}
+					//sf::Vertex v3(sf::Vector2f(triangle.p3.x, triangle.p3.y));
+					lines.push_back(tmp);
+				}
+				first = false;
+				text.setString("Edges: " + std::to_string(map.m_finalEdges.size()));
+			}
+
+			if (map.m_corridors.size() != 0) {
+				for (auto &corridor : map.m_corridors)
+				{
+					std::vector<sf::Vertex> tmp;
+					for (auto &corridorPoint : corridor.points)
+					{
+						sf::Vertex v1(sf::Vector2f(corridorPoint.x,corridorPoint.y));
+						tmp.push_back(v1);
+					}
+					corridors.push_back(tmp);
+				}
+				first = false;
+			}
+		}
+
 #if VISUAL_DEBUG_MODE
 		map.m_mutex.unlock();
 #endif
@@ -103,6 +162,16 @@ int main()
 		{
 			window.draw(shape);
 		}
+		for(auto &it : lines)
+			window.draw(&it[0], it.size(), sf::LinesStrip);
+		//for (auto &it : corridors)
+		//{
+		//	window.draw(&it[1], it.size(), sf::LinesStrip);
+		//}
+
+		//	window.draw(&corridors[1].back(), corridors.size(), sf::LinesStrip);
+
+		window.draw(text);
 		window.display();
 	}
 #if VISUAL_DEBUG_MODE
