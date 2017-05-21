@@ -6,6 +6,8 @@
 #include "DungeonMap.h"
 #include <vector>
 #include <thread>
+#include "sfLineT.h"
+#include <conio.h>
 
 
 int main()
@@ -29,13 +31,13 @@ int main()
 
 	std::vector<sf::RectangleShape> shapes;
 	std::vector<std::vector<sf::Vertex>> lines;
-	std::vector<std::vector<sf::Vertex>> corridors;
+	std::vector<std::vector<sfLine>> corridors;
 
 	const int NUM_BLOCKS = 150;
 	DungeonMapData tmpData;
 	tmpData.m_blockMinSize = Vector3D(20, 20, 5);
 	tmpData.m_blockMaxSize = Vector3D(100, 100, 80);
-	tmpData.m_iMinSpanningTreeProbability = 95;
+	tmpData.m_iMinSpanningTreeProbability = 85;
 	tmpData.m_fSpawnRadius = 50;
 	tmpData.m_initialPos = Vector3D(512, 768 / 2.f, 0);
 	tmpData.m_iNumBlocks = NUM_BLOCKS;
@@ -106,12 +108,19 @@ int main()
 			if (map.m_corridors.size() != 0) {
 				for (auto &corridor : map.m_corridors)
 				{
-					std::vector<sf::Vertex> tmp;
-					for (auto &corridorPoint : corridor.points)
-					{
-						sf::Vertex v1(sf::Vector2f(corridorPoint.x,corridorPoint.y));
-						tmp.push_back(v1);
-					}
+					std::vector<sfLine> tmp;
+					//for (auto &corridorPoint : corridor.points)
+					//{
+					sf::Vector2f v1(corridor.points[0].x, corridor.points[0].y);
+					sf::Vector2f v2(corridor.points[1].x, corridor.points[1].y);
+					tmp.push_back(sfLine(v1,v2));
+					tmp.back().SetColor( sf::Color::Red);
+					v1 = sf::Vector2f(corridor.points[1].x, corridor.points[1].y);
+					v2 = sf::Vector2f(corridor.points[2].x, corridor.points[2].y);
+					tmp.push_back(sfLine(v1, v2));
+					tmp.back().SetColor(sf::Color::Red);
+
+					//}
 					corridors.push_back(tmp);
 				}
 				first = false;
@@ -158,18 +167,36 @@ int main()
 		}
 
 		window.clear();
+		sf::RenderStates rs;
+		if (map.m_corridors.size() != 0) {
+			for (int i = 0; i < corridors.size(); i++)
+			{
+				for (int j = 0; j < 2; j++)
+				{
+					corridors[i][j].draw(window, rs);
+				}
+			}
+		}
 		for (auto &shape : shapes)
 		{
 			window.draw(shape);
 		}
-		for(auto &it : lines)
-			window.draw(&it[0], it.size(), sf::LinesStrip);
+		//for(auto &it : lines)
+		//	window.draw(&it[0], it.size(), sf::LinesStrip);
 		//for (auto &it : corridors)
 		//{
-		//	window.draw(&it[1], it.size(), sf::LinesStrip);
+		//	//window.draw(&it[0], it.size(), sf::LinesStrip);
+		//	window.draw(&corridors[0][0], corridors[0].size(), sf::LinesStrip);
 		//}
-
-		//	window.draw(&corridors[1].back(), corridors.size(), sf::LinesStrip);
+		//static int num = 0;
+		//static float t = 0;
+		//t += 0.02;
+		//if (t > 1 && num < corridors.size()-1)
+		//{
+		//	num++;
+		//	t = 0;
+		//}
+		//window.draw(&corridors[0].back(), corridors.size(), sf::LinesStrip);
 
 		window.draw(text);
 		window.display();

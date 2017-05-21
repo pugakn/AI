@@ -10,6 +10,7 @@
 struct DungeonHall
 {
 	std::vector<Vector3D> points;
+	float size;
 };
 struct DungeoBlock 
 {

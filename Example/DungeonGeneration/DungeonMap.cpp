@@ -178,11 +178,17 @@ void DungeonMap::RemoveRedundantConnections()
 				for (auto &edge2 : m_finalEdges)
 				{
 					//Search for edges that form a cycle
-					if ((triangle.edges[i].p1.p == edge.p1.p && triangle.edges[i].p2.p == edge2.p2.p)
-						|| (triangle.edges[i].p2.p == edge.p1.p && triangle.edges[i].p1.p == edge2.p2.p))
+					if ((triangle.edges[i].p1.p == edge.p1.p && triangle.edges[i].p2.p == edge2.p1.p)
+						|| (triangle.edges[i].p2.p == edge.p1.p && triangle.edges[i].p1.p == edge2.p1.p)
+						|| (triangle.edges[i].p1.p == edge.p2.p && triangle.edges[i].p2.p == edge2.p2.p)
+						|| (triangle.edges[i].p2.p == edge.p2.p && triangle.edges[i].p1.p == edge2.p2.p)
+						|| (triangle.edges[i].p1.p == edge.p1.p && triangle.edges[i].p2.p == edge2.p2.p)
+						|| (triangle.edges[i].p2.p == edge.p1.p && triangle.edges[i].p1.p == edge2.p2.p)
+						|| (triangle.edges[i].p1.p == edge.p2.p && triangle.edges[i].p2.p == edge2.p1.p)
+						|| (triangle.edges[i].p2.p == edge.p2.p && triangle.edges[i].p1.p == edge2.p1.p))
 					{
 						//Remove edge based on m_iMinSpanningTreeProbability  
-						if (rand() % 101 < m_data.m_iMinSpanningTreeProbability)
+						if (rand() % 100 < m_data.m_iMinSpanningTreeProbability)
 						{
 							EdgeOk = false;
 						}
@@ -209,18 +215,101 @@ void DungeonMap::CreateGraphConnections()
 
 void DungeonMap::CreateCorridors()
 {
+	std::vector<DungeoBlock*> ignoreList;
 	for (auto &block : m_blocks)
 	{
+		ignoreList.push_back(&block);
 		for (auto &con : block.graphConnections)
 		{
+			bool corridorLoop = true;
+			for (auto ignore : ignoreList)
+			{
+				if (con == ignore)
+					corridorLoop = false;
+			}
+			if (!corridorLoop)
+				continue;
 			m_corridors.push_back(DungeonHall());
 			Vector3D tmp;
-			tmp = Vector3D(block.position);
-			m_corridors.back().points.push_back(tmp);
-			tmp = Vector3D(block.position.x, std::max(block.position.y,con->position.y),0);
-			m_corridors.back().points.push_back(tmp);
-			tmp = Vector3D(con->position);
-			m_corridors.back().points.push_back(tmp);
+			Vector3D bigLine = con ->position - Vector3D(block.position.x,con->position.y,0);
+			Vector3D shortLine = Vector3D(block.position.x, con->position.y, 0) - block.position;
+			if (Magnitude(shortLine) > Magnitude(bigLine))
+			{
+				Vector3D temp = shortLine;
+				shortLine = bigLine;
+				bigLine = temp;
+			}
+			Vector3D startPoint;
+			Vector3D midPoint;
+			Vector3D finalPoint;
+			startPoint = block.position;
+			midPoint = startPoint + shortLine;
+			finalPoint = midPoint + bigLine;
+			//
+			Vector3D blockMinCorner = block.position - block.size / 2.f;
+			Vector3D blockMaxCorner = block.position + block.size / 2.f;
+			if (midPoint.x > blockMinCorner.x && midPoint.x < blockMaxCorner.x
+				&& midPoint.y > blockMinCorner.y && midPoint.y < blockMaxCorner.y)
+			{
+				if (finalPoint.y > midPoint.y)
+				{
+					midPoint += Vector3D( 0, block.size.y / 2.f, 0);
+					startPoint = midPoint;
+				}
+				else if (finalPoint.y < midPoint.y)
+				{
+					midPoint += Vector3D(0, -block.size.y / 2.f, 0);
+					startPoint = midPoint;
+				}
+				else if (finalPoint.x > midPoint.x)
+				{
+					midPoint += Vector3D(block.size.x / 2.f,0, 0);
+					startPoint = midPoint;
+				}
+				else if (finalPoint.x < midPoint.x)
+				{
+					midPoint += Vector3D(-block.size.x / 2.f,0, 0);
+					startPoint = midPoint;
+				}
+			}
+			
+			if (midPoint.y > startPoint.y)
+			{
+				startPoint += Vector3D(0, block.size.y / 2.f, 0);
+			}
+			else if (midPoint.y < startPoint.y)
+			{
+				startPoint += Vector3D(0, -block.size.y / 2.f, 0);
+			}
+			else if (midPoint.x > startPoint.x)
+			{
+				startPoint += Vector3D(block.size.x / 2.f, 0, 0);
+			}
+			else if (midPoint.x < startPoint.x)
+			{
+				startPoint += Vector3D(-block.size.x / 2.f, 0, 0);
+			}
+			
+
+			if (finalPoint.y > midPoint.y)
+			{
+				finalPoint += Vector3D(0, -con->size.y / 2.f, 0);
+			}
+			else if (finalPoint.y < midPoint.y)
+			{
+				finalPoint += Vector3D(0, con->size.y / 2.f, 0);
+			}
+			else if (finalPoint.x > midPoint.x)
+			{
+				finalPoint += Vector3D(-con->size.x / 2.f, 0, 0);
+			}
+			else if (finalPoint.x < midPoint.x)
+			{
+				finalPoint += Vector3D(con->size.x / 2.f, 0, 0);
+			}
+			m_corridors.back().points.push_back(startPoint);
+			m_corridors.back().points.push_back(midPoint);
+			m_corridors.back().points.push_back(finalPoint);
 		}
 	}
 }
