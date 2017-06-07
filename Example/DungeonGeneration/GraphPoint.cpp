@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "GraphPoint.h"
 
-GraphPoint::GraphPoint(Vector3D point) : p(point)
+GraphPoint::GraphPoint(Vector2Di point) : p(point)
 {
 	pGraphNode = nullptr;
 }
 
-GraphPoint::GraphPoint(Vector3D point, DungeoBlock* graphNode) : p(point)
+GraphPoint::GraphPoint(Vector2Di point, DungeoBlock* graphNode) : p(point)
 {
 	pGraphNode = graphNode;
 }

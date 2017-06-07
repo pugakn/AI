@@ -1,5 +1,5 @@
 #pragma once
-#include <Vector3D.h>
+#include <Vector2Di.h>
 #include <vector>
 #include <list>
 #include "Utils.h"
@@ -9,14 +9,14 @@
 #endif
 struct DungeonHall
 {
-	std::vector<Vector3D> points;
+	std::vector<Vector2Di> points;
 	float size;
 };
 struct DungeoBlock 
 {
-	Vector3D size;
+	Vector2Di size;
 	//Center position
-	Vector3D position;
+	Vector2Di position;
 	std::vector<DungeoBlock*> graphConnections;
 	//Vector3D Separation(float width, float height);
 };
@@ -26,11 +26,11 @@ struct DungeonMapData
 	int m_iNumBlocks;
 	float m_fMinSeparation;
 	float m_fSpawnRadius;
-	Vector3D m_initialPos;
-	Vector3D m_blockMinSize;
-	Vector3D m_blockMaxSize;
+	Vector2Di m_initialPos;
+	Vector2Di m_blockMinSize;
+	Vector2Di m_blockMaxSize;
 	//All blocks below this size will be removed after separation
-	Vector3D m_minValidSize;
+	Vector2Di m_minValidSize;
 	//Probability for remove a connection 0-100
 	int m_iMinSpanningTreeProbability;
 
@@ -41,7 +41,7 @@ class DungeonMap
 private:
 	DungeonMapData m_data;
 	//Returns a random point on radius
-	Vector3D RandomPointOnRadius(Vector3D pos, float radius);
+	Vector2Di RandomPointOnRadius(Vector2Di pos, float radius);
 	//Separate blocks with m_fMinSeparation
 	void SeparateBlocks();
 	//Remove blocks below m_minValidSize

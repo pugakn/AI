@@ -1,12 +1,12 @@
 #pragma once
-#include <Vector3D.h>
+#include <Vector2Di.h>
 struct DungeoBlock;
 struct GraphPoint
 {
 public:
-	Vector3D p;
+	Vector2Di p;
 	DungeoBlock* pGraphNode;
-	GraphPoint(Vector3D point);
-	GraphPoint(Vector3D point, DungeoBlock* graphNode);
+	GraphPoint(Vector2Di point);
+	GraphPoint(Vector2Di point, DungeoBlock* graphNode);
 };
 

@@ -1,12 +1,12 @@
 #pragma once
-#include <Vector3D.h>
+#include <Vector2Di.h>
 #include "Edge.h"
 #include <vector>
 struct DungeoBlock;
 struct Triangle
 {
 private:
-	Vector3D circumcenter;
+	Vector2Di circumcenter;
 	float circumcenterRadius;
 public:
 	GraphPoint p1;
@@ -14,13 +14,13 @@ public:
 	GraphPoint p3;
 	std::vector<Edge> edges;
 	void Init();
-	bool IsPointOnCircumCircle(Vector3D point);
+	bool IsPointOnCircumCircle(Vector2Di point);
 	bool operator==(const Triangle &other) const; 
 	Triangle(GraphPoint a, GraphPoint b, GraphPoint c) : p1(a), p2(b), p3(c) 
 	{ 
 		Init(); 
 	};
-	Triangle(Vector3D a, Vector3D b, Vector3D c) : p1(a), p2(b), p3(c) 
+	Triangle(Vector2Di a, Vector2Di b, Vector2Di c) : p1(a), p2(b), p3(c)
 	{
 		Init(); 
 	};
