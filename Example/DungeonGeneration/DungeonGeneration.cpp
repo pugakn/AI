@@ -33,17 +33,17 @@ int main()
 	std::vector<std::vector<sf::Vertex>> lines;
 	std::vector<std::vector<sfLine>> corridors;
 
-	const int NUM_BLOCKS = 200;
+	const int NUM_BLOCKS = 100;
 	DungeonMapData tmpData;
 	tmpData.m_blockMinSize = Vector2Di(5, 5);
 	tmpData.m_blockMaxSize = Vector2Di(100, 100);
-	tmpData.m_iMinSpanningTreeProbability = 80;
-	tmpData.m_fSpawnRadius = 75;
+	tmpData.m_iMinSpanningTreeProbability = 85;
+	tmpData.m_fSpawnRadius = 30;
 	tmpData.m_initialPos = Vector2Di(512, 768 / 2.f);
 	tmpData.m_iNumBlocks = NUM_BLOCKS;
-	tmpData.m_iSeed = 6666366;
+	tmpData.m_iSeed = 666366;
 	tmpData.m_minValidSize = Vector2Di(50, 50);
-	tmpData.m_fMinSeparation = 10.f;
+	tmpData.m_fMinSeparation = 3.f;
 	DungeonMap map;
 	std::thread mapThread([&map, tmpData]() {map.GenerateMap(tmpData); });
 #if !VISUAL_DEBUG_MODE
@@ -181,8 +181,13 @@ int main()
 				}
 			}
 		}
-		//for(auto &it : lines)
+
+		//for (auto &it : lines)
+		//{
 		//	window.draw(&it[0], it.size(), sf::LinesStrip);
+		//}
+
+
 		//for (auto &it : corridors)
 		//{
 		//	//window.draw(&it[0], it.size(), sf::LinesStrip);

@@ -13,8 +13,7 @@ void Triangle::Init()
 	Vector2Di U = (AcMag * (p3.p - p2.p) + BcMag * (p1.p - p3.p) + CcMag * (p2.p - p1.p));
 	circumcenter.x = U.y / ((p1.p.x * (p3.p.y - p2.p.y) + p2.p.x * (p1.p.y - p3.p.y) + p3.p.x * (p2.p.y - p1.p.y))*2);
 	circumcenter.y = U.x / ((p1.p.y * (p3.p.x - p2.p.x) + p2.p.y * (p1.p.x - p3.p.x) + p3.p.y * (p2.p.x - p1.p.x))*2);
-
-	circumcenterRadius = circumcenterRadius = Magnitude(p1.p - circumcenter);
+	circumcenterRadius = Magnitude(p1.p - circumcenter);
 }
 
 bool Triangle::IsPointOnCircumCircle(Vector2Di point)

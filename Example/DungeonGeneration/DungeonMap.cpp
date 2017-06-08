@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "Triangle.h"
 #include "Edge.h"
+#include "Vector3D.h"
 
 Vector2Di DungeonMap::RandomPointOnRadius(Vector2Di pos, float radius)
 {
@@ -22,26 +23,25 @@ void DungeonMap::SeparateBlocks()
 			Vector2Di forces(0, 0);
 			for (auto &it : m_blocks)
 			{
+				Vector2Di separation = block.position - it.position;
+				int blockLeft = block.position.x - block.size.x /2 - m_data.m_fMinSeparation ;
+				int blockRight = block.position.x + block.size.x / 2 + m_data.m_fMinSeparation ;
+				int blockTop = block.position.y + block.size.y / 2 + m_data.m_fMinSeparation;
+				int blockBottom = block.position.y - block.size.y / 2 - m_data.m_fMinSeparation;
 
-				Vector2Di separation = block.position- it.position;
-				int blockLeft = block.position.x - block.size.x * 0.5 - m_data.m_fMinSeparation ;
-				int blockRight = block.position.x + block.size.x * 0.5 + m_data.m_fMinSeparation ;
-				int blockTop = block.position.y + block.size.y * 0.5 + m_data.m_fMinSeparation;
-				int blockBottom = block.position.y - block.size.y * 0.5 - m_data.m_fMinSeparation;
-
-				int itLeft =   it.position.x -  it.size.x * 0.5;
-				int itRight =  it.position.x + it.size.x * 0.5;
-				int itTop =    it.position.y +   it.size.y * 0.5;
-				int itBottom = it.position.y -it.size.y * 0.5;
+				int itLeft =   it.position.x -  it.size.x / 2;
+				int itRight =  it.position.x + it.size.x / 2;
+				int itTop =    it.position.y +   it.size.y / 2;
+				int itBottom = it.position.y -it.size.y / 2;
 				//If two blocks intersect, add separation force
 				if (blockLeft < itRight && blockRight > itLeft &&
 					blockTop > itBottom && blockBottom < itTop && Magnitude(separation) != 0)
 				{
-					forces +=  Normalize(separation);
+					forces +=  GetDirection(separation);
 					finished = false;
 				}
 			}
-			block.position += forces;
+			block.position += Vector2Di(forces.x,forces.y);
 		}
 	}
 }
@@ -62,21 +62,21 @@ void DungeonMap::RemoveInvalidBlocks()
 void DungeonMap::DelaunayTriangulation()
 {
 	
-	int minX = m_blocks[0].position.x - m_blocks[0].size.x * 0.5;
-	int minY = m_blocks[0].position.y - m_blocks[0].size.y * 0.5;
-	int maxX = m_blocks[0].position.x + m_blocks[0].size.x * 0.5;
-	int maxY = m_blocks[0].position.y + m_blocks[0].size.y * 0.5;
+	int minX = m_blocks[0].position.x - m_blocks[0].size.x /2 ;
+	int minY = m_blocks[0].position.y - m_blocks[0].size.y /2 ;
+	int maxX = m_blocks[0].position.x + m_blocks[0].size.x /2 ;
+	int maxY = m_blocks[0].position.y + m_blocks[0].size.y /2 ;
 	//Get min and max points
 	for (std::size_t i = 0; i < m_blocks.size(); ++i)
 	{
-		int newMinX = m_blocks[i].position.x - m_blocks[i].size.x * 0.5;
-		int newMinY = m_blocks[i].position.y - m_blocks[i].size.y * 0.5;
-		int newMaxX = m_blocks[i].position.x + m_blocks[i].size.x * 0.5;
-		int newMaxY = m_blocks[i].position.y + m_blocks[i].size.y * 0.5;
-		if (newMinX < minX) minX = newMinX;
-		if (newMinY < minY) minY = newMinY;
-		if (newMaxX > maxX) maxX = newMaxX;
-		if (newMaxY > maxY) maxY = newMaxY;
+		int newMinX = m_blocks[i].position.x - m_blocks[i].size.x /2 ;
+		int newMinY = m_blocks[i].position.y - m_blocks[i].size.y /2 ;
+		int newMaxX = m_blocks[i].position.x + m_blocks[i].size.x /2 ;
+		int newMaxY = m_blocks[i].position.y + m_blocks[i].size.y /2 ;
+		if (newMinX < minX) minX = newMinX -1;
+		if (newMinY < minY) minY = newMinY -1;
+		if (newMaxX > maxX) maxX = newMaxX +1;
+		if (newMaxY > maxY) maxY = newMaxY +1;
 	}
 	//Create super triangles containing all other points
 	Vector2Di p1(minX, minY);
@@ -147,6 +147,7 @@ void DungeonMap::DelaunayTriangulation()
 		else
 			triangle++;
 	}
+
 }
 
 void DungeonMap::RemoveRedundantConnections()
@@ -201,7 +202,6 @@ void DungeonMap::CreateGraphConnections()
 		edge.p1.pGraphNode->graphConnections.push_back(edge.p2.pGraphNode);
 		edge.p2.pGraphNode->graphConnections.push_back(edge.p1.pGraphNode);
 	}
-
 }
 
 void DungeonMap::CreateCorridors()
@@ -237,7 +237,7 @@ void DungeonMap::CreateCorridors()
 			midPoint = startPoint + shortLine;
 			finalPoint = midPoint + bigLine;
 			//
-			Vector2Di blockMidSize = block.size * 0.5f;
+			Vector2Di blockMidSize = block.size /2;
 			Vector2Di blockMinCorner = block.position - blockMidSize;
 			Vector2Di blockMaxCorner = block.position + blockMidSize;
 			if (midPoint.x > blockMinCorner.x && midPoint.x < blockMaxCorner.x
@@ -282,7 +282,7 @@ void DungeonMap::CreateCorridors()
 				startPoint += Vector2Di(-blockMidSize.x, 0);
 			}
 			
-			Vector2Di conMidSize = con->size * 0.5f;
+			Vector2Di conMidSize = con->size /2;
 			if (finalPoint.y > midPoint.y)
 			{
 				finalPoint += Vector2Di(0, -conMidSize.y);
@@ -303,7 +303,7 @@ void DungeonMap::CreateCorridors()
 			//============== Switch invalid connections ================
 			for (auto &badBlock : m_blocks)
 			{
-				Vector2Di badBlockMidSize = badBlock.size * 0.5f;
+				Vector2Di badBlockMidSize = badBlock.size /2;
 				int blockLeft = badBlock.position.x - badBlockMidSize.x;
 				int blockRight = badBlock.position.x + badBlockMidSize.x;
 				int blockTop = badBlock.position.y + badBlockMidSize.y;
@@ -317,13 +317,12 @@ void DungeonMap::CreateCorridors()
 				{
 					if (midPoint == startPoint || midPoint == finalPoint)
 						continue;
-					auto tmp = startPoint;
 					startPoint = block.position;
 					midPoint = startPoint + bigLine;
 					finalPoint = midPoint + shortLine;
 
-					Vector2Di conMinCorner = con->position - con->size * 0.5f;
-					Vector2Di conMaxCorner = con->position + con->size * 0.5f;
+					Vector2Di conMinCorner = con->position - conMidSize;
+					Vector2Di conMaxCorner = con->position + conMidSize;
 					if (midPoint.x > conMinCorner.x && midPoint.x < conMaxCorner.x
 						&& midPoint.y > conMinCorner.y && midPoint.y < conMaxCorner.y)
 					{
@@ -356,20 +355,22 @@ void DungeonMap::CreateCorridors()
 					}
 					if (midPoint.y > startPoint.y)
 					{
-						startPoint += Vector2Di(0, badBlockMidSize.y);
+						startPoint += Vector2Di(0, blockMidSize.y);
 					}
 					else if (midPoint.y < startPoint.y)
 					{
-						startPoint += Vector2Di(0, -badBlockMidSize.y);
+						startPoint += Vector2Di(0, -blockMidSize.y);
 					}
 					else if (midPoint.x > startPoint.x)
 					{
-						startPoint += Vector2Di(badBlockMidSize.x, 0);
+						startPoint += Vector2Di(blockMidSize.x, 0);
 					}
 					else if (midPoint.x < startPoint.x)
 					{
-						startPoint += Vector2Di(-badBlockMidSize.x, 0);
+						startPoint += Vector2Di(-blockMidSize.x, 0);
 					}
+
+
 					if (finalPoint.y > midPoint.y)
 					{
 						finalPoint += Vector2Di(0, -conMidSize.y);
