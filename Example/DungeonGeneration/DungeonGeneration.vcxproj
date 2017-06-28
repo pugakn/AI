@@ -84,7 +84,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -149,8 +149,30 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="DungeonMap.h" />
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="FSM\Units\Armor.h" />
+    <ClInclude Include="FSM\Units\Attack.h" />
+    <ClInclude Include="FSM\Units\Build.h" />
+    <ClInclude Include="FSM\Units\Dead.h" />
+    <ClInclude Include="FSM\Units\Faction.h" />
+    <ClInclude Include="FSM\Units\FSM.h" />
+    <ClInclude Include="FSM\Units\Guarrison.h" />
+    <ClInclude Include="FSM\Units\Idle.h" />
+    <ClInclude Include="FSM\Units\MoveTo.h" />
+    <ClInclude Include="FSM\Units\Recollect.h" />
+    <ClInclude Include="FSM\Units\Roting.h" />
+    <ClInclude Include="FSM\Units\State.h" />
+    <ClInclude Include="FSM\Units\Subject.h" />
+    <ClInclude Include="FSM\Units\TerrainType.h" />
+    <ClInclude Include="FSM\Units\Type.h" />
+    <ClInclude Include="FSM\Units\Unit.h" />
+    <ClInclude Include="FSM\Units\WeaponType.h" />
+    <ClInclude Include="GameObjects\Boid.h" />
+    <ClInclude Include="GameObjects\GameObject.h" />
+    <ClInclude Include="GameObjects\Obstacle.h" />
+    <ClInclude Include="GameObjects\World.h" />
     <ClInclude Include="GraphPoint.h" />
     <ClInclude Include="sfLineT.h" />
     <ClInclude Include="stdafx.h" />
@@ -159,9 +181,31 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="DungeonGeneration.cpp" />
     <ClCompile Include="DungeonMap.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="FSM\Units\Armor.cpp" />
+    <ClCompile Include="FSM\Units\Attack.cpp" />
+    <ClCompile Include="FSM\Units\Build.cpp" />
+    <ClCompile Include="FSM\Units\Dead.cpp" />
+    <ClCompile Include="FSM\Units\Faction.cpp" />
+    <ClCompile Include="FSM\Units\FSM.cpp" />
+    <ClCompile Include="FSM\Units\Guarrison.cpp" />
+    <ClCompile Include="FSM\Units\Idle.cpp" />
+    <ClCompile Include="FSM\Units\MoveTo.cpp" />
+    <ClCompile Include="FSM\Units\Recollect.cpp" />
+    <ClCompile Include="FSM\Units\Roting.cpp" />
+    <ClCompile Include="FSM\Units\State.cpp" />
+    <ClCompile Include="FSM\Units\Subject.cpp" />
+    <ClCompile Include="FSM\Units\TerrainType.cpp" />
+    <ClCompile Include="FSM\Units\Type.cpp" />
+    <ClCompile Include="FSM\Units\Unit.cpp" />
+    <ClCompile Include="FSM\Units\WeaponType.cpp" />
+    <ClCompile Include="GameObjects\Boid.cpp" />
+    <ClCompile Include="GameObjects\GameObject.cpp" />
+    <ClCompile Include="GameObjects\Obstacle.cpp" />
+    <ClCompile Include="GameObjects\World.cpp" />
     <ClCompile Include="GraphPoint.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -176,6 +220,9 @@
     <ProjectReference Include="..\MathLib\MathLib.vcxproj">
       <Project>{343fb3f1-781c-416f-97fe-2a2b56535888}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

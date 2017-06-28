@@ -13,6 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de código fuente\FSM">
+      <UniqueIdentifier>{de0ec11a-66a8-468c-8a81-c7f75f678d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\FSM\Units">
+      <UniqueIdentifier>{39c0a09f-efc1-4b4b-942c-7f0bb674543d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\FSM">
+      <UniqueIdentifier>{0bdcc5d0-b102-4e59-b4f4-c1225be15e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\FSM\Units">
+      <UniqueIdentifier>{2242776e-84df-4cbb-95ff-138bfda5a576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GameObjects">
+      <UniqueIdentifier>{d7d226a0-13fa-4a00-88c8-2567f6dba733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GameObjects">
+      <UniqueIdentifier>{85eee204-0a2e-4a22-8387-45cfd63728d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\FSM\Anim">
+      <UniqueIdentifier>{2da8583b-d854-49b0-bfe8-6125231031e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\FSM\Anim">
+      <UniqueIdentifier>{d9879512-7f9f-48d0-b140-6d329c0f51e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -42,6 +66,72 @@
     <ClInclude Include="sfLineT.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="FSM\Units\Armor.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Attack.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Build.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Dead.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Faction.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\FSM.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Guarrison.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Idle.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\MoveTo.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Recollect.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Roting.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\State.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Subject.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\TerrainType.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Type.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\WeaponType.h">
+      <Filter>Archivos de encabezado\FSM\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Units\Unit.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\GameObject.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\World.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Boid.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Obstacle.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -65,5 +155,74 @@
     <ClCompile Include="GraphPoint.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="FSM\Units\Armor.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Attack.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Build.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Dead.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Faction.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\FSM.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Guarrison.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Idle.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\MoveTo.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Recollect.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Roting.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\State.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Subject.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\TerrainType.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Type.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\WeaponType.cpp">
+      <Filter>Archivos de código fuente\FSM\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Unit.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\GameObject.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\World.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Boid.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Obstacle.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

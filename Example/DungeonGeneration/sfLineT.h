@@ -3,9 +3,10 @@
 class sfLine : public sf::Drawable
 {
 public:
-	sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2) :
-		color(sf::Color::Yellow), thickness(3.f)
+	sfLine(const sf::Vector2f& point1, const sf::Vector2f& point2, float tickness) :
+		color(sf::Color::Yellow)
 	{
+		this->thickness = tickness;
 		sf::Vector2f direction = point2 - point1;
 		sf::Vector2f unitDirection = direction / std::sqrt(direction.x*direction.x + direction.y*direction.y);
 		sf::Vector2f unitPerpendicular(-unitDirection.y, unitDirection.x);
