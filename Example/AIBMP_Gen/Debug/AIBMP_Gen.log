@@ -1,0 +1,20 @@
+﻿  PerlinNoise.cpp
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\randomnumbers.h(5): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(64): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(65): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(66): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(78): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(79): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(80): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(92): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(93): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(94): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(95): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(97): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\perlinnoise.cpp(98): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  BMPGenerator.cpp
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\bmpgenerator.cpp(53): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\bmpgenerator.cpp(55): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
+  AIBMP_Gen.vcxproj -> C:\Users\Ulises\Documents\Visual Studio 2015\Projects\AIBMP_Gen\Debug\AIBMP_Gen.exe
+  AIBMP_Gen.vcxproj -> C:\Users\Ulises\Documents\Visual Studio 2015\Projects\AIBMP_Gen\Debug\AIBMP_Gen.pdb (Full PDB)

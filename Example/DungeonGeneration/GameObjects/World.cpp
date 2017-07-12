@@ -27,11 +27,11 @@ void CWorld::InitMap()
 	DungeonMapData tmpData;
 	tmpData.m_blockMinSize = Vector2Di(5, 5);
 	tmpData.m_blockMaxSize = Vector2Di(100, 100);
-	tmpData.m_iMinSpanningTreeProbability = 85;
+	tmpData.m_iMinSpanningTreeProbability = 75;
 	tmpData.m_fSpawnRadius = 30;
 	tmpData.m_initialPos = Vector2Di(512, 768 / 2.f);
 	tmpData.m_iNumBlocks = NUM_BLOCKS;
-	tmpData.m_iSeed = 666366;
+	tmpData.m_iSeed = 666;
 	tmpData.m_minValidSize = Vector2Di(50, 50);
 	tmpData.m_fMinSeparation = 3.f;
 	map.GenerateMap(tmpData);
@@ -91,14 +91,27 @@ void CWorld::InitMap()
 	m_tiles.resize(map.m_tiles.size());
 	for (size_t i = 0; i < m_tiles.size(); ++i)
 	{
-		m_tiles[i].setSize(sf::Vector2f(map.TILE_SIZE,map.TILE_SIZE));
+		m_tiles[i].setFillColor(sf::Color(0,0,0,60));
+		m_tiles[i].setSize(sf::Vector2f(map.TILE_SIZE,map.TILE_SIZE)*UNIT_SCALE);
 		static int y = 0;
-		y = i % map.TILE_SIZE;
-		m_tiles[i].setPosition(sf::Vector2f());
+		static int x = 0;
+		m_tiles[i].setPosition(sf::Vector2f(map.minX + x * map.TILE_SIZE,map.minY + y * map.TILE_SIZE)*UNIT_SCALE);
+		//m_tiles[i].setOutlineColor(sf::Color::White);
+		
 		if (map.m_tiles[i] == 1)
-			m_tiles[i].setFillColor(sf::Color::Green);
-		m_tiles[i].setOutlineColor(sf::Color::Red);
-		m_tiles[i].setOutlineThickness(1);
+		{
+			m_tiles[i].setFillColor(sf::Color(0, 255, 0, 150));
+			m_tiles[i].setOutlineColor(sf::Color::Red);
+			m_tiles[i].setOutlineThickness(1);
+
+		}
+
+		x++;
+		if (x > map.nTilesX-1 )
+		{
+			x = 0;
+			y++;
+		}
 	}
 }
 

@@ -1,0 +1,26 @@
+﻿  AIBMP_Gen.cpp
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\RandomNumbers.h(5): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+AIBMP_Gen.cpp(29): warning C4018: '<': no coinciden signed/unsigned
+AIBMP_Gen.cpp(47): warning C4018: '<': no coinciden signed/unsigned
+AIBMP_Gen.cpp(109): warning C4244: 'argumento': conversión de 'double' a 'uint8_t'; posible pérdida de datos
+  PerlinNoise.cpp
+c:\users\ulises\documents\visual studio 2015\projects\aibmp_gen\aibmp_gen\RandomNumbers.h(5): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+PerlinNoise.cpp(78): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(79): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(80): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(92): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(93): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(94): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(106): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(107): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(108): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(109): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(111): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+PerlinNoise.cpp(112): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  Generando código
+  Generación de código finalizada
+  58 of 733 functions ( 7.9%) were compiled, the rest were copied from previous compilation.
+    56 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  AIBMP_Gen.vcxproj -> C:\Users\Ulises\documents\visual studio 2015\Projects\AIBMP_Gen\Release\AIBMP_Gen.exe
+  AIBMP_Gen.vcxproj -> C:\Users\Ulises\documents\visual studio 2015\Projects\AIBMP_Gen\Release\AIBMP_Gen.pdb (Full PDB)

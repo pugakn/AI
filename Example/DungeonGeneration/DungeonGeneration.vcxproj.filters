@@ -144,6 +144,9 @@
     <ClInclude Include="FSM\State.h">
       <Filter>Archivos de encabezado\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="FSMMarchingSq.h">
+      <Filter>Archivos de encabezado\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -243,6 +246,9 @@
       <Filter>Archivos de código fuente\FSM</Filter>
     </ClCompile>
     <ClCompile Include="FSM\State.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMMarchingSq.cpp">
       <Filter>Archivos de código fuente\FSM</Filter>
     </ClCompile>
   </ItemGroup>

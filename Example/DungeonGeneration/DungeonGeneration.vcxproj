@@ -152,6 +152,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="DungeonMap.h" />
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="FSMMarchingSq.h" />
     <ClInclude Include="FSM\Anim\AnimStateAttack.h" />
     <ClInclude Include="FSM\Anim\AnimStateDie.h" />
     <ClInclude Include="FSM\Anim\AnimStateIdle.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="DungeonGeneration.cpp" />
     <ClCompile Include="DungeonMap.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="FSMMarchingSq.cpp" />
     <ClCompile Include="FSM\Anim\AnimStateAttack.cpp" />
     <ClCompile Include="FSM\Anim\AnimStateDie.cpp" />
     <ClCompile Include="FSM\Anim\AnimStateIdle.cpp" />

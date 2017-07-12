@@ -52,11 +52,13 @@ private:
 	void CreateCorridors();
 	void FillTiles();
 public:
-	const int TILE_SIZE = 50;
+	const int TILE_SIZE = 8;
 	int minX;
 	int minY;
 	int maxX;
 	int maxY;
+	int nTilesX;
+	int nTilesY;
 	std::vector<int> m_tiles;
 #if VISUAL_DEBUG_MODE
 	std::mutex m_mutex;

@@ -11,11 +11,30 @@ c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.
 c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(75): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
 c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(80): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
 c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(156): warning C4018: '<': no coinciden signed/unsigned
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(188): warning C4715: 'CWorld::GetFactionByID': no todas las rutas de acceso de control devuelven un valor
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(195): warning C4715: 'CWorld::GetArmorByID': no todas las rutas de acceso de control devuelven un valor
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(209): warning C4715: 'CWorld::GetTypeByID': no todas las rutas de acceso de control devuelven un valor
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(216): warning C4715: 'CWorld::GetWeaponTypeByID': no todas las rutas de acceso de control devuelven un valor
-c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(202): warning C4715: 'CWorld::GetTerrainTypenByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(95): warning C4244: 'argumento': conversión de 'const int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(98): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(173): warning C4018: '<': no coinciden signed/unsigned
+  FSMMarchingSq.cpp
+  DungeonMap.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(12): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(27): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(28): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(29): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(414): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(420): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(448): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(451): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(452): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(452): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  Generando código...
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(205): warning C4715: 'CWorld::GetFactionByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(212): warning C4715: 'CWorld::GetArmorByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(219): warning C4715: 'CWorld::GetTerrainTypenByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(226): warning C4715: 'CWorld::GetTypeByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(233): warning C4715: 'CWorld::GetWeaponTypeByID': no todas las rutas de acceso de control devuelven un valor
+  Omitiendo... (no se detectaron cambios relevantes)
+  Unit.cpp
+  DungeonGeneration.cpp
   DungeonGeneration.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\DungeonGeneration.exe
   DungeonGeneration.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\DungeonGeneration.pdb (Full PDB)

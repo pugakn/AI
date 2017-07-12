@@ -403,8 +403,8 @@ void DungeonMap::CreateCorridors()
 
 void DungeonMap::FillTiles()
 {
-	int nTilesX = (maxX - minX) / TILE_SIZE;
-	int nTilesY = (maxY - minY) / TILE_SIZE;
+	nTilesX = (maxX - minX) / TILE_SIZE;
+	nTilesY = (maxY - minY) / TILE_SIZE;
 	m_tiles.resize(nTilesX * nTilesY);
 	for (auto & tile : m_tiles)
 	{
@@ -414,17 +414,20 @@ void DungeonMap::FillTiles()
 	for (size_t i = 0; i < nTilesY; i++)
 	{
 		int TileMinX = minX;
-		int TileMinY = minY + i*TILE_SIZE;
+		int TileMinY = minY + i * TILE_SIZE;
 		int TileMAxX = TileMinX + TILE_SIZE;
 		int TileMAxY = TileMinY + TILE_SIZE;
 		for (size_t j = 0; j < nTilesX; j++)
 		{
 			for (auto & block : m_blocks)
 			{
-				if (block.position.x >= TileMinX && block.position.x <= TileMAxX)
-					if (block.position.y >= TileMinY && block.position.y <= TileMAxY)
+				auto minCornerPos = block.position - block.size / 2;
+				auto mmaxCornerPos = block.position + block.size / 2;
+				if (minCornerPos.x <= TileMinX && mmaxCornerPos.x >= TileMAxX)
+					if (minCornerPos.y <= TileMinY && mmaxCornerPos.y >= TileMAxY)
 					{
 						m_tiles[i * nTilesX + j] = 1;
+						break;
 					}
 			}
 			//Avanzar al siguiente tile
@@ -432,7 +435,7 @@ void DungeonMap::FillTiles()
 			TileMAxX = TileMinX + TILE_SIZE;
 		}
 	}
-	nTilesX = nTilesX + TILE_SIZE;//debug
+	//nTilesX = nTilesX + TILE_SIZE;//debug
 
 }
 
