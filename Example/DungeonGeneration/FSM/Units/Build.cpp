@@ -1,6 +1,6 @@
 #include "Build.h"
 #include "FSM.h"
-#include "Unit.h"
+#include "../../Unit.h"
 
 
 void CBuild::Update(std::weak_ptr<CGameObject> callerUnit)
@@ -33,11 +33,11 @@ void CBuild::Update(std::weak_ptr<CGameObject> callerUnit)
 	unit->SearchBuildingUnit();
 }
 
-void CBuild::OnEnter()
+void CBuild::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CBuild::OnExit()
+void CBuild::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

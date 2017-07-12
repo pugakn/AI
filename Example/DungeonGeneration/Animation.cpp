@@ -13,6 +13,8 @@ void Animation::Init()
 		exit(-1);
 	sprite.setTexture(texture);
 	sprite.setSize((sf::Vector2f)texture->getSize());
+	sprite.setOutlineColor(sf::Color::Red);
+	sprite.setOutlineThickness(1.0);
 }
 
 void Animation::OnEnter()
@@ -20,16 +22,19 @@ void Animation::OnEnter()
 	timeAccum = 0;
 }
 
-void Animation::Update(float delta,Vector3D pos )
+void Animation::Update(float delta,Vector3D pos,bool flip )
 {
 	timeAccum += delta;
 	int index = (int)(timeAccum*FRAMES_PER_SECOND);
 	if (index >= frames.size())
 		index = index % frames.size();
 	auto actualFrame = frames[index];
+	
 	sprite.setSize(sf::Vector2f(actualFrame.spriteSourceSizeW, actualFrame.spriteSourceSizeH));
-	sprite.setPosition(sf::Vector2f(actualFrame.spriteSourceSizeX,actualFrame.spriteSourceSizeY) + sf::Vector2f(pos.x,pos.y));
+	sprite.setPosition(sf::Vector2f(actualFrame.spriteSourceSizeX,actualFrame.spriteSourceSizeY) + sf::Vector2f(pos.x,pos.y) - sf::Vector2f(80.f,80.f)) ;
 	sprite.setTextureRect(sf::IntRect(actualFrame.x, actualFrame.y, actualFrame.w, actualFrame.h));
+	sprite.setScale(sf::Vector2f(flip ? -1.0 : 1.0, 1.0));
+	sprite.setOrigin(flip ? sf::Vector2f(sprite.getSize().x, 0) :sf::Vector2f(0,0));
 }
 
 void Animation::Render()

@@ -1,6 +1,6 @@
 #include "Dead.h"
 #include "FSM.h"
-#include "Unit.h"
+#include "../../Unit.h"
 
 
 
@@ -17,11 +17,11 @@ void CDead::Update(std::weak_ptr<CGameObject> callerUnit)
 	unit->Die();
 }
 
-void CDead::OnEnter()
+void CDead::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CDead::OnExit()
+void CDead::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

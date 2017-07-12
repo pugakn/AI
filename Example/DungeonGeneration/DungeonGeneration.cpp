@@ -30,6 +30,13 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+				sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+				world.MoveUnit(worldPos.x, worldPos.y);
+			}
+				
 		}
 		world.Update(t.asSeconds(),window);
 

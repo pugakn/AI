@@ -3,7 +3,7 @@
 #include <time.h>
 #include <memory>
 #include <iostream>
-#include "../FSM/Units/Unit.h"
+#include "../Unit.h"
 void CWorld::Init()
 {
 	srand(time(NULL));
@@ -15,6 +15,11 @@ void CWorld::Init()
 	m_ObjectList.push_back(std::make_shared<CUnit>());
 	std::dynamic_pointer_cast<CUnit>(m_ObjectList.back())->SetAnimation("champion");
 	m_ObjectList.back()->Init();
+	unitFSM.Attach(m_ObjectList.back());
+
+
+	unitFSM.Init(this, CFSM::FSM_TYPE::UNIT);
+	animFSM.Init(this, CFSM::FSM_TYPE::ANIM);
 }
 
 void CWorld::InitMap()
@@ -82,6 +87,18 @@ void CWorld::InitMap()
 			}
 			first = false;
 		}
+	}
+	m_tiles.resize(map.m_tiles.size());
+	for (size_t i = 0; i < m_tiles.size(); ++i)
+	{
+		m_tiles[i].setSize(sf::Vector2f(map.TILE_SIZE,map.TILE_SIZE));
+		static int y = 0;
+		y = i % map.TILE_SIZE;
+		m_tiles[i].setPosition(sf::Vector2f());
+		if (map.m_tiles[i] == 1)
+			m_tiles[i].setFillColor(sf::Color::Green);
+		m_tiles[i].setOutlineColor(sf::Color::Red);
+		m_tiles[i].setOutlineThickness(1);
 	}
 }
 
@@ -152,6 +169,10 @@ void CWorld::Render(sf::RenderWindow &window)
 	{
 		window.draw(shape);
 	}
+	for (auto &shape : m_tiles)
+	{
+		window.draw(shape);
+	}
 }
 
 void CWorld::CreateBoid(Vector3D position, float fRadius)
@@ -196,6 +217,13 @@ CWeaponType CWorld::GetWeaponTypeByID(unsigned short id)
 	for (auto &it : m_weaponTypes)
 		if (it.m_uId == id)
 			return it;
+}
+
+void CWorld::MoveUnit(float x, float y)
+{
+	std::dynamic_pointer_cast<CUnit>(m_ObjectList.back())->m_targetPos = Vector3D(x, y, 0.0);
+	unitFSM.SetState(m_ObjectList.back(), CFSM::MOVE_TO);
+	animFSM.SetState(m_ObjectList.back(), CFSM::MOVE_TO);
 }
 
 CWorld::CWorld()

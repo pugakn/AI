@@ -1,1 +1,7 @@
-﻿
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  stdafx.cpp
+  JSONToBinary.cpp
+  JSONAnimParser.cpp
+  Generando código...
+  JSONAnimParser.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\JSONAnimParser.exe
+  JSONAnimParser.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\JSONAnimParser.pdb (Full PDB)

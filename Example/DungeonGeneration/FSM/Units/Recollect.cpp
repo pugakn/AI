@@ -1,6 +1,6 @@
 #include "Recollect.h"
 #include "FSM.h"
-#include "Unit.h"
+#include "../../Unit.h"
 
 
 void CRecollect::Update(std::weak_ptr<CGameObject> callerUnit)
@@ -27,11 +27,11 @@ void CRecollect::Update(std::weak_ptr<CGameObject> callerUnit)
 	unit->MoveToNearestResource();
 }
 
-void CRecollect::OnEnter()
+void CRecollect::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CRecollect::OnExit()
+void CRecollect::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

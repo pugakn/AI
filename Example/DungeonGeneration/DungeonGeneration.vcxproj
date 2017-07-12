@@ -152,6 +152,12 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="DungeonMap.h" />
     <ClInclude Include="Edge.h" />
+    <ClInclude Include="FSM\Anim\AnimStateAttack.h" />
+    <ClInclude Include="FSM\Anim\AnimStateDie.h" />
+    <ClInclude Include="FSM\Anim\AnimStateIdle.h" />
+    <ClInclude Include="FSM\Anim\AnimStateRun.h" />
+    <ClInclude Include="FSM\State.h" />
+    <ClInclude Include="FSM\Subject.h" />
     <ClInclude Include="FSM\Units\Armor.h" />
     <ClInclude Include="FSM\Units\Attack.h" />
     <ClInclude Include="FSM\Units\Build.h" />
@@ -163,11 +169,8 @@
     <ClInclude Include="FSM\Units\MoveTo.h" />
     <ClInclude Include="FSM\Units\Recollect.h" />
     <ClInclude Include="FSM\Units\Roting.h" />
-    <ClInclude Include="FSM\Units\State.h" />
-    <ClInclude Include="FSM\Units\Subject.h" />
     <ClInclude Include="FSM\Units\TerrainType.h" />
     <ClInclude Include="FSM\Units\Type.h" />
-    <ClInclude Include="FSM\Units\Unit.h" />
     <ClInclude Include="FSM\Units\WeaponType.h" />
     <ClInclude Include="GameObjects\Boid.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
@@ -178,6 +181,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +189,12 @@
     <ClCompile Include="DungeonGeneration.cpp" />
     <ClCompile Include="DungeonMap.cpp" />
     <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="FSM\Anim\AnimStateAttack.cpp" />
+    <ClCompile Include="FSM\Anim\AnimStateDie.cpp" />
+    <ClCompile Include="FSM\Anim\AnimStateIdle.cpp" />
+    <ClCompile Include="FSM\Anim\AnimStateRun.cpp" />
+    <ClCompile Include="FSM\State.cpp" />
+    <ClCompile Include="FSM\Subject.cpp" />
     <ClCompile Include="FSM\Units\Armor.cpp" />
     <ClCompile Include="FSM\Units\Attack.cpp" />
     <ClCompile Include="FSM\Units\Build.cpp" />
@@ -196,11 +206,8 @@
     <ClCompile Include="FSM\Units\MoveTo.cpp" />
     <ClCompile Include="FSM\Units\Recollect.cpp" />
     <ClCompile Include="FSM\Units\Roting.cpp" />
-    <ClCompile Include="FSM\Units\State.cpp" />
-    <ClCompile Include="FSM\Units\Subject.cpp" />
     <ClCompile Include="FSM\Units\TerrainType.cpp" />
     <ClCompile Include="FSM\Units\Type.cpp" />
-    <ClCompile Include="FSM\Units\Unit.cpp" />
     <ClCompile Include="FSM\Units\WeaponType.cpp" />
     <ClCompile Include="GameObjects\Boid.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
@@ -214,6 +221,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 #include "Idle.h"
 #include "FSM.h"
-#include "Unit.h"
+#include "../../Unit.h"
 
 
 void CIdle::Update(std::weak_ptr<CGameObject> callerUnit)
@@ -17,17 +17,17 @@ void CIdle::Update(std::weak_ptr<CGameObject> callerUnit)
 	if (unit->SeesEnemies() && unit->IsBelic())
 	{
 		unit->SetNearestTarget();
-		m_fsm->SetState(callerUnit,m_fsm->m_states[States::ATTACK]);
+		m_fsm->SetState(callerUnit,CFSM::UNIT_STATES::ATTACK);
 		return;
 	}
 	return;
 }
 
-void CIdle::OnEnter()
+void CIdle::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CIdle::OnExit()
+void CIdle::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

@@ -1,6 +1,6 @@
 #include "Guarrison.h"
 #include "FSM.h"
-#include "Unit.h"
+#include "../../Unit.h"
 
 
 void CGuarrison::Update(std::weak_ptr<CGameObject> callerUnit)
@@ -28,11 +28,11 @@ void CGuarrison::Update(std::weak_ptr<CGameObject> callerUnit)
 	}
 }
 
-void CGuarrison::OnEnter()
+void CGuarrison::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CGuarrison::OnExit()
+void CGuarrison::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

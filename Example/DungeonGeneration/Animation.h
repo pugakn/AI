@@ -46,7 +46,7 @@ public:
 	Animation();
 	void Init();
 	void OnEnter();
-	void Update(float delta, Vector3D pos);
+	void Update(float delta, Vector3D pos, bool flip);
 	void Render();
 	~Animation();
 };

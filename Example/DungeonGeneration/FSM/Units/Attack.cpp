@@ -1,5 +1,5 @@
 #include "Attack.h"
-#include "Unit.h"
+#include "../../Unit.h"
 #include "FSM.h"
 
 
@@ -37,14 +37,14 @@ void CAttack::Update(std::weak_ptr<CGameObject> callerUnit)
 		return;
 	}
 	//Si no encuentra a alguien para atacar regresa a idle
-	m_fsm->SetState( callerUnit, m_fsm->m_states[States::IDLE]);
+	m_fsm->SetState( callerUnit,CFSM::UNIT_STATES::IDLE);
 }
 
-void CAttack::OnEnter()
+void CAttack::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 
-void CAttack::OnExit()
+void CAttack::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
 }
 

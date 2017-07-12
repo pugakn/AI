@@ -36,6 +36,7 @@ private:
 
 
 	std::vector<sf::RectangleShape> shapes;
+	std::vector<sf::RectangleShape> m_tiles;
 	std::vector<std::vector<sf::Vertex>> lines;
 	std::vector<std::vector<sfLine>> corridors;
 
@@ -54,6 +55,10 @@ public:
 	CType GetTypeByID(unsigned short id);
 	CWeaponType GetWeaponTypeByID(unsigned short id);
 	DungeonMap map;
+	CFSM unitFSM;
+	CFSM animFSM;
+
+	void MoveUnit(float x, float y);
 	CWorld();
 	~CWorld();
 };

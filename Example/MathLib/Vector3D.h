@@ -1,5 +1,5 @@
 #pragma once
-
+#define PI4  0.78539816
 struct Vector3D
 {
 public:

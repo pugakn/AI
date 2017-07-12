@@ -99,12 +99,6 @@
     <ClInclude Include="FSM\Units\Roting.h">
       <Filter>Archivos de encabezado\FSM\Units</Filter>
     </ClInclude>
-    <ClInclude Include="FSM\Units\State.h">
-      <Filter>Archivos de encabezado\FSM\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM\Units\Subject.h">
-      <Filter>Archivos de encabezado\FSM\Units</Filter>
-    </ClInclude>
     <ClInclude Include="FSM\Units\TerrainType.h">
       <Filter>Archivos de encabezado\FSM\Units</Filter>
     </ClInclude>
@@ -113,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="FSM\Units\WeaponType.h">
       <Filter>Archivos de encabezado\FSM\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="FSM\Units\Unit.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\GameObject.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
@@ -131,6 +122,27 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Anim\AnimStateAttack.h">
+      <Filter>Archivos de encabezado\FSM\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Anim\AnimStateDie.h">
+      <Filter>Archivos de encabezado\FSM\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Anim\AnimStateIdle.h">
+      <Filter>Archivos de encabezado\FSM\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Anim\AnimStateRun.h">
+      <Filter>Archivos de encabezado\FSM\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\Subject.h">
+      <Filter>Archivos de encabezado\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM\State.h">
+      <Filter>Archivos de encabezado\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,12 +200,6 @@
     <ClCompile Include="FSM\Units\Roting.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
-    <ClCompile Include="FSM\Units\State.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\Subject.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
     <ClCompile Include="FSM\Units\TerrainType.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
@@ -202,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="FSM\Units\WeaponType.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\Unit.cpp">
-      <Filter>Archivos de código fuente\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\GameObject.cpp">
       <Filter>Archivos de código fuente\GameObjects</Filter>
@@ -220,6 +223,27 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Anim\AnimStateAttack.cpp">
+      <Filter>Archivos de código fuente\FSM\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Anim\AnimStateDie.cpp">
+      <Filter>Archivos de código fuente\FSM\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Anim\AnimStateIdle.cpp">
+      <Filter>Archivos de código fuente\FSM\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Anim\AnimStateRun.cpp">
+      <Filter>Archivos de código fuente\FSM\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Archivos de código fuente\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Subject.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\State.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

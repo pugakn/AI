@@ -1,1 +1,18 @@
-﻿
+﻿  stdafx.cpp
+  WalkerBase.cpp
+c:\users\ulises\documents\github\ai\example\pathfinding\walkerbase.cpp(35): warning C4018: '<': no coinciden signed/unsigned
+  Vector4D.cpp
+c:\users\ulises\documents\github\ai\example\pathfinding\vector4d.cpp(55): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+  Vector3D.cpp
+c:\users\ulises\documents\github\ai\example\pathfinding\vector3d.cpp(55): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+  pathfinding.cpp
+c:\users\ulises\documents\github\ai\example\pathfinding\pathfinding.cpp(190): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Matrix4D.cpp
+  DijikstraWalker.cpp
+  DFSWalker.cpp
+  BFSWalker.cpp
+  BestFSWalker.cpp
+  AstarWalker.cpp
+  Generando código...
+  pathfinding.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\pathfinding.exe
+  pathfinding.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\pathfinding.pdb (Full PDB)

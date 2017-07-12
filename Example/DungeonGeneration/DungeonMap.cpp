@@ -62,10 +62,10 @@ void DungeonMap::RemoveInvalidBlocks()
 void DungeonMap::DelaunayTriangulation()
 {
 	
-	int minX = m_blocks[0].position.x - m_blocks[0].size.x /2 ;
-	int minY = m_blocks[0].position.y - m_blocks[0].size.y /2 ;
-	int maxX = m_blocks[0].position.x + m_blocks[0].size.x /2 ;
-	int maxY = m_blocks[0].position.y + m_blocks[0].size.y /2 ;
+	minX = m_blocks[0].position.x - m_blocks[0].size.x / 2;
+	minY = m_blocks[0].position.y - m_blocks[0].size.y / 2;
+	maxX = m_blocks[0].position.x + m_blocks[0].size.x / 2;
+	maxY = m_blocks[0].position.y + m_blocks[0].size.y /2 ;
 	//Get min and max points
 	for (std::size_t i = 0; i < m_blocks.size(); ++i)
 	{
@@ -401,6 +401,41 @@ void DungeonMap::CreateCorridors()
 
 }
 
+void DungeonMap::FillTiles()
+{
+	int nTilesX = (maxX - minX) / TILE_SIZE;
+	int nTilesY = (maxY - minY) / TILE_SIZE;
+	m_tiles.resize(nTilesX * nTilesY);
+	for (auto & tile : m_tiles)
+	{
+		tile = 0;
+	}
+
+	for (size_t i = 0; i < nTilesY; i++)
+	{
+		int TileMinX = minX;
+		int TileMinY = minY + i*TILE_SIZE;
+		int TileMAxX = TileMinX + TILE_SIZE;
+		int TileMAxY = TileMinY + TILE_SIZE;
+		for (size_t j = 0; j < nTilesX; j++)
+		{
+			for (auto & block : m_blocks)
+			{
+				if (block.position.x >= TileMinX && block.position.x <= TileMAxX)
+					if (block.position.y >= TileMinY && block.position.y <= TileMAxY)
+					{
+						m_tiles[i * nTilesX + j] = 1;
+					}
+			}
+			//Avanzar al siguiente tile
+			TileMinX = TileMAxX;
+			TileMAxX = TileMinX + TILE_SIZE;
+		}
+	}
+	nTilesX = nTilesX + TILE_SIZE;//debug
+
+}
+
 void DungeonMap::GenerateMap(const DungeonMapData& data)
 {
 	m_data = data;
@@ -422,6 +457,7 @@ void DungeonMap::GenerateMap(const DungeonMapData& data)
 	RemoveRedundantConnections();
 	CreateGraphConnections();
 	CreateCorridors();
+	FillTiles();
 #if VISUAL_DEBUG_MODE
 	m_mutex.unlock();
 #endif

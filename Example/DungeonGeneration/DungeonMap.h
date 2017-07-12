@@ -50,7 +50,14 @@ private:
 	void RemoveRedundantConnections();
 	void CreateGraphConnections();
 	void CreateCorridors();
+	void FillTiles();
 public:
+	const int TILE_SIZE = 50;
+	int minX;
+	int minY;
+	int maxX;
+	int maxY;
+	std::vector<int> m_tiles;
 #if VISUAL_DEBUG_MODE
 	std::mutex m_mutex;
 #endif

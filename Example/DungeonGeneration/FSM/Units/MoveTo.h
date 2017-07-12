@@ -1,12 +1,12 @@
 #pragma once
-#include "State.h"
+#include "../State.h"
 class CMoveTo :
 	public CState
 {
 public:
 	void Update(std::weak_ptr<CGameObject> callerUnit) override;
-	void OnEnter()override;
-	void OnExit()override;
+	void OnEnter(std::weak_ptr<CGameObject> callerUnit)override;
+	void OnExit(std::weak_ptr<CGameObject> callerUnit)override;
 	CMoveTo();
 	~CMoveTo();
 };
