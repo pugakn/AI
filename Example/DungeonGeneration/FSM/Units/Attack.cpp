@@ -38,6 +38,7 @@ void CAttack::Update(std::weak_ptr<CGameObject> callerUnit)
 	}
 	//Si no encuentra a alguien para atacar regresa a idle
 	m_fsm->SetState( callerUnit,CFSM::UNIT_STATES::IDLE);
+	
 }
 
 void CAttack::OnEnter(std::weak_ptr<CGameObject> callerUnit)

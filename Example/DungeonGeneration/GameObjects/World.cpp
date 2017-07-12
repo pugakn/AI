@@ -98,7 +98,7 @@ void CWorld::InitMap()
 		m_tiles[i].setPosition(sf::Vector2f(map.minX + x * map.TILE_SIZE,map.minY + y * map.TILE_SIZE)*UNIT_SCALE);
 		//m_tiles[i].setOutlineColor(sf::Color::White);
 		
-		if (map.m_tiles[i] == 1)
+		if (map.m_tiles[i].type == 1)
 		{
 			m_tiles[i].setFillColor(sf::Color(0, 255, 0, 150));
 			m_tiles[i].setOutlineColor(sf::Color::Red);

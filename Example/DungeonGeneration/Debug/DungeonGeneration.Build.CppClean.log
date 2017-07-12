@@ -30,9 +30,16 @@ c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\armor.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\attack.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\build.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dead.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\fsmanim.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\animstateattack.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\animstatedie.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\animstateidle.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\animstaterun.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\fsmmarchingsq.obj
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.ilk
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.exe
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.pdb
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dungeongeneration.vcxprojresolveassemblyreference.cache
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dungeong.0a589321.tlog\cl.command.1.tlog
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dungeong.0a589321.tlog\cl.read.1.tlog
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dungeong.0a589321.tlog\cl.write.1.tlog

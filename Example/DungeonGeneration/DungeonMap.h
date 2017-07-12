@@ -4,6 +4,8 @@
 #include <list>
 #include "Utils.h"
 #include "Triangle.h"
+#include "FSM\State.h"
+#include <memory>
 #if VISUAL_DEBUG_MODE
 #include <mutex>
 #endif
@@ -36,6 +38,11 @@ struct DungeonMapData
 
 
 };
+struct Tile
+{
+	int type;
+	std::weak_ptr<CState> m_state;
+};
 class DungeonMap
 {
 private:
@@ -59,7 +66,7 @@ public:
 	int maxY;
 	int nTilesX;
 	int nTilesY;
-	std::vector<int> m_tiles;
+	std::vector<Tile> m_tiles;
 #if VISUAL_DEBUG_MODE
 	std::mutex m_mutex;
 #endif

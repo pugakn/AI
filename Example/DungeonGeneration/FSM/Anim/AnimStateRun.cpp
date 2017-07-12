@@ -35,6 +35,8 @@ void CAnimStateRun::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 	auto dist = Normalize(unit->m_targetPos - unit->GetPosition());
 	float angle = atan2f(-(dist.y), (dist.x));
 	float t = PI4 / 2.f;
+	unit->m_CoordDir = CUnit::DIRECTION::W;
+	unit->m_flipSprite = false;
 	if (angle > -4 * PI4 + t && angle <  -3 * PI4 + t)
 	{
 		unit->m_CoordDir = CUnit::DIRECTION::SW;
@@ -50,7 +52,7 @@ void CAnimStateRun::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 		unit->m_CoordDir = CUnit::DIRECTION::SW;
 		unit->m_flipSprite = true;
 	}
-	else if (angle > -1 * PI4 + t && angle <  PI4 + t)
+	else if (angle > -1 * PI4 + t && angle <   t)
 	{
 		unit->m_CoordDir = CUnit::DIRECTION::W;
 		unit->m_flipSprite = true;
@@ -70,11 +72,11 @@ void CAnimStateRun::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 		unit->m_CoordDir = CUnit::DIRECTION::NW;
 		unit->m_flipSprite = false;
 	}
-	else if (angle > 3 * PI4 + t && angle < 4 * PI4 + t)
-	{
-		unit->m_CoordDir = CUnit::DIRECTION::W;
-		unit->m_flipSprite = false;
-	}
+	//else if (angle > 3 * PI4 + t && angle < 4 * PI4 + t)
+	//{
+		//unit->m_CoordDir = CUnit::DIRECTION::W;
+		//unit->m_flipSprite = false;
+	//}
 }
 
 void CAnimStateRun::OnExit(std::weak_ptr<CGameObject> callerUnit)

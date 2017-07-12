@@ -1,9 +1,1 @@
-﻿  Matrix4D.cpp
-  Generando código...
-  Compilando...
-  Vector4D.cpp
-c:\users\ulises\documents\github\ai\example\mathlib\vector4d.cpp(62): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-  Vector3D.cpp
-c:\users\ulises\documents\github\ai\example\mathlib\vector3d.cpp(65): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-  Generando código...
-  MathLib.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\MathLib.lib
+﻿

@@ -408,7 +408,7 @@ void DungeonMap::FillTiles()
 	m_tiles.resize(nTilesX * nTilesY);
 	for (auto & tile : m_tiles)
 	{
-		tile = 0;
+		tile.type = 0;
 	}
 
 	for (size_t i = 0; i < nTilesY; i++)
@@ -426,7 +426,7 @@ void DungeonMap::FillTiles()
 				if (minCornerPos.x <= TileMinX && mmaxCornerPos.x >= TileMAxX)
 					if (minCornerPos.y <= TileMinY && mmaxCornerPos.y >= TileMAxY)
 					{
-						m_tiles[i * nTilesX + j] = 1;
+						m_tiles[i * nTilesX + j].type = 1;
 						break;
 					}
 			}
