@@ -1,42 +1,63 @@
 #pragma once
 
-#include "FSM/State.h"
 #include <memory>
 #include <list>
 #include <vector>
 #include "FSM\Subject.h"
-class CMarchingSearching : public CState
+#include "DungeonMap.h"
+
+
+#include <memory>
+class CWorld;
+class FSMMarchingSq;
+class Tile;
+class CMarchingState
+{
+protected:
+	FSMMarchingSq* m_fsm;
+	CWorld* m_pWorld;
+public:
+	void SetWorlPtr(CWorld* ptr);
+	CMarchingState();
+	virtual void Update(Tile * tile ) = 0;
+	virtual void OnEnter(Tile * tile) = 0;
+	virtual void OnExit(Tile * tile) = 0;
+	void SetFSM(FSMMarchingSq* fsm);
+	virtual ~CMarchingState();
+};
+
+class CMarchingSearching : public CMarchingState
 {
 public:
-	void Update(std::weak_ptr<CGameObject> callerUnit) override;
-	void OnEnter(std::weak_ptr<CGameObject> callerUnit)override;
-	void OnExit(std::weak_ptr<CGameObject> callerUnit)override;
+	void Update(Tile * tile) override;
+	void OnEnter(Tile * tile) override;
+	void OnExit(Tile * tile) override;
 };
 
 
-class CMarchingDone : public CState
+class CMarchingDone : public CMarchingState
 {
 public:
-	void Update(std::weak_ptr<CGameObject> callerUnit) override;
-	void OnEnter(std::weak_ptr<CGameObject> callerUnit)override;
-	void OnExit(std::weak_ptr<CGameObject> callerUnit)override;
+	void Update(Tile * tile) override;
+	void OnEnter(Tile * tile) override;
+	void OnExit(Tile * tile) override;
 
 };
 
 
-class FSMMarchingSq : public CSubject //Hereda de Subject para implementar el patron de diseño observador
+class FSMMarchingSq 
 {
 
 public:
-	enum UNIT_STATES
+	enum MARCHING_STATES
 	{
 		DONE,
 		SEARCHING
 	};
-	std::vector<std::shared_ptr<CState>> m_states; //Lista a de todos los estados disponibles
+	std::vector<std::shared_ptr<CMarchingState>> m_states; //Lista a de todos los estados disponibles
 
 	void Init(CWorld * world);
-	void SetState(std::weak_ptr<CGameObject> unit, UNIT_STATES state);
+	void SetState(Tile *tile, MARCHING_STATES state);
 	void Update(float delta);
 	void Destroy();
 	FSMMarchingSq();

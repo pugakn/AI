@@ -4,7 +4,7 @@
 #include <list>
 #include "Utils.h"
 #include "Triangle.h"
-#include "FSM\State.h"
+#include "FSMMarchingSq.h"
 #include <memory>
 #if VISUAL_DEBUG_MODE
 #include <mutex>
@@ -38,10 +38,11 @@ struct DungeonMapData
 
 
 };
+class CMarchingState;
 struct Tile
 {
 	int type;
-	std::weak_ptr<CState> m_state;
+	std::weak_ptr<CMarchingState> m_state;
 };
 class DungeonMap
 {

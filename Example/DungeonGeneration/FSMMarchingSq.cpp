@@ -7,15 +7,16 @@ void FSMMarchingSq::Init(CWorld * world)
 	m_states.resize(2);
 	//Consruir estados y asignar punteros
 	m_states[DONE] = std::make_shared<CMarchingDone>();
-	//m_states[DONE]->SetFSM(this);
+	m_states[DONE]->SetFSM(this);
 	m_states[DONE]->SetWorlPtr(world);
 	m_states[SEARCHING] = std::make_shared<CMarchingSearching>();
-	//m_states[SEARCHING]->SetFSM(this);
+	m_states[SEARCHING]->SetFSM(this);
 	m_states[SEARCHING]->SetWorlPtr(world);
 }
 
-void FSMMarchingSq::SetState(std::weak_ptr<CGameObject> unit, UNIT_STATES state)
+void FSMMarchingSq::SetState(Tile * tile, MARCHING_STATES state)
 {
+	tile->m_state = m_states[state];
 }
 
 void FSMMarchingSq::Update(float delta)
@@ -30,31 +31,52 @@ FSMMarchingSq::FSMMarchingSq()
 {
 }
 
-
 FSMMarchingSq::~FSMMarchingSq()
 {
 }
 
-void CMarchingSearching::Update(std::weak_ptr<CGameObject> callerUnit)
+void CMarchingState::SetWorlPtr(CWorld * ptr)
+{
+	m_pWorld = ptr;
+}
+
+CMarchingState::CMarchingState()
 {
 }
 
-void CMarchingSearching::OnEnter(std::weak_ptr<CGameObject> callerUnit)
+
+void CMarchingState::SetFSM(FSMMarchingSq * fsm)
+{
+	m_fsm = fsm;
+}
+
+CMarchingState::~CMarchingState()
 {
 }
 
-void CMarchingSearching::OnExit(std::weak_ptr<CGameObject> callerUnit)
+void CMarchingDone::Update(Tile * tile)
+{
+
+}
+
+void CMarchingDone::OnEnter(Tile * tile)
 {
 }
 
-void CMarchingDone::Update(std::weak_ptr<CGameObject> callerUnit)
+void CMarchingDone::OnExit(Tile * tile)
 {
 }
 
-void CMarchingDone::OnEnter(std::weak_ptr<CGameObject> callerUnit)
+void CMarchingSearching::Update(Tile * tile)
+{
+	//Search for corners
+
+}
+
+void CMarchingSearching::OnEnter(Tile * tile)
 {
 }
 
-void CMarchingDone::OnExit(std::weak_ptr<CGameObject> callerUnit)
+void CMarchingSearching::OnExit(Tile * tile)
 {
 }

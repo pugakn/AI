@@ -1,1 +1,52 @@
-﻿
+﻿  FSMMarchingSq.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\fsmmarchingsq.h(13): warning C4099: 'Tile': nombre de tipo visto anteriormente usando 'struct' ahora se ve usando 'class'
+  c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(43): note: vea la declaración de 'Tile'
+  Generando código...
+  Compilando...
+  Unit.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(43): warning C4099: 'Tile': nombre de tipo visto anteriormente usando 'class' ahora se ve usando 'struct'
+  c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(42): note: vea la declaración de 'Tile'
+c:\users\ulises\documents\github\ai\example\dungeongeneration\unit.cpp(15): warning C4065: la instrucción switch contiene etiquetas 'default' pero no etiquetas 'case'
+  World.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(43): warning C4099: 'Tile': nombre de tipo visto anteriormente usando 'class' ahora se ve usando 'struct'
+  c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(42): note: vea la declaración de 'Tile'
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\boid.h(6): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(9): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(32): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(45): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(48): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(60): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(74): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(75): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(80): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(81): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(95): warning C4244: 'argumento': conversión de 'const int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(98): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(173): warning C4018: '<': no coinciden signed/unsigned
+  DungeonMap.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(43): warning C4099: 'Tile': nombre de tipo visto anteriormente usando 'class' ahora se ve usando 'struct'
+  c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(42): note: vea la declaración de 'Tile'
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(12): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(27): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(28): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(29): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(30): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(414): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(420): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(448): warning C4018: '<': no coinciden signed/unsigned
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(451): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(452): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.cpp(452): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  DungeonGeneration.cpp
+c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(43): warning C4099: 'Tile': nombre de tipo visto anteriormente usando 'class' ahora se ve usando 'struct'
+  c:\users\ulises\documents\github\ai\example\dungeongeneration\dungeonmap.h(42): note: vea la declaración de 'Tile'
+  Generando código...
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(205): warning C4715: 'CWorld::GetFactionByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(212): warning C4715: 'CWorld::GetArmorByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(219): warning C4715: 'CWorld::GetTerrainTypenByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(226): warning C4715: 'CWorld::GetTypeByID': no todas las rutas de acceso de control devuelven un valor
+c:\users\ulises\documents\github\ai\example\dungeongeneration\gameobjects\world.cpp(233): warning C4715: 'CWorld::GetWeaponTypeByID': no todas las rutas de acceso de control devuelven un valor
+  DungeonGeneration.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\DungeonGeneration.exe
+  DungeonGeneration.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\bin\DungeonGeneration.pdb (Full PDB)
