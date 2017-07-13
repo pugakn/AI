@@ -43,6 +43,9 @@ struct Tile
 {
 	int type;
 	std::weak_ptr<CMarchingState> m_state;
+	int xIndex;
+	int yIndex;
+	//std::vector<Tile*> m_brothers;
 };
 class DungeonMap
 {

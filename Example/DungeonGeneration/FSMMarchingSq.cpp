@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "FSMMarchingSq.h"
-
+#include "GameObjects\World.h"
 
 void FSMMarchingSq::Init(CWorld * world)
 {
@@ -56,7 +56,7 @@ CMarchingState::~CMarchingState()
 
 void CMarchingDone::Update(Tile * tile)
 {
-
+	
 }
 
 void CMarchingDone::OnEnter(Tile * tile)
@@ -69,8 +69,24 @@ void CMarchingDone::OnExit(Tile * tile)
 
 void CMarchingSearching::Update(Tile * tile)
 {
-	//Search for corners
+	bool change = false;
 
+
+
+	if (change)
+	{
+		//Change brother's state
+		for (size_t i = 0; i < 3; i++)
+		{
+			for (size_t j = 0; j < 3; j++)
+			{
+				int yI = tile->yIndex - 1 + i;
+				int xI = tile->xIndex - 1 + i;
+				int index = yI * m_pWorld->map.nTilesX + xI;
+				m_fsm->SetState(&m_pWorld->map.m_tiles[index], FSMMarchingSq::MARCHING_STATES::SEARCHING);
+			}
+		}
+	}
 }
 
 void CMarchingSearching::OnEnter(Tile * tile)

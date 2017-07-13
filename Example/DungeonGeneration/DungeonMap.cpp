@@ -406,9 +406,21 @@ void DungeonMap::FillTiles()
 	nTilesX = (maxX - minX) / TILE_SIZE;
 	nTilesY = (maxY - minY) / TILE_SIZE;
 	m_tiles.resize(nTilesX * nTilesY);
-	for (auto & tile : m_tiles)
+
+	int y = 0;
+	int x = 0;
+	for (size_t i = 0 ; i < m_tiles.size(); i++)
 	{
-		tile.type = 0;
+
+		m_tiles[i].type = 0;
+		m_tiles[i].xIndex = x;
+		m_tiles[i].yIndex = y;
+		x++;
+		if (x > nTilesX - 1)
+		{
+			x = 0;
+			y++;
+		}
 	}
 
 	for (size_t i = 0; i < nTilesY; i++)

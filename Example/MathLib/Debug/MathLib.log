@@ -1,12 +1,1 @@
-﻿  Vector4D.cpp
-c:\users\ulises\documents\github\ai\example\mathlib\vector4d.cpp(62): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-  Vector3D.cpp
-c:\users\ulises\documents\github\ai\example\mathlib\vector3d.cpp(65): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-  Vector2Di.cpp
-c:\users\ulises\documents\github\ai\example\mathlib\vector2di.cpp(37): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\mathlib\vector2di.cpp(41): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\mathlib\vector2di.cpp(48): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-c:\users\ulises\documents\github\ai\example\mathlib\vector2di.cpp(70): warning C4244: 'return': conversión de 'double' a 'int'; posible pérdida de datos
-  Matrix4D.cpp
-  Generando código...
-  MathLib.vcxproj -> C:\Users\Ulises\Documents\GitHub\AI\Example\Debug\MathLib.lib
+﻿
