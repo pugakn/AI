@@ -71,10 +71,137 @@ void CMarchingSearching::Update(Tile * tile)
 {
 	bool change = false;
 
+	int weight = 0;
 
+	int yI = tile->yIndex - 1 ;
+	int xI = tile->xIndex - 1 ;
+	int index = yI * m_pWorld->map.nTilesX + xI;
+	if (m_pWorld->map.m_tiles[index].type != 0)
+	{
+		change = true;
+		weight += 8;
+	}
+	else
+	{
+		yI = tile->yIndex ;
+		xI = tile->xIndex - 1;
+		index = yI * m_pWorld->map.nTilesX + xI;
+		if (m_pWorld->map.m_tiles[index].type != 0)
+		{
+			change = true;
+			weight += 8;
+		}
+		else
+		{
+			yI = tile->yIndex - 1;
+			xI = tile->xIndex ;
+			index = yI * m_pWorld->map.nTilesX + xI;
+			if (m_pWorld->map.m_tiles[index].type != 0)
+			{
+				change = true;
+				weight += 8;
+			}
+		}
+	}
+
+	yI = tile->yIndex + 1;
+	xI = tile->xIndex + 1;
+	index = yI * m_pWorld->map.nTilesX + xI;
+	if (m_pWorld->map.m_tiles[index].type != 0)
+	{
+		change = true;
+		weight += 2;
+	}
+	else
+	{
+		yI = tile->yIndex;
+		xI = tile->xIndex + 1;
+		index = yI * m_pWorld->map.nTilesX + xI;
+		if (m_pWorld->map.m_tiles[index].type != 0)
+		{
+			change = true;
+			weight += 2;
+		}
+		else
+		{
+			yI = tile->yIndex + 1;
+			xI = tile->xIndex ;
+			index = yI * m_pWorld->map.nTilesX + xI;
+			if (m_pWorld->map.m_tiles[index].type != 0)
+			{
+				change = true;
+				weight += 2;
+			}
+		}
+	}
+
+
+	yI = tile->yIndex - 1;
+	xI = tile->xIndex + 1;
+	index = yI * m_pWorld->map.nTilesX + xI;
+	if (m_pWorld->map.m_tiles[index].type != 0)
+	{
+		change = true;
+		weight += 4;
+	}
+	else
+	{
+		yI = tile->yIndex;
+		xI = tile->xIndex + 1;
+		index = yI * m_pWorld->map.nTilesX + xI;
+		if (m_pWorld->map.m_tiles[index].type != 0)
+		{
+			change = true;
+			weight += 4;
+		}
+		else
+		{
+			yI = tile->yIndex - 1;
+			xI = tile->xIndex;
+			index = yI * m_pWorld->map.nTilesX + xI;
+			if (m_pWorld->map.m_tiles[index].type != 0)
+			{
+				change = true;
+				weight += 4;
+			}
+		}
+	}
+
+
+	yI = tile->yIndex + 1;
+	xI = tile->xIndex - 1;
+	index = yI * m_pWorld->map.nTilesX + xI;
+	if (m_pWorld->map.m_tiles[index].type != 0)
+	{
+		change = true;
+		weight += 1;
+	}
+	else
+	{
+		yI = tile->yIndex + 1;
+		xI = tile->xIndex;
+		index = yI * m_pWorld->map.nTilesX + xI;
+		if (m_pWorld->map.m_tiles[index].type != 0)
+		{
+			change = true;
+			weight += 1;
+		}
+		else
+		{
+			yI = tile->yIndex ;
+			xI = tile->xIndex - 1;
+			index = yI * m_pWorld->map.nTilesX + xI;
+			if (m_pWorld->map.m_tiles[index].type != 0)
+			{
+				change = true;
+				weight += 1;
+			}
+		}
+	}
 
 	if (change)
 	{
+		tile->type = weight;
 		//Change brother's state
 		for (size_t i = 0; i < 3; i++)
 		{
@@ -87,6 +214,8 @@ void CMarchingSearching::Update(Tile * tile)
 			}
 		}
 	}
+	else
+		m_fsm->SetState(tile, FSMMarchingSq::MARCHING_STATES::DONE);
 }
 
 void CMarchingSearching::OnEnter(Tile * tile)
