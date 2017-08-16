@@ -88,7 +88,7 @@ public:
 	void Render() override;
 
 	void SetAnimation(char * file);
-	CUnit();
+	CUnit(int id);
 	~CUnit();
 };
 

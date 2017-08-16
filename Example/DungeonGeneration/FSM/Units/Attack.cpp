@@ -43,10 +43,15 @@ void CAttack::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CAttack::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateAttack.gm");
 }
 
 void CAttack::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

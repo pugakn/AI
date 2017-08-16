@@ -2,8 +2,6 @@ c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dungeongener
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\vc140.pdb
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\vc140.idb
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\stdafx.obj
-c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\build.obj
-c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dead.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\faction.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\fsm.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\guarrison.obj
@@ -14,10 +12,12 @@ c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\roting.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\terraintype.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\type.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\weapontype.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\gamemonkey.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\boid.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\gameobject.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\obstacle.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\world.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\gmfunctions.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\graphpoint.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\triangle.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\unit.obj
@@ -35,6 +35,8 @@ c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\state.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\subject.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\armor.obj
 c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\attack.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\build.obj
+c:\users\ulises\documents\github\ai\example\dungeongeneration\debug\dead.obj
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.ilk
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.exe
 c:\users\ulises\documents\github\ai\example\bin\dungeongeneration.pdb

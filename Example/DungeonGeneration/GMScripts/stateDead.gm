@@ -1,0 +1,15 @@
+
+global Update = function(unit)
+{
+	//print("Update Idle");
+};
+
+global OnEnter = function()
+{
+	print("Enter Idle");
+};
+
+global OnExit = function()
+{
+	print("Exit Idle");
+};

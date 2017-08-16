@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include "../Unit.h"
+#include "../GMFunctions.h"
 void CWorld::Init()
 {
 	srand(time(NULL));
@@ -12,14 +13,17 @@ void CWorld::Init()
 	champion.m_uId = 0;
 	m_types.push_back(champion);
 
-	m_ObjectList.push_back(std::make_shared<CUnit>());
+	m_ObjectList.push_back(std::make_shared<CUnit>(m_ObjectList.size()-1));
 	std::dynamic_pointer_cast<CUnit>(m_ObjectList.back())->SetAnimation("champion");
 	m_ObjectList.back()->Init();
 	unitFSM.Attach(m_ObjectList.back());
 
 
 	unitFSM.Init(this, CFSM::FSM_TYPE::UNIT);
+	gmUnit::pFSM = &unitFSM;
 	animFSM.Init(this, CFSM::FSM_TYPE::ANIM);
+
+	unitFSM.SetState(m_ObjectList.back(), CFSM::IDLE);
 }
 
 void CWorld::InitMap()

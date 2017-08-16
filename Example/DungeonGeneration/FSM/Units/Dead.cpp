@@ -19,10 +19,15 @@ void CDead::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CDead::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateDead.gm");
 }
 
 void CDead::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

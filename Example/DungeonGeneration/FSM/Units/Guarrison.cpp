@@ -30,10 +30,15 @@ void CGuarrison::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CGuarrison::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateGuarrison.gm");
 }
 
 void CGuarrison::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

@@ -25,10 +25,15 @@ void CRoting::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CRoting::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateRoting.gm");
 }
 
 void CRoting::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

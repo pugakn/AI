@@ -35,10 +35,15 @@ void CBuild::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CBuild::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateBuild.gm");
 }
 
 void CBuild::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

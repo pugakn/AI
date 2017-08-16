@@ -5,10 +5,12 @@
 #include <list>
 #include <vector>
 #include "../Subject.h"
+#include "../../GameMonkey.h"
 class CFSM : public CSubject //Hereda de Subject para implementar el patron de diseño observador
 {
 
 public:
+	CGameMonkey gm;
 	enum FSM_TYPE
 	{
 		ANIM,

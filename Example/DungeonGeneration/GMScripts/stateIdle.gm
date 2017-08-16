@@ -1,0 +1,21 @@
+
+global Update = function(unit)
+{
+    //Si la unidad es belica y ve a un enemigo, cambia al estado de ataque
+	if (SeesEnemies(unit) && IsBelic(unit))
+	{
+		SetNearestTarget(unit);
+		SetState(unit,3);//3 = attack
+		return;
+	}
+};
+
+global OnEnter = function()
+{
+	print("Enter Idle");
+};
+
+global OnExit = function()
+{
+	print("Exit Idle");
+};

@@ -29,10 +29,15 @@ void CRecollect::Update(std::weak_ptr<CGameObject> callerUnit)
 
 void CRecollect::OnEnter(std::weak_ptr<CGameObject> callerUnit)
 {
+	m_fsm->gm.gmLoadAndExecuteScript("GMScripts/stateRecollect.gm");
 }
 
 void CRecollect::OnExit(std::weak_ptr<CGameObject> callerUnit)
 {
+	//***************************************
+	// Reset gmMachine
+	//***************************************
+	m_fsm->gm.Reset();
 }
 
 

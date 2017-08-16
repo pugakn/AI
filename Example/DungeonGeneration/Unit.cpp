@@ -2,7 +2,6 @@
 #include "FSM/State.h"
 #include "../DungeonGeneration/GameObjects/World.h"
 
-
 void CUnit::Init()
 {
 	m_flipSprite = false;
@@ -45,8 +44,9 @@ void CUnit::SetAnimation(char * file)
 	}
 }
 
-CUnit::CUnit()
+CUnit::CUnit(int id)
 {
+	m_uId = id;
 }
 
 

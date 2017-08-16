@@ -1,0 +1,25 @@
+
+
+global Update = function(unit)
+{
+	//Si la unidad llegó a su destino, cambia a idle
+	if (ArrivedToTargetPos(unit))
+	{
+		SetState(unit, 0);//0 = Idle
+		return;
+	}
+	//La unidad se mueve hacia su destino
+	//print("Update MoveTo");
+	//print(unit);
+	MoveTo(unit);
+};
+
+global OnEnter = function()
+{
+	print("Enter MoveTo");
+};
+
+global OnExit = function()
+{
+	print("Exit MoveTo");
+};

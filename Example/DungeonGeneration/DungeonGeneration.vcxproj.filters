@@ -147,6 +147,12 @@
     <ClInclude Include="FSMMarchingSq.h">
       <Filter>Archivos de encabezado\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="GameMonkey.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GMFunctions.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -170,9 +176,6 @@
     <ClCompile Include="GraphPoint.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="FSM\Units\Armor.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
     <ClCompile Include="FSM\Units\Attack.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
@@ -180,9 +183,6 @@
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
     <ClCompile Include="FSM\Units\Dead.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\Faction.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
     <ClCompile Include="FSM\Units\FSM.cpp">
@@ -201,15 +201,6 @@
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
     <ClCompile Include="FSM\Units\Roting.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\TerrainType.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\Type.cpp">
-      <Filter>Archivos de código fuente\FSM\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="FSM\Units\WeaponType.cpp">
       <Filter>Archivos de código fuente\FSM\Units</Filter>
     </ClCompile>
     <ClCompile Include="GameObjects\GameObject.cpp">
@@ -250,6 +241,27 @@
     </ClCompile>
     <ClCompile Include="FSMMarchingSq.cpp">
       <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMonkey.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\WeaponType.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Type.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\TerrainType.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Faction.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM\Units\Armor.cpp">
+      <Filter>Archivos de código fuente\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="GMFunctions.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

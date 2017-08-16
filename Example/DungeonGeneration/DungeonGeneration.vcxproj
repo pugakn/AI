@@ -89,13 +89,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)MathLib;$(SolutionDir)Librerias\SFML\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Librerias\GM\include;$(SolutionDir)MathLib;$(SolutionDir)Librerias\SFML\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)Librerias\SFML\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>MathLib.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)Librerias\SFML\lib;$(SolutionDir)Librerias\GM\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gmBuild.lib;MathLib.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,12 +121,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Librerias\GM\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Ulises\Documents\GitHub\AI\Example\Librerias\GM\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,10 +176,12 @@
     <ClInclude Include="FSM\Units\TerrainType.h" />
     <ClInclude Include="FSM\Units\Type.h" />
     <ClInclude Include="FSM\Units\WeaponType.h" />
+    <ClInclude Include="GameMonkey.h" />
     <ClInclude Include="GameObjects\Boid.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="GameObjects\Obstacle.h" />
     <ClInclude Include="GameObjects\World.h" />
+    <ClInclude Include="GMFunctions.h" />
     <ClInclude Include="GraphPoint.h" />
     <ClInclude Include="sfLineT.h" />
     <ClInclude Include="stdafx.h" />
@@ -211,10 +216,12 @@
     <ClCompile Include="FSM\Units\TerrainType.cpp" />
     <ClCompile Include="FSM\Units\Type.cpp" />
     <ClCompile Include="FSM\Units\WeaponType.cpp" />
+    <ClCompile Include="GameMonkey.cpp" />
     <ClCompile Include="GameObjects\Boid.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp" />
     <ClCompile Include="GameObjects\Obstacle.cpp" />
     <ClCompile Include="GameObjects\World.cpp" />
+    <ClCompile Include="GMFunctions.cpp" />
     <ClCompile Include="GraphPoint.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

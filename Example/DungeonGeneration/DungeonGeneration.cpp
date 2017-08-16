@@ -9,9 +9,18 @@
 #include "sfLineT.h"
 #include <conio.h>
 #include "GameObjects\World.h"
+
+
 extern const sf::Uint32 winWidth ;
 extern const sf::Uint32 winHeight ;
 sf::RenderWindow window(sf::VideoMode(winWidth, winHeight), "Map");
+
+#include <fstream>
+#include <iostream>
+#include <iterator>
+#include "GameMonkey.h"
+#include <gmCall.h>
+
 int main()
 {
 	sf::Clock clock; 
